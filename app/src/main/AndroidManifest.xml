@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.appian.manutdvietnam">
+    package="com.appian.manchesterunitednews">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CLEAR_APP_CACHE"/>
     <application
-        android:name=".MainApplication"
+        android:name="com.appian.manchesterunitednews.MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -38,7 +38,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.SplashActivity"
+        <activity android:name="com.appian.manchesterunitednews.app.SplashActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -47,73 +47,73 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.MainActivity"
+        <activity android:name="com.appian.manchesterunitednews.app.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".app.match.MatchActivity"
-            android:parentActivityName=".app.MainActivity"
+            android:name="com.appian.manchesterunitednews.app.match.MatchActivity"
+            android:parentActivityName="com.appian.manchesterunitednews.app.MainActivity"
             tools:targetApi="jelly_bean"
             android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".app.player.PlayerDetailsActivity"
+            android:name="com.appian.manchesterunitednews.app.player.PlayerDetailsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Light.NoActionBar" />
         <activity
-            android:name=".app.coach.CoachDetailsActivity"
+            android:name="com.appian.manchesterunitednews.app.coach.CoachDetailsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Light.NoActionBar" />
-        <activity android:name=".app.detailnews.DetailArticleActivity"
+        <activity android:name="com.appian.manchesterunitednews.app.detailnews.DetailArticleActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:parentActivityName=".app.MainActivity"
+            android:parentActivityName="com.appian.manchesterunitednews.app.MainActivity"
             tools:targetApi="jelly_bean"/>
-        <activity android:name=".app.user.LogInActivity"
+        <activity android:name="com.appian.manchesterunitednews.app.user.LogInActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
-        <activity android:name=".app.user.SignupActivity"
+        <activity android:name="com.appian.manchesterunitednews.app.user.SignupActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
-        <activity android:name=".app.user.LogInNormalActivity"
+        <activity android:name="com.appian.manchesterunitednews.app.user.LogInNormalActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
-        <activity android:name=".app.comment.CommentActivity"
+        <activity android:name="com.appian.manchesterunitednews.app.comment.CommentActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
-        <activity android:name=".app.setting.SettingActivity"
+        <activity android:name="com.appian.manchesterunitednews.app.setting.SettingActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
-        <activity android:name=".app.user.LogInSuccessActivity"
+        <activity android:name="com.appian.manchesterunitednews.app.user.LogInSuccessActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
-        <activity android:name=".app.user.UpdateProfileActivity"
+        <activity android:name="com.appian.manchesterunitednews.app.user.UpdateProfileActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
-        <activity android:name=".app.match.videohighlight.VideoActivity"
-            android:parentActivityName=".app.MainActivity"
+        <activity android:name="com.appian.manchesterunitednews.app.match.videohighlight.VideoActivity"
+            android:parentActivityName="com.appian.manchesterunitednews.app.MainActivity"
             tools:targetApi="jelly_bean" />
 
         <service
-            android:name=".service.firebase.AppFirebaseMessageService"
+            android:name="com.appian.manchesterunitednews.service.firebase.AppFirebaseMessageService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service
-            android:name=".service.firebase.AppFirebaseInstanceIdService"
+            android:name="com.appian.manchesterunitednews.service.firebase.AppFirebaseInstanceIdService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".service.app.AppService"
+        <service android:name="com.appian.manchesterunitednews.service.app.AppService"
             android:exported="false"/>
-        <service android:name=".network.NetworkService"
+        <service android:name="com.appian.manchesterunitednews.network.NetworkService"
             android:exported="false"/>
     </application>
 

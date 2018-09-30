@@ -19,17 +19,17 @@ android {
     flavorDimensions "app"
     productFlavors {
         manutd {
-            applicationId "com.appian.manutdvietnam"
+            applicationId "com.appian.manchesterunitednews"
             versionCode 11
             versionName "1.1.0"
         }
         barca {
-            applicationId "com.appian.barcavietnam"
+            applicationId "com.appian.barcelonanews"
             versionCode 1
             versionName "1.0.0"
         }
         real {
-            applicationId "com.appian.realmadridvietnam"
+            applicationId "com.appian.realmadridnews"
             versionCode 1
             versionName "1.0.0"
         }
