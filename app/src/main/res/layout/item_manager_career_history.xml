@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:padding="10dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_manager_career_team_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        app:civ_border_color="@color/lightGray"
+        app:civ_border_width="1dp" />
+
+    <TextView
+        android:id="@+id/tv_manager_career_team_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:layout_toEndOf="@id/img_manager_career_team_image"
+        android:layout_toRightOf="@id/img_manager_career_team_image"
+        android:textColor="@color/text_color_common"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_manager_career_match_per_point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@id/tv_manager_career_team_name"
+        android:layout_toRightOf="@id/tv_manager_career_team_name"
+        android:gravity="end"
+        android:textColor="@color/text_color_common"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/img_manager_career_team_image"
+        android:layout_toRightOf="@id/img_manager_career_team_image"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_manager_career_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:textColor="@color/color_subtext"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_manager_career_matches"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/text_color_common"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/tv_manager_career_wins"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/win_color"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/tv_manager_career_draws"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/draw_color"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/tv_manager_career_loss"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/loss_color"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</RelativeLayout>

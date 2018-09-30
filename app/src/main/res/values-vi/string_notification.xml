@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_match_started">Trận đấu bắt đầu</string>
+    <string name="notification_2nd_started_ps">Hiệp 2 bắt đầu: %s</string>
+    <string name="notification_1aet_started_ps">Hiệp phụ thứ 1 bắt đầu: %s</string>
+    <string name="notification_2aet_started_ps">Hiệp phụ thứ 2 bắt đầu: %s</string>
+    <string name="notification_halftime_ps">Hiệp 1 kết thúc: %s</string>
+    <string name="notification_finish_ps">Trận đấu kết thúc: %s</string>
+    <string name="notification_goal">Bàn thắng: %s</string>
+    <string name="notification_card">Thẻ phạt: %s</string>
+    <string name="notification_substitution">Thay người: %s</string>
+    <string name="notification_injury">Chấn thương: %s</string>
+    <string name="notification_reminder">Nhắc nhở: %s</string>
+    <string name="notification_lineups">Đội hình ra sân: %s</string>
+    <string name="notification_best_player">Cầu thủ xuất sắc nhất trận: %s</string>
+    <string name="notification_news">Tin tức</string>
+    <string name="notification_video">Video</string>
+</resources>

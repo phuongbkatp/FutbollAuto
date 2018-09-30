@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:id="@+id/layout_table_row"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_standing_pos"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="Roboto-Thin"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="@color/text_color_common"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/img_team_logo"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_standing_team"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="2"
+        android:ellipsize="marquee"
+        android:fadingEdge="horizontal"
+        android:fontFamily="Roboto-Thin"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:textColor="@color/text_color_common"/>
+
+    <TextView
+        android:id="@+id/tv_standing_played"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:fontFamily="Roboto-Thin"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textColor="@color/text_color_common"/>
+
+    <TextView
+        android:id="@+id/tv_standing_win"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:fontFamily="Roboto-Thin"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textColor="@color/text_color_common"/>
+
+    <TextView
+        android:id="@+id/tv_standing_draw"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:fontFamily="Roboto-Thin"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textColor="@color/text_color_common"/>
+
+    <TextView
+        android:id="@+id/tv_standing_loss"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:fontFamily="Roboto-Thin"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textColor="@color/text_color_common"/>
+
+    <TextView
+        android:id="@+id/tv_standing_goals"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="2"
+        android:fontFamily="Roboto-Thin"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textColor="@color/text_color_common"/>
+
+    <TextView
+        android:id="@+id/tv_standing_points"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:fontFamily="Roboto-Thin"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textColor="@color/text_color_common"/>
+</LinearLayout>

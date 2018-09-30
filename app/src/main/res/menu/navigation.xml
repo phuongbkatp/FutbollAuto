@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/llNewsFeedMenu"
+        android:icon="@drawable/newsfeed_ic"
+        android:title="@string/home_menu"/>
+
+    <item
+        android:id="@+id/llLeagueMenu"
+        android:icon="@drawable/premier_league_logo"
+        android:title="@string/league_menu"/>
+
+    <item
+        android:id="@+id/llSquadMenu"
+        android:icon="@drawable/squad_ic"
+        android:title="@string/squad_tab"/>
+    <item
+        android:id="@+id/rlSetting"
+        android:icon="@drawable/more_button"
+        android:title="@string/more_menu"/>
+</menu>

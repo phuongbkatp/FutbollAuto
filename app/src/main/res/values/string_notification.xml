@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_match_started">Match stated</string>
+    <string name="notification_2nd_started_ps">2nd half started: %s</string>
+    <string name="notification_1aet_started_ps">1st extra time started: %s</string>
+    <string name="notification_2aet_started_ps">2nd extra time started: %s</string>
+    <string name="notification_halftime_ps">Halftime finished: %s</string>
+    <string name="notification_finish_ps">Match finished: %s</string>
+    <string name="notification_goal">Goal: %s</string>
+    <string name="notification_card">Card: %s</string>
+    <string name="notification_substitution">Substitution: %s</string>
+    <string name="notification_injury">Injury: %s</string>
+    <string name="notification_reminder">Reminder: %s</string>
+    <string name="notification_lineups">Lineups: %s</string>
+    <string name="notification_best_player">Best player: %s</string>
+    <string name="notification_news">News</string>
+    <string name="notification_video">Video</string>
+</resources>

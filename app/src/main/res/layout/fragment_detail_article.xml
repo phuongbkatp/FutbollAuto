@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/globalWhite">
+
+    <RelativeLayout
+        android:id="@+id/bottom_panel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/globalWhite">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:orientation="horizontal">
+
+            <ProgressBar
+                android:id="@+id/progress_loading"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:padding="5dp" />
+
+            <FrameLayout
+                android:id="@+id/fl_share_icon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/activity_margin_standard"
+                android:layout_marginStart="@dimen/activity_margin_standard"
+                android:layout_weight="1"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="@dimen/detail_share_icon"
+                    android:layout_height="@dimen/detail_share_icon"
+                    android:layout_gravity="center"
+                    android:background="@drawable/share_ic"
+                    android:backgroundTint="@color/color_subtext" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/fl_comment_icon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/detail_share_icon"
+                    android:layout_height="@dimen/detail_share_icon"
+                    android:layout_gravity="center"
+                    android:background="@mipmap/ic_comment_processing_outline"
+                    android:backgroundTint="@color/color_subtext" />
+
+                <TextView
+                    android:id="@+id/tv_news_detail_comment_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_gravity="top"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/badge_red"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:textColor="@color/globalWhite"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_next_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_weight="2"
+                android:gravity="end"
+                android:orientation="horizontal"
+                android:paddingEnd="@dimen/activity_margin_standard"
+                android:paddingLeft="@dimen/activity_margin_standard"
+                android:paddingRight="@dimen/activity_margin_standard"
+                android:paddingStart="@dimen/activity_margin_standard">
+
+                <ImageView
+                    android:layout_width="@dimen/detail_share_icon"
+                    android:layout_height="@dimen/detail_share_icon"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_margin_standard"
+                    android:layout_marginStart="@dimen/activity_margin_standard"
+                    android:background="@drawable/next_ic" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_panel"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_news_detail_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_navigation_news"
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/activity_margin_standard">
+
+                <TextView
+                    android:id="@+id/tv_news_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin_standard"
+                    android:layout_marginRight="@dimen/activity_margin_standard"
+                    android:layout_marginTop="@dimen/activity_margin_standard"
+                    android:textColor="@color/text_color_common"
+                    android:textSize="@dimen/list_news_title"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_news_detail_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin_standard"
+                    android:layout_marginRight="@dimen/activity_margin_standard"
+                    android:layout_marginTop="@dimen/activity_margin_standard"
+                    android:textColor="@color/match_detail_text_2"
+                    android:textSize="@dimen/list_news_description" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="@dimen/activity_margin_standard"
+                    android:layout_marginTop="@dimen/activity_margin_standard"
+                    android:background="@color/draw_circle_color" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_head_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin_standard"
+                    android:layout_marginRight="@dimen/activity_margin_standard"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_news_detail_source"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:textColor="@color/player_value"
+                        android:textSize="@dimen/list_news_time" />
+
+                    <TextView
+                        android:id="@+id/tv_time_news"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/player_value"
+                        android:textSize="@dimen/list_news_time" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="@dimen/activity_margin_standard"
+                    android:layout_marginTop="@dimen/activity_margin_standard"
+                    android:background="@color/draw_circle_color" />
+
+
+                <WebView
+                    android:id="@+id/wv_news_detail_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_newest_comments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/comment_detail_news"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:visibility="gone"
+                        android:textSize="12sp"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/lv_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:divider="@null"
+                        android:dividerHeight="0dp" />
+                    <Button
+                        android:id="@+id/btn_load_more_comments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/load_more_comments"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>

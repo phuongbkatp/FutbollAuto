@@ -1,0 +1,21 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:title="Open source licenses"
+                  android:layout="@xml/setting_layout_one_line">
+
+    <Preference
+        android:key="none_option"
+        android:title="@string/none_option"/>
+
+    <Preference
+        android:key="fifteen_minute_option"
+        android:title="@string/fifteen_minute_option" />
+
+    <Preference
+        android:key="thirty_minute_option"
+        android:title="@string/thirty_minute_option" />
+
+    <Preference
+        android:key="one_hour_option"
+        android:title="@string/one_hour_option" />
+
+</PreferenceScreen>

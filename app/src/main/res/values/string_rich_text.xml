@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="video_disclaimer">
+        <![CDATA[
+            <html>
+                <h1>Disclaimer</h1>
+                <p>The third party website that you are about to visit is not hosted by MAN UTD NEWS</p>
+                <p>MAN UTD NEWS are not responsible for and can not be held accountable for any content, such as audio-visual content, that you may find on this third party hosted website</p>
+            </html>
+        ]]>
+    </string>
+</resources>

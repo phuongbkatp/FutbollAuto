@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_login_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_margin_standard">
+
+        <FrameLayout
+            android:id="@+id/img_back_arrow"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:layout_width="@dimen/toolbar_icon_size"
+                android:layout_height="@dimen/toolbar_icon_size"
+                android:layout_gravity="center"
+                android:background="@mipmap/ic_arrow_back_white_24dp"
+                android:backgroundTint="@color/colorPrimary" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_login_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/log_in_menu"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginBottom="24dp"
+            android:textAllCaps="true"
+            android:textSize="@dimen/title_sign_in_textsize"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/rl_login_title"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/user_profile"
+        app:civ_border_color="@color/globalWhite"
+        app:civ_border_width="2dp"/>
+
+    <TextView
+        android:id="@+id/tv_log_in_des"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profileImage"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:text="@string/log_in_description"
+        android:textAlignment="center"
+        android:textColor="@color/text_color_common"
+        android:textSize="@dimen/item_fixture_text_size"/>
+
+    <Button
+        android:id="@+id/btn_facebook_log_in"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/tv_log_in_des"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/navigation_title_margin"
+        android:background="@drawable/rounded_rectangle_facebook"
+        android:elevation="@dimen/activity_margin_standard"
+        android:text="@string/facebook"
+        android:textColor="@color/globalWhite"
+        android:textSize="12dp"/>
+
+    <Button
+        android:id="@+id/btn_google_log_in"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/btn_facebook_log_in"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_margin_standard"
+        android:background="@drawable/rounded_rectangle"
+        android:elevation="@dimen/activity_margin_standard"
+        android:text="@string/google"
+        android:textColor="@color/globalWhite"
+        android:textSize="12dp"/>
+
+    <TextView
+        android:id="@+id/tv_Or"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_google_log_in"
+        android:layout_marginTop="@dimen/activity_margin_standard"
+        android:layout_centerHorizontal="true"
+        android:text="@string/or_sign_in"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"/>
+
+    <Button
+        android:id="@+id/btn_log_in_normal"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/tv_Or"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_margin_standard"
+        android:background="@drawable/rounded_rectangle_grey"
+        android:elevation="@dimen/activity_margin_standard"
+        android:text="@string/sign_in"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_log_in_normal"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_margin="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:id="@+id/tv_register_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dont_have_account"
+            android:textColor="@color/text_color_common"
+            android:textSize="@dimen/item_fixture_text_size"/>
+        <TextView
+            android:id="@+id/tv_log_in_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up"
+            android:layout_marginLeft="@dimen/activity_margin_standard"
+            android:layout_toRightOf="@id/tv_register_des"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/item_fixture_text_size"/>
+    </RelativeLayout>
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/activity_margin_standard"
+        android:text="@string/privacy_des"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"/>
+</RelativeLayout>

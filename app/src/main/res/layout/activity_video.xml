@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frame_full_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_back_to_app"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary">
+
+        <ProgressBar
+            android:id="@+id/progress_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:indeterminateTint="@color/globalWhite"
+            android:indeterminateTintMode="src_in"
+            android:indeterminate="true"/>
+
+        <TextView
+            android:id="@+id/tv_back_to_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/back_to_app"
+            android:textColor="@color/globalWhite"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/activity_margin_standard"
+            android:layout_marginStart="@dimen/activity_margin_standard"
+            android:layout_toEndOf="@id/tv_back_to_app"
+            android:layout_toRightOf="@id/tv_back_to_app"
+            android:background="@drawable/go_back_app_ic"
+            android:backgroundTint="@color/globalWhite" />
+    </RelativeLayout>
+    <WebView
+        android:id="@+id/video_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/rl_back_to_app"/>
+</RelativeLayout>

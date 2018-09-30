@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="light_theme_color_primary">@color/colorPrimary</color>
+    <color name="light_theme_color_primary_dark">@color/colorPrimaryDark</color>
+
+    <color name="colorPrimary">#007893</color>
+    <color name="colorPrimaryDark">#007893</color>
+    <color name="colorPrimarySecond">#D8D4D3</color>
+
+    <color name="colorAccent">#FDBD19</color>
+    <color name="player_value">#FDBD19</color>
+    <color name="tab_team_fragment_color">@color/colorPrimarySecond</color>
+    <color name="tab_team_fragment_color_text">@color/colorPrimary</color>
+
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="setting_notification_news">News</string>
+    <string name="setting_notification_reminder">Reminder</string>
+    <string name="setting_notification_start">Start</string>
+    <string name="setting_notification_goals">Goals</string>
+    <string name="setting_notification_cards">Cards</string>
+    <string name="setting_notification_substitution">Substitution</string>
+    <string name="setting_notification_injury">Injury</string>
+    <string name="setting_notification_halftime">Halftime</string>
+    <string name="setting_notification_finish">Finish</string>
+    <string name="setting_notification_lineups">Lineups</string>
+    <string name="setting_notification_best_player">Best player</string>
+    <string name="setting_notification_other">Other match events</string>
+    <string name="setting_notification_all">Push notification</string>
+</resources>

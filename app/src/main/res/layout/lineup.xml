@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fillViewport="true">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_line_up"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/field_color"
+                android:orientation="vertical"
+                android:padding="@dimen/activity_margin_standard">
+
+                <ImageView
+                    android:id="@+id/img_match_detail_lineups_home_team_logo"
+                    android:layout_width="@dimen/match_detail_line_up_team_logo_size"
+                    android:layout_height="@dimen/match_detail_line_up_team_logo_size"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="@dimen/match_detail_lineups_gap"/>
+
+                <TextView
+                    android:id="@+id/tv_match_detail_lineups_home_team_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin_standard"
+                    android:layout_toRightOf="@id/img_match_detail_lineups_home_team_logo"
+                    android:textColor="@color/text_color_common"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/tv_match_detail_lineups_home_team_scheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_match_detail_lineups_home_team_name"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/text_color_common"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/img_match_detail_lineups_home_team_coach"
+                        android:layout_width="@dimen/match_detail_lineups_player_image_size"
+                        android:layout_height="@dimen/match_detail_lineups_player_image_size"
+                        android:layout_marginEnd="@dimen/match_detail_lineups_gap"
+                        android:layout_marginRight="@dimen/match_detail_lineups_gap"
+                        app:civ_border_color="@color/globalWhite"
+                        app:civ_border_width="2dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_match_detail_lineups_home_team_coach"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_color_common"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/lineup43"
+                    layout="@layout/lineup43"
+                    android:visibility="visible"/>
+
+                <include
+                    android:id="@+id/lineup33"
+                    layout="@layout/lineup33"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/lineup44"
+                    layout="@layout/lineup44"
+                    android:visibility="gone"/>
+
+
+                <include
+                    android:id="@+id/lineup34"
+                    layout="@layout/lineup34"
+                    android:visibility="gone"/>
+
+            </FrameLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/field_color"
+                android:orientation="vertical"
+                android:padding="@dimen/activity_margin_standard">
+
+                <ImageView
+                    android:id="@+id/img_match_detail_lineups_away_team_logo"
+                    android:layout_width="@dimen/match_detail_line_up_team_logo_size"
+                    android:layout_height="@dimen/match_detail_line_up_team_logo_size"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="@dimen/match_detail_lineups_gap"/>
+
+                <TextView
+                    android:id="@+id/tv_match_detail_lineups_away_team_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin_standard"
+                    android:layout_toRightOf="@id/img_match_detail_lineups_away_team_logo"
+                    android:textColor="@color/text_color_common"
+                    android:textSize="18sp"/>
+
+
+                <TextView
+                    android:id="@+id/tv_match_detail_lineups_away_team_scheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_match_detail_lineups_away_team_name"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/text_color_common"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_match_detail_lineups_away_team_coach"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_color_common"
+                        android:textSize="18sp"/>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/img_match_detail_lineups_away_team_coach"
+                        android:layout_width="@dimen/match_detail_lineups_player_image_size"
+                        android:layout_height="@dimen/match_detail_lineups_player_image_size"
+                        android:layout_marginStart="@dimen/match_detail_lineups_gap"
+                        app:civ_border_color="@color/globalWhite"
+                        app:civ_border_width="2dp"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_match_detail_substitution_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/match_detail_lineups_padding"
+                android:background="@color/globalWhite"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/match_detail_substitution_title"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lv_match_detail_substitution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/match_detail_lineups_padding"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_noinfo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="@dimen/lineup_icon_size"
+                android:layout_height="@dimen/lineup_icon_size"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:background="@drawable/ic_line_up_tab"
+                android:backgroundTint="@color/color_subtext"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="40dp"
+                android:text="@string/no_line_up"
+                android:textAlignment="center"
+                android:textColor="@color/color_subtext"
+                android:textSize="@dimen/fixture_tab_text"/>
+        </LinearLayout>
+
+    </FrameLayout>
+</android.support.v4.widget.NestedScrollView>

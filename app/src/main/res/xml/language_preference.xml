@@ -1,0 +1,8 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:title="Open source licenses"
+                  android:layout="@xml/setting_layout_one_line">
+
+    <Preference
+        android:selectable="false"
+        android:summary="Vietnam" />
+</PreferenceScreen>

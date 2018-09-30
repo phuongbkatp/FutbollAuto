@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/comment_input_bg"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/edt_comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:background="@drawable/text_input_bg"
+        android:hint="@string/add_comment"
+        android:inputType="textMultiLine"
+        android:maxLines="10"
+        android:layout_marginTop="@dimen/activity_margin_standard"
+        android:layout_marginBottom="@dimen/activity_margin_standard"
+        android:layout_marginLeft="@dimen/activity_margin_standard"
+        android:layout_marginStart="@dimen/activity_margin_standard"
+        android:paddingLeft="@dimen/activity_margin_standard"
+        android:paddingStart="@dimen/activity_margin_standard"
+        android:paddingRight="@dimen/activity_margin_standard"
+        android:paddingEnd="@dimen/activity_margin_standard"
+        android:paddingTop="@dimen/activity_margin_standard"
+        android:paddingBottom="@dimen/activity_margin_standard"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/btn_comment_send"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_weight="0"
+        android:padding="10dp"
+        android:src="@drawable/send_button" />
+</LinearLayout>

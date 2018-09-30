@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="light_theme_color_primary">@color/colorPrimary</color>
+    <color name="light_theme_color_primary_dark">@color/colorPrimaryDark</color>
+
+    <color name="colorPrimary">#c60000</color>
+    <color name="colorPrimaryDark">#9e0202</color>
+    <color name="colorPrimarySecond">#891146</color>
+
+    <color name="colorLive">#c60000</color>
+    <color name="colorAccent">#bf0000</color>
+    <color name="globalWhite">#ffffff</color>
+    <color name="lightBlack">#8c000000</color>
+    <color name="match_detail_text_1">#d9000000</color>
+    <color name="match_detail_text_2">#8c000000</color>
+    <color name="lightGray">#40000000</color>
+    <color name="lightGray20">#20000000</color>
+    <color name="text_color_common">#373737</color>
+    <color name="navigation_icon_color">#737373</color>
+    <color name="color_promotion_1">#ffffff</color>
+    <color name="color_promotion_2">#ffffff</color>
+    <color name="color_promotion_3">#ffffff</color>
+    <color name="color_promotion_relegation">#ffffff</color>
+    <color name="color_promotion_none">#ffffff</color>
+    <color name="color_subtext">#999999</color>
+    <color name="facebook_color">#3b5998</color>
+    <color name="header_color">#f7f7f7</color>
+    <color name="player_value">#8BC34A</color>
+    <color name="field_color">#c4ddc0</color>
+    <color name="statistic_bg">#80d080</color>
+    <color name="statistic_progress">#FF5722</color>
+    <color name="draw_circle_color">#d3d5c8</color>
+    <color name="match_detail_color">#80d3d5c8</color>
+    <color name="win_color">#80d080</color>
+    <color name="draw_color">#999999</color>
+    <color name="loss_color">#bf0000</color>
+
+    <color name="color_dialog_gray">#ededf3</color>
+    <color name="color_text_bottombar">#929092</color>
+    <color name="colorError">#ccc60000</color>
+    <color name="colorReport">#ff0000</color>
+    <color name="colorRed">#c60000</color>
+    <color name="tab_team_fragment_color">@color/colorPrimary</color>
+    <color name="tab_team_fragment_color_text">#FBE404</color>
+
+    <color name="colorBgSettingGray">#f0eff4</color>
+
+</resources>

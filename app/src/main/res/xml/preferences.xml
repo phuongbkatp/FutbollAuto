@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:key="first_preference_screen">
+
+    <SwitchPreference
+        android:key="notification_on_off_all"
+        android:defaultValue="true"
+        android:title="@string/setting_notification_all"/>
+
+    <PreferenceCategory
+        android:key="notification_category"
+        android:layout="@xml/categories_settings_layout"
+        android:title="@string/notification_setting">
+
+        <SwitchPreference
+            android:key="notification_break_news"
+            android:defaultValue="true"
+            android:title="@string/setting_notification_news"/>
+
+        <SwitchPreference
+            android:key="football_reminder"
+            android:defaultValue="true"
+            android:title="@string/setting_notification_reminder"/>
+        <SwitchPreference
+            android:key="football_start"
+            android:defaultValue="true"
+            android:title="@string/setting_notification_start"/>
+        <SwitchPreference
+            android:key="football_goal"
+            android:defaultValue="true"
+            android:title="@string/setting_notification_goals"/>
+        <SwitchPreference
+            android:key="football_card"
+            android:defaultValue="true"
+            android:title="@string/setting_notification_cards"/>
+        <SwitchPreference
+            android:key="football_substitution"
+            android:defaultValue="true"
+            android:title="@string/setting_notification_substitution"/>
+        <SwitchPreference
+            android:key="football_finish"
+            android:defaultValue="true"
+            android:title="@string/setting_notification_finish"/>
+        <SwitchPreference
+            android:key="football_lineups"
+            android:defaultValue="true"
+            android:title="@string/setting_notification_lineups"/>
+        <SwitchPreference
+            android:key="football_other"
+            android:defaultValue="true"
+            android:title="@string/setting_notification_other"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="general_category"
+        android:layout="@xml/categories_settings_layout"
+        android:title="@string/general_setting">
+        <ListPreference
+            android:key="language_setting"
+            android:layout="@xml/setting_layout_two_line"
+            android:persistent="true"
+            android:summary="%s"
+            android:title="@string/language_setting"
+            android:entryValues="@array/setting_language_values"
+            android:entries="@array/setting_language_texts"/>
+        <Preference
+            android:key="rate_button"
+            android:persistent="false"
+            android:title="@string/rate_setting"/>
+        <Preference
+            android:key="privacy_policy"
+            android:persistent="false"
+            android:title="@string/privacy_policy"/>
+        <Preference
+            android:key="clear_cache"
+            android:persistent="false"
+            android:title="@string/cache_setting"
+            android:summary="@string/clear_cache_description"/>
+    </PreferenceCategory>
+</PreferenceScreen>

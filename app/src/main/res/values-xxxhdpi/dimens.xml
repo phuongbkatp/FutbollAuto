@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Fixtures -->
+    <dimen name="item_fixture_padding">12dp</dimen>
+    <dimen name="item_fixture_text_size">14sp</dimen>
+    <dimen name="item_fixture_time_text_size">10sp</dimen>
+    <dimen name="item_fixture_match_info_margin_top">8dp</dimen>
+    <dimen name="item_fixture_match_goal_size">40dp</dimen>
+    <dimen name="item_fixture_match_goal_size_bg">60dp</dimen>
+    <dimen name="cardview_margin">4dp</dimen>
+    <dimen name="item_fixture_match_team_logo_size">40dp</dimen>
+    <dimen name="item_fixture_match_team_logo_size_small">40dp</dimen>
+
+    <dimen name="item_match_team_score_size">40dp</dimen>
+    <dimen name="item_match_team_score_height">45dp</dimen>
+
+    <dimen name="item_match_team_score_size_small">30dp</dimen>
+
+    <dimen name="item_fixture_match_item_gap">4dp</dimen>
+    <!-- Match detail -->
+    <dimen name="match_detail_padding">12dp</dimen>
+    <dimen name="match_detail_text_size">12sp</dimen>
+    <dimen name="match_detail_time_text_size">10sp</dimen>
+    <dimen name="match_detail_goals_text_size">28sp</dimen>
+    <dimen name="match_detail_goals_text_size_small">25sp</dimen>
+
+    <dimen name="match_detail_team_logo_size">40dp</dimen>
+    <dimen name="match_detail_line_up_team_logo_size">25dp</dimen>
+
+    <dimen name="match_detail_item_gap">4dp</dimen>
+    <!-- Match detail event -->
+    <dimen name="match_detail_event_padding">12dp</dimen>
+    <dimen name="match_detail_event_item_padding">8dp</dimen>
+    <dimen name="match_detail_event_time_size">40dp</dimen>
+    <dimen name="match_detail_event_goal_size">60dp</dimen>
+    <dimen name="match_detail_event_goals_text_size">12sp</dimen>
+    <dimen name="match_detail_event_gap">4dp</dimen>
+    <dimen name="match_detail_event_goal_img_size">20dp</dimen>
+    <dimen name="match_detail_event_card_width">12dp</dimen>
+    <dimen name="match_detail_event_card_height">16dp</dimen>
+    <dimen name="match_detail_event_text_size">12sp</dimen>
+    <dimen name="match_detail_event_time_text_size">10sp</dimen>
+    <dimen name="match_detail_event_icon">30dp</dimen>
+    <dimen name="appBarLayout_height">250dp</dimen>
+
+
+    <!-- Match detail lineups -->
+    <dimen name="match_detail_lineups_padding">12dp</dimen>
+    <dimen name="match_detail_lineups_player_number_width">20dp</dimen>
+    <dimen name="match_detail_lineups_gap">4dp</dimen>
+    <dimen name="match_detail_lineups_list_item_padding">8dp</dimen>
+    <dimen name="match_detail_lineups_player_image_size">32dp</dimen>
+
+    <dimen name="toolbar_icon_size">20dp</dimen>
+    <dimen name="toolbar_icon_size_x2">60dp</dimen>
+    <dimen name="header_view_margin_bottom">30dp</dimen>
+    <dimen name="activity_margin_standard">8dp</dimen>
+    <dimen name="activity_padding_standard">8dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">25dp</dimen>
+    <dimen name="lineup_margin_standard">16dp</dimen>
+
+    <dimen name="navigation_title_size">18sp</dimen>
+    <dimen name="navigation_title_margin">20dp</dimen>
+    <dimen name="player_detail_txt_size">18sp</dimen>
+    <dimen name="player_detail_txt_size_small">12sp</dimen>
+    <dimen name="statistic_text_size">16dp</dimen>
+    <dimen name="performance_height">50dp</dimen>
+    <dimen name="navigation_icon_size">35dp</dimen>
+
+    <dimen name="player_transfer_padding">2dp</dimen>
+    <dimen name="team_performance_margin">4dp</dimen>
+    <dimen name="detail_share_icon">24dp</dimen>
+
+    <dimen name="title_sign_in_textsize">16sp</dimen>
+    <dimen name="account_txt">17sp</dimen>
+    <!--screen profile-->
+    <dimen name="size_avatar_screen_prodfile">100dp</dimen>
+    <dimen name="height_item_screen_profile">40dp</dimen>
+    <dimen name="size_icon_clear">13dp</dimen>
+    <dimen name="width_btn_update">150dp</dimen>
+    <dimen name="height_btn_update">40dp</dimen>
+    <dimen name="width_btn_birthday">140dp</dimen>
+    <dimen name="width_btn_select_gender">100dp</dimen>
+    <!-- list news -->
+    <dimen name="list_news_title">14sp</dimen>
+    <dimen name="list_news_description">14sp</dimen>
+    <dimen name="list_news_time">12sp</dimen>
+    <dimen name="list_news_comment">12sp</dimen>
+    <dimen name="last_next_height">140dp</dimen>
+    <dimen name="button_toggle_size">25dp</dimen>
+    <dimen name="item_large_height">160dp</dimen>
+    <dimen name="item_topic_height">160dp</dimen>
+    <dimen name="app_title_topic_text_size">14sp</dimen>
+    <dimen name="toolbar_height">50dp</dimen>
+    <dimen name="native_ad_icon_size">35dp</dimen>
+    <dimen name="native_ad_media_height">100dp</dimen>
+    <dimen name="native_ad_call_to_action_width">100dp</dimen>
+    <dimen name="native_ad_call_to_action_height">30dp</dimen>
+    <dimen name="splash_title_size">30sp</dimen>
+    <dimen name="logo_size">100dp</dimen>
+    <dimen name="toolbar_title_size">18sp</dimen>
+    <dimen name="tab_news_text_size">10sp</dimen>
+    <dimen name="header_detail_player">150dp</dimen>
+    <dimen name="header_navigation_news">150dp</dimen>
+    <dimen name="navigation_header_height">160dp</dimen>
+    <dimen name="launchscreens_icon_bottom">16.0dip</dimen>
+    <dimen name="tab_height">35dp</dimen>
+    <dimen name="fixture_tab_text">16sp</dimen>
+    <dimen name="input_text_height">50dp</dimen>
+
+</resources>

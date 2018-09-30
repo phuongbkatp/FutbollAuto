@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView android:id="@+id/cardview"
+                                    xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="140dp"
+                                    android:layout_margin="@dimen/activity_margin_standard"
+                                    android:orientation="vertical"
+                                    app:cardCornerRadius="6dp"
+                                    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_margin_standard"
+        android:paddingTop="@dimen/activity_margin_standard">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/item_fixture_match_item_gap"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="2dp">
+
+                <ImageView
+                    android:id="@+id/img_fixture_home_team_logo"
+                    android:layout_width="@dimen/item_fixture_match_team_logo_size"
+                    android:layout_height="@dimen/item_fixture_match_team_logo_size"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/match_detail_item_gap"/>
+
+                <TextView
+                    android:id="@+id/tv_fixture_home_team_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/item_fixture_match_item_gap"
+                    android:layout_marginLeft="@dimen/item_fixture_match_item_gap"
+                    android:layout_marginStart="@dimen/item_fixture_match_item_gap"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/text_color_common"
+                    android:textSize="@dimen/item_fixture_text_size"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/item_match_team_score_height">
+
+                    <LinearLayout
+                        android:id="@+id/ll_fixture_detail_goals"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/tv_fixture_home_team_goal"
+                            android:layout_width="@dimen/item_match_team_score_size"
+                            android:layout_height="@dimen/item_match_team_score_size"
+                            android:background="@drawable/circle_black"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:textColor="@color/globalWhite"
+                            android:textSize="@dimen/match_detail_goals_text_size_small"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/tv_fixture_away_team_goal"
+                            android:layout_width="@dimen/item_match_team_score_size"
+                            android:layout_height="@dimen/item_match_team_score_size"
+                            android:layout_marginLeft="@dimen/match_detail_item_gap"
+                            android:background="@drawable/circle_black"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:textColor="@color/globalWhite"
+                            android:textSize="@dimen/match_detail_goals_text_size_small"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_time_remaining"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center_horizontal"
+                        android:gravity="top"
+                        android:textAlignment="center"
+                        android:textColor="@color/text_color_common"
+                        android:textSize="@dimen/item_fixture_text_size"
+                        android:visibility="gone"/>
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/item_fixture_match_item_gap"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="2dp">
+
+                <ImageView
+                    android:id="@+id/img_fixture_away_team_logo"
+                    android:layout_width="@dimen/item_fixture_match_team_logo_size"
+                    android:layout_height="@dimen/item_fixture_match_team_logo_size"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/match_detail_item_gap"/>
+
+                <TextView
+                    android:id="@+id/tv_fixture_away_team_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/item_fixture_match_item_gap"
+                    android:layout_marginLeft="@dimen/item_fixture_match_item_gap"
+                    android:layout_marginStart="@dimen/item_fixture_match_item_gap"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/text_color_common"
+                    android:textSize="@dimen/item_fixture_text_size"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_match_stt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/activity_margin_standard"
+                android:layout_marginTop="@dimen/activity_margin_standard"
+                android:textAlignment="center"
+                android:textColor="@color/color_subtext"
+                android:textSize="@dimen/item_fixture_time_text_size"/>
+
+            <TextView
+                android:id="@+id/tv_fixture_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_match_stt"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/tv_fixture_date"
+                android:textAlignment="center"
+                android:textColor="@color/text_color_common"
+                android:textSize="@dimen/item_fixture_time_text_size"/>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

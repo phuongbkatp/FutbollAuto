@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBgSettingGray"
+    android:theme="@style/navigationTextStyle">
+
+    <LinearLayout
+        android:id="@+id/profile_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_margin_standard"
+        android:paddingTop="@dimen/activity_margin_standard">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImage"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/profile_pic"
+            android:layout_gravity="center_horizontal"
+            app:civ_border_color="@color/globalWhite"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/tv_profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:text="@string/log_in_menu"
+            android:textColor="@color/globalWhite"
+            android:textStyle="bold"
+            android:textSize="@dimen/navigation_title_size"
+ />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/league_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/setting_content_margin_left"
+        android:layout_marginStart="@dimen/setting_content_margin_left"
+        android:layout_marginTop="@dimen/setting_sub_title_margin_top"
+        android:text="@string/league_menu"
+        android:textAllCaps="true"
+        android:textColor="@color/text_color_common"
+        android:textSize="@dimen/fixture_tab_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_layout" />
+
+    <ListView
+        android:id="@+id/navigation_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:divider="@null"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/league_title" />
+
+    <TextView
+        android:id="@+id/setting_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/setting_content_margin_left"
+        android:layout_marginStart="@dimen/setting_content_margin_left"
+        android:layout_marginTop="@dimen/setting_sub_title_margin_top"
+        android:text="@string/setting_menu"
+        android:textAllCaps="true"
+        android:textColor="@color/text_color_common"
+        android:textSize="@dimen/fixture_tab_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/navigation_list" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setting_title">
+
+
+        <LinearLayout
+            android:id="@+id/rl_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/globalWhite"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <FrameLayout
+                android:layout_width="@dimen/navigation_icon_size"
+                android:layout_height="@dimen/navigation_icon_size"
+                android:layout_gravity="left|center_vertical">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/setting_ic"
+                    android:backgroundTint="@color/navigation_icon_color" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/navigation_title_margin"
+                android:text="@string/setting_menu"
+                android:textAlignment="center"
+                android:textColor="@color/text_color_common"
+                android:textSize="@dimen/navigation_title_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/globalWhite"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rl_setting">
+
+            <FrameLayout
+                android:layout_width="@dimen/navigation_icon_size"
+                android:layout_height="@dimen/navigation_icon_size"
+                android:layout_gravity="left|center_vertical">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/share_ic"
+                    android:backgroundTint="@color/navigation_icon_color" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/navigation_title_margin"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:text="@string/share_via"
+                android:textAlignment="center"
+                android:textColor="@color/text_color_common"
+                android:textSize="@dimen/navigation_title_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/globalWhite"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_share">
+
+            <FrameLayout
+                android:layout_width="@dimen/navigation_icon_size"
+                android:layout_height="@dimen/navigation_icon_size"
+                android:layout_gravity="left|center_vertical">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/like"
+                    android:backgroundTint="@color/navigation_icon_color" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/navigation_title_margin"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:text="@string/rate_setting"
+                android:textAlignment="center"
+                android:textColor="@color/text_color_common"
+                android:textSize="@dimen/navigation_title_size" />
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/activity_margin_standard"
+    android:orientation="horizontal">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_profile_pic"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/activity_margin_standard"
+        android:layout_marginRight="@dimen/activity_margin_standard"
+        android:layout_weight="1"
+        android:src="@drawable/user_profile" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="@dimen/activity_margin_standard"
+        android:layout_marginRight="@dimen/activity_margin_standard"
+        android:layout_weight="10"
+        android:background="@drawable/rounded_corner"
+        android:padding="@dimen/activity_margin_standard">
+
+        <TextView
+            android:id="@+id/tv_comment_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_comment_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_comment_user_name"
+            android:layout_marginTop="@dimen/activity_margin_standard"
+            android:textColor="@color/text_color_common"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_comment_created_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_comment_content"
+            android:layout_marginTop="@dimen/activity_margin_standard"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/color_subtext"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/btn_report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tv_comment_content"
+            android:layout_marginTop="@dimen/activity_margin_standard"
+            android:textColor="@color/color_subtext"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:text="@string/report"
+            android:textStyle="bold"
+            android:tint="@color/colorReport"
+            android:visibility="gone"/>
+    </RelativeLayout>
+</LinearLayout>

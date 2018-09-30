@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="video_disclaimer">
+        <![CDATA[
+            <html>
+                <h1>Miễn trừ trách nhiệm</h1>
+                <p>Website bên thứ ba bạn chuẩn bị xem không thuộc sở hữu của MAN UTD NEWS</p>
+                <p>MAN UTD NEWS không chịu trách nhiệm về bất cứ nội dung, như các nội dung nghe-nhìn, mà bạn thấy trên website bên thứ ba</p>
+            </html>
+        ]]>
+    </string>
+</resources>

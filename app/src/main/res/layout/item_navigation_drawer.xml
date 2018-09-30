@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/globalWhite"
+    android:orientation="horizontal"
+    android:theme="@style/navigationTextStyle">
+    <FrameLayout
+        android:layout_width="@dimen/navigation_icon_size"
+        android:layout_height="@dimen/navigation_icon_size"
+        android:layout_gravity="left|center_vertical">
+    <ImageView
+        android:id="@+id/img_navigation_item"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_gravity="center" />
+    </FrameLayout>
+    <TextView
+        android:id="@+id/tv_navigation_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:fadingEdge="horizontal"
+        android:textAlignment="center"
+        android:textColor="@color/text_color_common"
+        android:layout_marginLeft="@dimen/navigation_title_margin"
+        android:textSize="@dimen/navigation_title_size"/>
+</LinearLayout>
