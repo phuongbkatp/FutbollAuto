@@ -1,7 +1,8 @@
 package com.appian.manchesterunitednews.data.interactor;
 
 import com.appian.manchesterunitednews.data.RestfulService;
-import com.appnet.android.football.fbvn.data.ListNewsData;
+import com.appian.manchesterunitednews.data.RestfulServiceAuto;
+import com.appnet.android.football.fbvn.data.NewsDataAuto;
 import com.appnet.android.football.fbvn.data.News;
 import com.appnet.android.football.fbvn.data.NewsData;
 
@@ -34,43 +35,19 @@ public class NewsInteractor {
         });
     }
 
-    public void loadNewsByApp(int appId, String language, int page, int limit, final OnResponseListener<List<News>> listener) {
+    public void loadNewsLatest(final OnResponseListener<List<News>> listener) {
         if (listener == null) {
             return;
         }
-        Call<ListNewsData> call = RestfulService.getInstance().loadNewsByApp(appId, language, page, limit);
+        Call<NewsDataAuto> call = RestfulServiceAuto.getInstance().loadNewsLatest();
         enqueue(call, listener);
     }
 
-    public void loadNewsByCategory(int appId, int categoryId, String language, int page, int limit, final OnResponseListener<List<News>> listener) {
-        if (listener == null) {
-            return;
-        }
-        Call<ListNewsData> call = RestfulService.getInstance().loadNewsByCategory(appId, categoryId, language, page, limit);
-        enqueue(call, listener);
-    }
-
-    public void loadNewsByMatch(int sofaMatchId, String language, int page, int limit, OnResponseListener<List<News>> listener) {
-        if (listener == null) {
-            return;
-        }
-        Call<ListNewsData> call = RestfulService.getInstance().loadNewsByMatch(sofaMatchId, language, page, limit);
-        enqueue(call, listener);
-    }
-
-    public void loadVideoOfMatch(int sofaMatchId, int page, int limit, OnResponseListener<List<News>> listener) {
-        if (listener == null) {
-            return;
-        }
-        Call<ListNewsData> call = RestfulService.getInstance().loadVideoOfMatch(sofaMatchId, page, limit);
-        enqueue(call, listener);
-    }
-
-    private void enqueue(Call<ListNewsData> call, final OnResponseListener<List<News>> listener) {
-        call.enqueue(new Callback<ListNewsData>() {
+    private void enqueue(Call<NewsDataAuto> call, final OnResponseListener<List<News>> listener) {
+        call.enqueue(new Callback<NewsDataAuto>() {
             @Override
-            public void onResponse(Call<ListNewsData> call, Response<ListNewsData> response) {
-                if (response.body() == null) {
+            public void onResponse(Call<NewsDataAuto> call, Response<NewsDataAuto> response) {
+                if (response.body() == null && response.body().getStatus()) {
                     listener.onSuccess(null);
                     return;
                 }
@@ -78,7 +55,7 @@ public class NewsInteractor {
             }
 
             @Override
-            public void onFailure(Call<ListNewsData> call, Throwable t) {
+            public void onFailure(Call<NewsDataAuto> call, Throwable t) {
                 listener.onFailure(t.getMessage());
             }
         });

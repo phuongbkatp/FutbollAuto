@@ -39,9 +39,9 @@ public class ListNewsPresenter extends BasePresenter<ListNewsView> implements On
     public void loadListNews(int appId, int type, int id, String language, int page, int limit) {
         switch (type) {
             case TYPE_APP:
-                mInteractor.loadNewsByApp(appId, language, page, limit, this);
+                mInteractor.loadNewsLatest(this);
                 break;
-            case TYPE_CATEGORY:
+            /*case TYPE_CATEGORY:
                 mInteractor.loadNewsByCategory(appId, id, language, page, limit, this);
                 break;
             case TYPE_MATCH:
@@ -49,7 +49,7 @@ public class ListNewsPresenter extends BasePresenter<ListNewsView> implements On
                 break;
             case TYPE_VIDEO_MATCH:
                 mInteractor.loadVideoOfMatch(id, page, limit, this);
-                break;
+                break;*/
         }
     }
 }
