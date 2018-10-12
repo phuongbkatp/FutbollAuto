@@ -25,6 +25,7 @@ import com.appian.manchesterunitednews.util.EndlessRecyclerViewScrollListener;
 import com.appian.manchesterunitednews.util.ItemClickSupport;
 import com.appian.manchesterunitednews.util.SimpleDividerItemDecoration;
 import com.appnet.android.football.fbvn.data.News;
+import com.appnet.android.football.fbvn.data.NewsAuto;
 
 import java.util.List;
 
@@ -75,7 +76,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         }
         mListNewsPresenter = new ListNewsPresenter(new NewsInteractor());
         mListNewsPresenter.attachView(this);
-        loadNews(mStartingPage);
+        loadNews();
     }
 
     @Override
@@ -97,26 +98,17 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         ItemClickSupport.addTo(lvNews).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                News item = mNewsAdapter.getItem(position);
-                if(item == null) {
+                NewsAuto item = mNewsAdapter.getItem(position);
+                if (item == null) {
                     return;
                 }
-                if(item.isVideoType()) {
-                    mVideoAlertDialog = CustomDialogFragment.newInstance(item.getId());
-                    mVideoAlertDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogFragmentTheme);
-                    if(getFragmentManager() != null) {
-                        mVideoAlertDialog.show(getFragmentManager(), "DialogFragment");
-                    }
-                } else {
-                    startDetailArticleActivity(position);
-                }
+                startDetailArticleActivity(item.getLink());
             }
         });
         mOnLoadMoreListener = new EndlessRecyclerViewScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int page) {
-                mCurrentPage++;
-                loadNews(mCurrentPage);
+                loadNews();
             }
         };
         lvNews.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
@@ -125,21 +117,9 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     }
 
 
-    private void startDetailArticleActivity(int pos) {
+    private void startDetailArticleActivity(String link) {
         Intent intent = new Intent(this.getActivity(), DetailArticleActivity.class);
-        List<News> nextItems = mNewsAdapter.getNextItems(pos, 3);
-        int[] ids = new int[nextItems.size()+1];
-        News itemNews = mNewsAdapter.getItem(pos);
-        if (itemNews == null) {
-            return;
-        }
-        ids[0] = itemNews.getId();
-        int index = 1;
-        for (News item : nextItems) {
-            ids[index] = item.getId();
-            index++;
-        }
-        intent.putExtra(DetailArticleActivity.EXTRA_NEWS_LIST_ID, ids);
+        intent.putExtra(DetailArticleActivity.LINK, link);
         startActivity(intent);
 
     }
@@ -151,18 +131,18 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void onRefresh() {
-        loadNews(mStartingPage);
+        loadNews();
         mOnLoadMoreListener.resetState();
         mCurrentPage = mStartingPage;
     }
 
-    private void loadNews(int page) {
+    private void loadNews() {
         showLoading(true);
-        mListNewsPresenter.loadListNews(mAppId, mNewsType, mTypeId, mLanguage, page, LIMIT_NEWS);
+        mListNewsPresenter.loadListNews(mNewsType);
     }
 
     @Override
-    public void showListNews(List<News> data) {
+    public void showListNews(List<NewsAuto> data) {
         showLoading(false);
         if (data != null) {
             if (mCurrentPage == mStartingPage) {
@@ -189,6 +169,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             mVideoAlertDialog.dismiss();
         }
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -196,7 +177,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     }
 
     private void showLoading(boolean isLoading) {
-        if(getView() != null) {
+        if (getView() != null) {
             mSwipeRefreshLayout.setRefreshing(isLoading);
         }
     }

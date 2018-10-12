@@ -3,12 +3,15 @@ package com.appian.manchesterunitednews.app.detailnews;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseActivity;
 import com.appian.manchesterunitednews.app.adapter.AdapterViewPager;
+import com.appian.manchesterunitednews.app.detailnews.presenter.DetailNewsPresenter;
+import com.appian.manchesterunitednews.app.news.presenter.ListNewsPresenter;
 import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appian.manchesterunitednews.util.ViewHelper;
@@ -18,32 +21,30 @@ import com.viewpagerindicator.CirclePageIndicator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DetailArticleActivity extends BaseActivity implements DetailNewsFragment.OnButtonClickListener {
+public class DetailArticleActivity extends BaseActivity {
+    private static final String TAG_DETAIL_NEWS = "detail_news";
 
-    public static final String EXTRA_NEWS_LIST_ID = "extra_news_list_id";
+    public static final String LINK = "link";
 
     private ViewPager mViewPagerNews;
     private InterstitialAdMob mInterstitialAdMob;
+    private DetailNewsPresenter mDetailNewsPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_news);
-        List<Fragment> listNewsFragments = new ArrayList<>();
         Intent intent = getIntent();
-        if (intent != null) {
-            int ids[] = intent.getIntArrayExtra(EXTRA_NEWS_LIST_ID);
-            if (ids != null) {
-                for (int id : ids) {
-                    listNewsFragments.add(DetailNewsFragment.newInstance(id));
-                }
-            }
+        String link = intent.getStringExtra(LINK);
+        Bundle bundle = new Bundle();
+        bundle.putString(LINK, link);
+        if (savedInstanceState == null) {
+            Fragment newFragment = new DetailNewsFragment();
+            newFragment.setArguments(bundle);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.view_content, newFragment, TAG_DETAIL_NEWS).commit();
         }
-        mViewPagerNews = findViewById(R.id.viewpagerNews);
-        CirclePageIndicator indicatorNews = findViewById(R.id.indicatorNews);
-        AdapterViewPager newsAdapterViewPager = new AdapterViewPager(getSupportFragmentManager(), listNewsFragments);
-        mViewPagerNews.setAdapter(newsAdapterViewPager);
-        indicatorNews.setViewPager(mViewPagerNews);
+
         View btnBackArrow = findViewById(R.id.img_back_arrow);
         btnBackArrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +74,4 @@ public class DetailArticleActivity extends BaseActivity implements DetailNewsFra
 
     }
 
-    @Override
-    public void onButtonClicked(View view) {
-        mViewPagerNews.setCurrentItem(mViewPagerNews.getCurrentItem() + 1);
-    }
 }

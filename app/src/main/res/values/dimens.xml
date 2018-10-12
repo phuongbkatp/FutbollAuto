@@ -70,7 +70,7 @@
     <dimen name="width_btn_birthday">140dp</dimen>
     <dimen name="width_btn_select_gender">100dp</dimen>
     <!-- list news -->
-    <dimen name="list_news_title">14sp</dimen>
+    <dimen name="list_news_title">16sp</dimen>
     <dimen name="list_news_description">14sp</dimen>
     <dimen name="list_news_time">12sp</dimen>
     <dimen name="list_news_comment">12sp</dimen>
@@ -116,5 +116,8 @@
 
     <dimen name="setting_sub_title_margin_top">35dp</dimen>
     <dimen name="setting_content_margin_left">20dp</dimen>
+    <dimen name="detail_content_text_size">16dp</dimen>
+    <dimen name="detail_caption_text_size">14dp</dimen>
+    <dimen name="detail_news_title">20sp</dimen>
 
 </resources>

@@ -19,6 +19,7 @@ import com.appian.manchesterunitednews.app.detailnews.presenter.DetailNewsPresen
 import com.appian.manchesterunitednews.app.detailnews.view.DetailNewsView;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
 import com.appian.manchesterunitednews.util.ViewHelper;
+import com.appnet.android.football.fbvn.data.DetailNewsAuto;
 import com.appnet.android.football.fbvn.data.News;
 
 public class VideoActivity extends BaseActivity implements DetailNewsView {
@@ -51,14 +52,14 @@ public class VideoActivity extends BaseActivity implements DetailNewsView {
         }
         mPresenter = new DetailNewsPresenter(new NewsInteractor());
         mPresenter.attachView(this);
-        mPresenter.loadNewsDetail(id);
+        //mPresenter.loadNewsDetail(id);
     }
 
     @Override
-    public void showNews(News news) {
-        if (mWvContent != null && news != null && !TextUtils.isEmpty(news.getUrl())) {
+    public void showNews(DetailNewsAuto news) {
+/*        if (mWvContent != null && news != null && !TextUtils.isEmpty(news.getUrl())) {
             mWvContent.loadUrl(news.getUrl());
-        }
+        }*/
     }
 
     @Override

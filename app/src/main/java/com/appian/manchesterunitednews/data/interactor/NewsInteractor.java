@@ -2,6 +2,9 @@ package com.appian.manchesterunitednews.data.interactor;
 
 import com.appian.manchesterunitednews.data.RestfulService;
 import com.appian.manchesterunitednews.data.RestfulServiceAuto;
+import com.appnet.android.football.fbvn.data.DetailNewsAuto;
+import com.appnet.android.football.fbvn.data.DetailNewsDataAuto;
+import com.appnet.android.football.fbvn.data.NewsAuto;
 import com.appnet.android.football.fbvn.data.NewsDataAuto;
 import com.appnet.android.football.fbvn.data.News;
 import com.appnet.android.football.fbvn.data.NewsData;
@@ -14,28 +17,28 @@ import retrofit2.Response;
 
 public class NewsInteractor {
 
-    public void loadNewsDetail(int id, final OnResponseListener<News> listener) {
+    public void loadNewsDetail(String link, final OnDetailNewsResponseListener<DetailNewsAuto> listener) {
         if(listener == null) {
             return;
         }
-        Call<NewsData> call = RestfulService.getInstance().loadNewsDetail(id);
-        call.enqueue(new Callback<NewsData>() {
+        Call<DetailNewsDataAuto> call = RestfulServiceAuto.getInstance().loadNewsDetail(link);
+        call.enqueue(new Callback<DetailNewsDataAuto>() {
             @Override
-            public void onResponse(Call<NewsData> call, Response<NewsData> response) {
-                if(response.body() == null) {
+            public void onResponse(Call<DetailNewsDataAuto> call, Response<DetailNewsDataAuto> response) {
+                if(response.body() == null && response.body().getStatus() != 0) {
                     return;
                 }
                 listener.onSuccess(response.body().getData());
             }
 
             @Override
-            public void onFailure(Call<NewsData> call, Throwable t) {
+            public void onFailure(Call<DetailNewsDataAuto> call, Throwable t) {
                 listener.onFailure(t.getMessage());
             }
         });
     }
 
-    public void loadNewsLatest(final OnResponseListener<List<News>> listener) {
+    public void loadNewsLatest(final OnResponseListener<List<NewsAuto>> listener) {
         if (listener == null) {
             return;
         }
@@ -43,11 +46,11 @@ public class NewsInteractor {
         enqueue(call, listener);
     }
 
-    private void enqueue(Call<NewsDataAuto> call, final OnResponseListener<List<News>> listener) {
+    private void enqueue(Call<NewsDataAuto> call, final OnResponseListener<List<NewsAuto>> listener) {
         call.enqueue(new Callback<NewsDataAuto>() {
             @Override
             public void onResponse(Call<NewsDataAuto> call, Response<NewsDataAuto> response) {
-                if (response.body() == null && response.body().getStatus()) {
+                if (response.body() == null && response.body().getStatus() != 0) {
                     listener.onSuccess(null);
                     return;
                 }

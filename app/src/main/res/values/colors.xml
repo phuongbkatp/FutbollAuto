@@ -44,5 +44,6 @@
     <color name="tab_team_fragment_color_text">#FBE404</color>
 
     <color name="colorBgSettingGray">#f0eff4</color>
+    <color name="text_news_detail">#000000</color>
 
 </resources>

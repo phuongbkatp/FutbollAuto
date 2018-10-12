@@ -5,6 +5,7 @@ import android.content.Context;
 import com.appian.manchesterunitednews.BuildConfig;
 import com.appian.manchesterunitednews.MainApplication;
 import com.appian.manchesterunitednews.network.NetworkHelper;
+import com.appnet.android.football.fbvn.data.DetailNewsDataAuto;
 import com.appnet.android.football.fbvn.data.NewsDataAuto;
 import com.appnet.android.football.fbvn.service.RestfulApiFootballAuto;
 
@@ -39,15 +40,8 @@ public class RestfulServiceAuto {
 
     private static RestfulApiFootballAuto createRestfulApiFootball(final Context context, String baseUrl) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .cache(createCache(context))
-                .addNetworkInterceptor(new ResponseCacheInterceptor())
-                .addInterceptor(new OfflineResponseCacheInterceptor())
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS);
-        if(BuildConfig.DEBUG) {
-            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            builder.addInterceptor(interceptor);
-        }
+
         OkHttpClient client = builder.build();
         Retrofit retrofit = (new Retrofit.Builder())
                 .baseUrl(baseUrl)
@@ -56,43 +50,6 @@ public class RestfulServiceAuto {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         return retrofit.create(RestfulApiFootballAuto.class);
-    }
-
-    private static Cache createCache(Context context) {
-        //setup cache
-        File httpCacheDirectory = new File(context.getCacheDir(), "httpCache");
-        int cacheSize = 10 * 1024 * 1024; // 10 MB
-        return new Cache(httpCacheDirectory, cacheSize);
-    }
-
-    private static class ResponseCacheInterceptor implements Interceptor {
-        @Override
-        public okhttp3.Response intercept(Chain chain) throws IOException {
-            okhttp3.Response originalResponse = chain.proceed(chain.request());
-            CacheControl cacheControl = chain.request().cacheControl();
-            if (cacheControl != null && cacheControl.maxAgeSeconds() > 0 && cacheControl.isPublic()) {
-                // Remain override cache control in each request
-                return originalResponse.newBuilder()
-                        .header("Cache-Control", "public, max-age=" + cacheControl.maxAgeSeconds())
-                        .build();
-            }
-            return originalResponse.newBuilder()
-                    .header("Cache-Control", "public, max-age=2")   // 2 sec
-                    .build();
-        }
-    }
-
-    private static class OfflineResponseCacheInterceptor implements Interceptor {
-        @Override
-        public okhttp3.Response intercept(Chain chain) throws IOException {
-            Request request = chain.request();
-            if (!NetworkHelper.isNetworkAvailable(MainApplication.getApplication().getApplicationContext())) {
-                request = request.newBuilder()
-                        .header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 15) // 15 days
-                        .build();
-            }
-            return chain.proceed(request);
-        }
     }
 
     public static RestfulServiceAuto getInstance() {
@@ -106,8 +63,8 @@ public class RestfulServiceAuto {
         return mRestfulApiFootball.loadNewsLatest();
     }
 
-/*    public Call<NewsData> loadNewsDetail(int newsId) {
-        return mRestfulApiFootball.loadNewsDetail(MAX_AGE_CACHE_NEWS_DETAIL, newsId);
-    }*/
+    public Call<DetailNewsDataAuto> loadNewsDetail(String link) {
+        return mRestfulApiFootball.loadNewsDetail(link);
+    }
 
 }

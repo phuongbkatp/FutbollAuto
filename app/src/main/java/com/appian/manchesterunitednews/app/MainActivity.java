@@ -199,7 +199,7 @@ public class MainActivity extends BaseActivity
             }
         } else if (TAG_FRAGMENT_TOPIC.equals(tag)) {
             if (fragment == null) {
-                fragment = new NewsTopicFragment();
+                //fragment = new NewsTopicFragment();
             }
         } else if (TAG_FRAGMENT_LEAGUE.equals(tag)) {
             if (fragment == null) {

@@ -20,6 +20,7 @@ import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
 import com.appnet.android.football.fbvn.data.News;
+import com.appnet.android.football.fbvn.data.NewsAuto;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class NewsTopicFragment extends BaseFragment implements ListNewsView {
         mListNewsPresenter = new ListNewsPresenter(new NewsInteractor());
         mListNewsPresenter.attachView(this);
         String language = AppConfigManager.getInstance().getLanguage(getContext());
-        mListNewsPresenter.loadListNews(appConfig.getAppId(), ListNewsPresenter.TYPE_CATEGORY, appConfig.getCategoryEventId(), language, 1, 10);
+        //mListNewsPresenter.loadListNews(appConfig.getAppId(), ListNewsPresenter.TYPE_CATEGORY, appConfig.getCategoryEventId(), language, 1, 10);
     }
 
     @Override
@@ -110,15 +111,15 @@ public class NewsTopicFragment extends BaseFragment implements ListNewsView {
     }
 
     @Override
-    public void showListNews(List<News> data) {
+    public void showListNews(List<NewsAuto> data) {
         if(data == null) {
             return;
         }
-        for (News news : data) {
+/*        for (NewsAuto news : data) {
             HeadNewsFragment fragment = HeadNewsFragment.newInstance(news.getId(), news.getTitle(),
                     news.getThumbnail(), news.getCreatedAt(), news.getCommentCount());
             mTopicFragments.add(fragment);
-        }
+        }*/
         mTopicAdapterViewPager.notifyDataSetChanged();
     }
 

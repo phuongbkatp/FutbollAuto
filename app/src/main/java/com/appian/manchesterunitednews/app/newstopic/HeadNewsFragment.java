@@ -74,7 +74,7 @@ public class HeadNewsFragment extends BaseFragment {
     private void startDetailArticleActivity() {
         Intent intent = new Intent(getContext(), DetailArticleActivity.class);
         int[] ids = {mId};
-        intent.putExtra(DetailArticleActivity.EXTRA_NEWS_LIST_ID, ids);
+        //intent.putExtra(DetailArticleActivity.EXTRA_NEWS_LIST_ID, ids);
         startActivity(intent);
 
     }

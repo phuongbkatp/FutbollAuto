@@ -31,7 +31,7 @@ public class NotificationFactory {
         } else {
             int[] ids = {id};
             Intent intent = new Intent(context, DetailArticleActivity.class);
-            intent.putExtra(DetailArticleActivity.EXTRA_NEWS_LIST_ID, ids);
+            //intent.putExtra(DetailArticleActivity.EXTRA_NEWS_LIST_ID, ids);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }
@@ -59,7 +59,7 @@ public class NotificationFactory {
             notification.putExtra("id", id);
             notification.setClass(VideoActivity.class);
         } else {
-            notification.putExtra(DetailArticleActivity.EXTRA_NEWS_LIST_ID, ids);
+            //notification.putExtra(DetailArticleActivity.EXTRA_NEWS_LIST_ID, ids);
             notification.setTitle(res.getString(R.string.notification_news));
             notification.setClass(DetailArticleActivity.class);
         }

@@ -3,25 +3,29 @@ package com.appian.manchesterunitednews.app.detailnews.presenter;
 import com.appian.manchesterunitednews.app.BasePresenter;
 import com.appian.manchesterunitednews.app.detailnews.view.DetailNewsView;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
+import com.appian.manchesterunitednews.data.interactor.OnDetailNewsResponseListener;
 import com.appian.manchesterunitednews.data.interactor.OnResponseListener;
+import com.appnet.android.football.fbvn.data.DetailNewsAuto;
 import com.appnet.android.football.fbvn.data.News;
 
-public class DetailNewsPresenter extends BasePresenter<DetailNewsView> implements OnResponseListener<News> {
+import java.util.List;
+
+public class DetailNewsPresenter extends BasePresenter<DetailNewsView> implements OnDetailNewsResponseListener<DetailNewsAuto> {
     private final NewsInteractor mInteractor;
 
     public DetailNewsPresenter(NewsInteractor interactor) {
         mInteractor = interactor;
     }
 
-    public void loadNewsDetail(int id) {
-        if(id == 0) {
+    public void loadNewsDetail(String link) {
+        if(link == "") {
             return;
         }
-        mInteractor.loadNewsDetail(id, this);
+        mInteractor.loadNewsDetail(link, this);
     }
 
     @Override
-    public void onSuccess(News data) {
+    public void onSuccess(DetailNewsAuto data) {
         if(getView() == null) {
             return;
         }
