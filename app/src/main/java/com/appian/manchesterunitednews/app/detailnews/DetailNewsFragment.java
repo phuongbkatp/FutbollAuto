@@ -17,11 +17,17 @@ import com.appian.manchesterunitednews.app.detailnews.presenter.DetailNewsPresen
 import com.appian.manchesterunitednews.app.detailnews.view.DetailNewsView;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
 import com.appian.manchesterunitednews.util.CustomImageLayout;
+import com.appian.manchesterunitednews.util.CustomTableLayout;
 import com.appian.manchesterunitednews.util.CustomTextView;
 import com.appian.manchesterunitednews.util.ImageLoader;
 import com.appian.manchesterunitednews.util.Utils;
+import com.appnet.android.football.fbvn.data.Cell;
+import com.appnet.android.football.fbvn.data.ColumnHeader;
+import com.appian.manchesterunitednews.util.MyTableViewAdapter;
+import com.appnet.android.football.fbvn.data.RowHeader;
 import com.appnet.android.football.fbvn.data.ContentDetailNewsAuto;
 import com.appnet.android.football.fbvn.data.DetailNewsAuto;
+import com.evrencoskun.tableview.TableView;
 
 import java.util.List;
 
@@ -32,6 +38,10 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
     private ImageView mImgThumbnail;
     private TextView mTvTimeNews;
     private LinearLayout ll_content;
+
+    private List<RowHeader> mRowHeaderList;
+    private List<ColumnHeader> mColumnHeaderList;
+    private List<List<Cell>> mCellList;
 
     private String link;
     private DetailNewsAuto mNews;
@@ -64,7 +74,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         mAdapter = new CommentsAdapter(getContext());
         mPresenter = new DetailNewsPresenter(new NewsInteractor());
         mPresenter.attachView(this);
-        mPresenter.loadNewsDetail(link);
+        mPresenter.loadNewsDetail("https://www.bbc.com/sport/football/45757516");
 
     }
 
@@ -111,7 +121,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         }
         for (ContentDetailNewsAuto item : listContent) {
             if (item.getType() != null && item.getType().equals("text")) {
-                LinearLayout textView = new CustomTextView(getContext(), item.getText());
+                LinearLayout textView = new CustomTextView(getContext(), item.getText(), item.isHead());
                 ll_content.addView(textView);
             } else if (item.getType() != null && item.getType().equals("image")) {
                 if (item.getLinkImg() == null || item.getText() == null ) return;
@@ -119,6 +129,11 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
                 ll_content.addView(imgLayout);
 
                 ll_content.addView(new RecyclerView(getContext()));
+            } else if (item.getType() != null && item.getType().equals("table")) {
+                mColumnHeaderList = item.getRowHeaderList();
+                mCellList = item.getCellList();
+                CustomTableLayout tableLayout = new CustomTableLayout(getContext(),item.getText(), mColumnHeaderList, mCellList);
+                ll_content.addView(tableLayout);
             }
         }
     }

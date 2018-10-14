@@ -46,7 +46,8 @@
                     android:layout_marginRight="@dimen/activity_margin_standard"
                     android:layout_marginTop="@dimen/activity_margin_standard"
                     android:textColor="@color/match_detail_text_2"
-                    android:textSize="@dimen/list_news_description" />
+                    android:textSize="@dimen/list_news_description"
+                    android:textStyle="bold"/>
 
                 <View
                     android:layout_width="match_parent"

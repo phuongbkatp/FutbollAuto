@@ -63,7 +63,7 @@
                 android:gravity="bottom">
 
                 <TextView
-                    android:id="@+id/tv_date"
+                    android:id="@+id/tv_source"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -72,28 +72,18 @@
                     android:textColor="@color/color_subtext"
                     android:textSize="@dimen/list_news_time" />
 
-                <LinearLayout
+
+                <TextView
+                    android:id="@+id/tv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginStart="2dp"
+                    android:textColor="@color/color_subtext"
+                    android:textSize="@dimen/list_news_comment" />
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_comment_small" />
-
-                    <TextView
-                        android:id="@+id/tv_news_comment_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginStart="2dp"
-                        android:textColor="@color/color_subtext"
-                        android:textSize="@dimen/list_news_comment" />
-                </LinearLayout>
 
             </RelativeLayout>
 

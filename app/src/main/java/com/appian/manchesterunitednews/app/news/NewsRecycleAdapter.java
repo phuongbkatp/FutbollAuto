@@ -69,7 +69,8 @@ class NewsRecycleAdapter extends FbAdRecyclerAdapter<NewsAuto> {
         }
         RecyclerViewHolder itemHolder = (RecyclerViewHolder) holder;
         itemHolder.TvTitle.setText(item.getTitle());
-        itemHolder.TvDate.setText(Utils.calculateTimeAgo(mContext, item.getCreatedTime()));
+        itemHolder.TvSource.setText(item.getSiteName());
+        itemHolder.TvDate.setText(Utils.calculateTimeAgo(mContext, item.getCreatedTime() ));
         ImageLoader.displayImage(item.getImage(), itemHolder.ImgThumbnail);
 /*        if(item.isVideoType()) {
             itemHolder.IconVideo.setVisibility(View.VISIBLE);
@@ -98,7 +99,7 @@ class NewsRecycleAdapter extends FbAdRecyclerAdapter<NewsAuto> {
     private class RecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView TvTitle;
         TextView TvDate;
-        TextView TvCommentCount;
+        TextView TvSource;
         ImageView ImgThumbnail;
         View IconVideo;
 
@@ -106,7 +107,7 @@ class NewsRecycleAdapter extends FbAdRecyclerAdapter<NewsAuto> {
             super(view);
             TvTitle = view.findViewById(R.id.tv_title);
             TvDate = view.findViewById(R.id.tv_date);
-            TvCommentCount = view.findViewById(R.id.tv_news_comment_count);
+            TvSource = view.findViewById(R.id.tv_source);
             ImgThumbnail = view.findViewById(R.id.img_thumb_news);
             IconVideo = view.findViewById(R.id.img_ic_video_type);
         }

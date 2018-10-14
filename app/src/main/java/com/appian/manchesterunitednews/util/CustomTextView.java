@@ -14,15 +14,18 @@ import com.appian.manchesterunitednews.R;
  */
 
 public class CustomTextView extends LinearLayout {
-    public CustomTextView(Context context, String content) {
+    public CustomTextView(Context context, String content, boolean isHead) {
         super(context);
-        initView(context, content);
+        initView(context, content, isHead);
     }
 
-    private void initView(Context context,String content) {
+    private void initView(Context context,String content,boolean isHead) {
         View view = inflate(context, R.layout.custom_text__view, null);
         TextView textView = view.findViewById(R.id.content);
         textView.setText(content);
+        if (isHead) {
+            textView.setTypeface(textView.getTypeface(), Typeface.BOLD_ITALIC);
+        }
         addView(view);
     }
 
