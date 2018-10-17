@@ -70,7 +70,11 @@ class NewsRecycleAdapter extends FbAdRecyclerAdapter<NewsAuto> {
         RecyclerViewHolder itemHolder = (RecyclerViewHolder) holder;
         itemHolder.TvTitle.setText(item.getTitle());
         itemHolder.TvSource.setText(item.getSiteName());
-        itemHolder.TvDate.setText(Utils.calculateTimeAgo(mContext, item.getCreatedTime() ));
+        if (item.getCreatedTime() != 0) {
+            itemHolder.TvDate.setText(Utils.calculateTimeAgo(mContext, item.getCreatedTime()));
+        } else {
+            itemHolder.TvDate.setVisibility(View.GONE);
+        }
         ImageLoader.displayImage(item.getImage(), itemHolder.ImgThumbnail);
 /*        if(item.isVideoType()) {
             itemHolder.IconVideo.setVisibility(View.VISIBLE);

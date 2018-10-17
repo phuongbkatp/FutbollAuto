@@ -40,9 +40,9 @@ public class NewsTopicFragment extends BaseFragment implements ListNewsView {
         super.onCreate(savedInstanceState);
         AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(getContext());
         List<Fragment> fList = new ArrayList<>();
-        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_CATEGORY, appConfig.getTabId(3)));
-        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_CATEGORY, appConfig.getTabId(4)));
-        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_CATEGORY, appConfig.getTabId(5)));
+        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_APP, appConfig.getTabId(3)));
+        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_APP, appConfig.getTabId(4)));
+        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_APP, appConfig.getTabId(5)));
         mNewsAdapterViewPager = new AdapterViewPager(getChildFragmentManager(), fList);
         mTopicFragments = new ArrayList<>();
         mTopicAdapterViewPager = new AdapterViewPager(getChildFragmentManager(), mTopicFragments);

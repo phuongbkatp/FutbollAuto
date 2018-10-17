@@ -53,8 +53,8 @@ public class HomeFragment extends BaseFragment implements TeamLastNextMatchView 
         mTeamId = appConfig.getTeamSofaId();
         List<Fragment> fList = new ArrayList<>();
         fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_APP, 0));
-        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_CATEGORY, appConfig.getTabId(1)));
-        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_CATEGORY, appConfig.getTabId(2)));
+        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_TRENDING, 0));
+        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_VIDEO, 0));
         mNewsAdapterViewPager = new AdapterViewPager(getChildFragmentManager(), fList);
         mLastNextFragments = new ArrayList<>();
         mLastNextAdapterViewPager = new AdapterViewPager(getChildFragmentManager(), mLastNextFragments);
@@ -96,11 +96,11 @@ public class HomeFragment extends BaseFragment implements TeamLastNextMatchView 
         }
         TabLayout.Tab tab2 = tabLayout.getTabAt(1);
         if (tab2 != null) {
-            tab2.setText(appConfig.getTabTitle(context, 1));
+            tab2.setText(getString(R.string.trend_news));
         }
         TabLayout.Tab tab3 = tabLayout.getTabAt(2);
         if (tab3 != null) {
-            tab3.setText(appConfig.getTabTitle(context, 2));
+            tab3.setText(getString(R.string.video_news));
         }
         mLastNextViewPager.setAdapter(mLastNextAdapterViewPager);
 

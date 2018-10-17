@@ -51,7 +51,6 @@ import static android.app.Activity.RESULT_OK;
 
 public class MoreFragment extends BaseFragment
         implements View.OnClickListener,
-        OnLogoutListener, OnBtnLogoutClickListener,
         SeasonLeagueTeamView {
     private static final String TAG_FRAGMENT_LEAGUE = "fragment_league";
 
@@ -63,9 +62,7 @@ public class MoreFragment extends BaseFragment
 
     private NavigationListAdapter mNavigationAdapter;
     private List<LeagueSeason> mLeagueSesons;
-    private TextView mTvProfileName;
 
-    private ImageView mImgUserProfile;
 
     private BroadcastReceiver mUserProfileChangedReceiver;
 
@@ -84,10 +81,6 @@ public class MoreFragment extends BaseFragment
         super.onViewCreated(view, savedInstanceState);
         mLeagueSesons = new ArrayList<>();
 
-        //User profile
-        mImgUserProfile = view.findViewById(R.id.profileImage);
-        mTvProfileName = view.findViewById(R.id.tv_profile_name);
-
         mNavigationAdapter = new NavigationListAdapter(getContext(), mLeagueSesons);
         ListView navigationList = view.findViewById(R.id.navigation_list);
         navigationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -104,23 +97,14 @@ public class MoreFragment extends BaseFragment
         navigationList.setAdapter(mNavigationAdapter);
 
         View viewSetting = view.findViewById(R.id.rl_setting);
-        View viewProfile = view.findViewById(R.id.profile_layout);
 
         viewSetting.setOnClickListener(this);
-        viewProfile.setOnClickListener(this);
         mSeasonLeagueTeamPresenter = new SeasonLeagueTeamPresenter();
         mSeasonLeagueTeamPresenter.attachView(this);
         loadLeftMenu();
 
-        handleLogin();
         AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(getContext());
 
-        mUserProfileChangedReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                handleLogin();
-            }
-        };
         View btnShare = view.findViewById(R.id.btn_share);
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,14 +157,6 @@ public class MoreFragment extends BaseFragment
         switch (v.getId()) {
             case R.id.rl_setting:
                 switchActivity(RC_SETTING);
-                break;
-            case R.id.profile_layout:
-                UserAccount userAccount = AccountManager.getInstance().getAccount(getContext());
-                if (userAccount != null) {
-                    switchFragment(TAG_FRAGMENT_PROFILE);
-                } else {
-                    switchActivity(RC_LOGIN);
-                }
                 break;
             default:
                 break;
@@ -235,7 +211,7 @@ public class MoreFragment extends BaseFragment
 
     private void setTitle() {
         if (mToolbar != null) {
-            mToolbar.changeToolbarTitle(getString(R.string.news_topic_menu));
+            mToolbar.changeToolbarTitle(getString(R.string.more_menu));
         }
     }
 
@@ -250,39 +226,9 @@ public class MoreFragment extends BaseFragment
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_LOGIN && resultCode == RESULT_OK) {
-            handleLogin();
         }
     }
 
-    private void handleLogin() {
-        UserAccount account = AccountManager.getInstance().getAccount(getContext());
-        if (account == null) {
-            fillNotLoginUser();
-            return;
-        }
-        ImageLoader.displayImage(account.getAvatar(), mImgUserProfile, R.drawable.profile_pic);
-        mTvProfileName.setText(account.getFullName());
-    }
-
-    private void handleLogout() {
-        AccountManager.getInstance().clearAccount(getContext());
-        fillNotLoginUser();
-    }
-
-    private void fillNotLoginUser() {
-        mImgUserProfile.setImageResource(R.drawable.profile_pic);
-        mTvProfileName.setText(getResources().getString(R.string.log_in_menu));
-    }
-
-    @Override
-    public void onLogoutSuccess() {
-        fillNotLoginUser();
-    }
-
-    @Override
-    public void onBtnLogoutClick() {
-        handleLogout();
-    }
 
     @Override
     public void showSeasonLeagueTeam(List<LeagueSeason> data) {

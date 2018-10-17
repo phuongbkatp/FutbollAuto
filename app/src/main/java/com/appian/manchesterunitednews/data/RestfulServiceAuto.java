@@ -62,7 +62,12 @@ public class RestfulServiceAuto {
     public Call<NewsDataAuto> loadNewsLatest() {
         return mRestfulApiFootball.loadNewsLatest();
     }
-
+    public Call<NewsDataAuto> loadNewsTrend() {
+        return mRestfulApiFootball.loadNewsTrend();
+    }
+    public Call<NewsDataAuto> loadNewsVideo() {
+        return mRestfulApiFootball.loadNewsVideo();
+    }
     public Call<DetailNewsDataAuto> loadNewsDetail(String link) {
         return mRestfulApiFootball.loadNewsDetail(link);
     }

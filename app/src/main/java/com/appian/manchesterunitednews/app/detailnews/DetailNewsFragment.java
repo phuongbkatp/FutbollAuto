@@ -1,5 +1,9 @@
 package com.appian.manchesterunitednews.app.detailnews;
 
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.widget.ImageButton;
+import android.widget.MediaController;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,7 +12,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseStateFragment;
@@ -36,6 +43,9 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
     private TextView mTvDescription;
     private TextView mTvSource;
     private ImageView mImgThumbnail;
+    private VideoView mContentVideo;
+    private RelativeLayout mRlVideo;
+    private ProgressBar progressBar;
     private TextView mTvTimeNews;
     private LinearLayout ll_content;
 
@@ -49,6 +59,9 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
     private DetailNewsPresenter mPresenter;
 
     private CommentsAdapter mAdapter;
+    private MediaController mediacontroller;
+    private boolean isPlaying = false;
+    private ImageButton playPause;
 
     @Override
     public void showNews(DetailNewsAuto news) {
@@ -74,7 +87,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         mAdapter = new CommentsAdapter(getContext());
         mPresenter = new DetailNewsPresenter(new NewsInteractor());
         mPresenter.attachView(this);
-        mPresenter.loadNewsDetail("https://www.bbc.com/sport/football/45757516");
+        mPresenter.loadNewsDetail(link);
 
     }
 
@@ -95,6 +108,24 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         mTvDescription = view.findViewById(R.id.tv_news_detail_description);
         mTvSource = view.findViewById(R.id.tv_news_detail_source);
         mImgThumbnail = view.findViewById(R.id.img_news_detail_thumbnail);
+        mContentVideo = view.findViewById(R.id.content_video);
+        playPause = view.findViewById(R.id.play_or_pause);
+
+
+        playPause.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                if (isPlaying) {
+                    playPause.setPressed(false);
+                    mContentVideo.pause();
+                }else{
+                    playPause.setPressed(true);
+                    mContentVideo.resume();
+                }
+                isPlaying = !isPlaying;
+            }
+        });
+        mRlVideo = view.findViewById(R.id.rl_video);
+        progressBar = view.findViewById(R.id.progrss);
         mTvTimeNews = view.findViewById(R.id.tv_time_news);
         ll_content = view.findViewById(R.id.ll_content);
     }
@@ -114,6 +145,13 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         if (!TextUtils.isEmpty(mNews.getSource())) {
             mTvSource.setText(mNews.getSource());
         }
+        String url = mNews.getMetaDetailNewsAuto().getVideo();
+        if (!url.equals("")) {
+            mRlVideo.setVisibility(View.VISIBLE);
+            playVideo(url);
+        } else {
+            mRlVideo.setVisibility(View.GONE);
+        }
         ImageLoader.displayImage(mNews.getMetaDetailNewsAuto().getImage(), mImgThumbnail);
         List<ContentDetailNewsAuto> listContent = mNews.getContentDetailNewsAuto();
         if (listContent.size() == 0) {
@@ -124,7 +162,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
                 LinearLayout textView = new CustomTextView(getContext(), item.getText(), item.isHead());
                 ll_content.addView(textView);
             } else if (item.getType() != null && item.getType().equals("image")) {
-                if (item.getLinkImg() == null || item.getText() == null ) return;
+                if (item.getLinkImg() == null || item.getText() == null) return;
                 CustomImageLayout imgLayout = new CustomImageLayout(getContext(), item.getLinkImg(), item.getText());
                 ll_content.addView(imgLayout);
 
@@ -132,7 +170,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
             } else if (item.getType() != null && item.getType().equals("table")) {
                 mColumnHeaderList = item.getRowHeaderList();
                 mCellList = item.getCellList();
-                CustomTableLayout tableLayout = new CustomTableLayout(getContext(),item.getText(), mColumnHeaderList, mCellList);
+                CustomTableLayout tableLayout = new CustomTableLayout(getContext(), item.getText(), mColumnHeaderList, mCellList);
                 ll_content.addView(tableLayout);
             }
         }
@@ -144,4 +182,20 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         mPresenter.detachView();
     }
 
+    private void playVideo(String uriPath) {
+        mediacontroller = new MediaController(getContext());
+        mediacontroller.setAnchorView(mContentVideo);
+        Uri uri = Uri.parse(uriPath);
+
+        mContentVideo.setVideoURI(uri);
+        progressBar.setVisibility(View.VISIBLE);
+        mContentVideo.start();
+        
+        mContentVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            // Close the progress bar and play the video
+            public void onPrepared(MediaPlayer mp) {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
 }

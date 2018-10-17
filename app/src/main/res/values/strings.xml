@@ -72,7 +72,10 @@
     <string name="comment_tab">COMMENT</string>
     <string name="lineup_tab">LINE-UP</string>
 
-    <string name="all_news">ALL</string>
+    <string name="all_news">TOP</string>
+    <string name="trend_news">TREND</string>
+    <string name="video_news">VIDEO</string>
+
     <string name="about_match">MATCH</string>
     <string name="expert_news">COMMENTARY</string>
 

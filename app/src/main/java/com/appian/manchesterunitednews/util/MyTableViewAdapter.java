@@ -24,6 +24,7 @@ public class MyTableViewAdapter extends AbstractTableAdapter<ColumnHeader, RowHe
     public MyTableViewAdapter(Context context) {
         super(context);
         mContext = context;
+        setRowHeaderWidth(0);
 
     }
 

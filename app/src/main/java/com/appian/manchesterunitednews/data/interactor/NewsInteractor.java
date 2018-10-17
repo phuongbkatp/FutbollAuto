@@ -46,6 +46,20 @@ public class NewsInteractor {
         enqueue(call, listener);
     }
 
+    public void loadNewsTrend(final OnResponseListener<List<NewsAuto>> listener) {
+        if (listener == null) {
+            return;
+        }
+        Call<NewsDataAuto> call = RestfulServiceAuto.getInstance().loadNewsTrend();
+        enqueue(call, listener);
+    }
+    public void loadNewsVideo(final OnResponseListener<List<NewsAuto>> listener) {
+        if (listener == null) {
+            return;
+        }
+        Call<NewsDataAuto> call = RestfulServiceAuto.getInstance().loadNewsVideo();
+        enqueue(call, listener);
+    }
     private void enqueue(Call<NewsDataAuto> call, final OnResponseListener<List<NewsAuto>> listener) {
         call.enqueue(new Callback<NewsDataAuto>() {
             @Override

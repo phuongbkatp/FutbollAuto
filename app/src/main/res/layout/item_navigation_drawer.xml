@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/setting_item_height"
     android:background="@color/globalWhite"
     android:orientation="horizontal"
+    android:padding="12dp"
     android:theme="@style/navigationTextStyle">
     <FrameLayout
         android:layout_width="@dimen/navigation_icon_size"

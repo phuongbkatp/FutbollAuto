@@ -120,9 +120,7 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
                     case 3:
                         mTvTitle.setText(res.getString(R.string.video_tab));
                         break;
-                    case 4:
-                        mTvTitle.setText(res.getString(R.string.comment_tab));
-                        break;
+
                 }
             }
 
@@ -175,13 +173,6 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
             tab3.setCustomView(view3);
         }
 
-        View view5 = View.inflate(context, R.layout.custom_tab_layout, null);
-        view5.findViewById(R.id.icon_tab).setBackgroundResource(R.drawable.ic_comment_tab);
-        TabLayout.Tab tab4 = tabLayout.getTabAt(4);
-        if (tab4 != null) {
-            tab4.setCustomView(view5);
-        }
-
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         btnBackArrow.setOnClickListener(new View.OnClickListener() {
@@ -228,8 +219,6 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
                     return MatchDetailFragment.newInstance(mMatchId, this);
                 case 3:
                     return NewsFragment.newInstance(0, ListNewsPresenter.TYPE_VIDEO_MATCH, mMatchId);
-                case 4:
-                    return CommentFragment.newInstance(Constant.OBJECT_TYPE_SOFA_MATCH, mMatchId);
 
             }
             return null;
@@ -237,7 +226,7 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
 
         @Override
         public int getCount() {
-            return 5;
+            return 4;
         }
     }
 

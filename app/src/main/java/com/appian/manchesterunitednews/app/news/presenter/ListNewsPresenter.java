@@ -11,8 +11,8 @@ import java.util.List;
 
 public class ListNewsPresenter extends BasePresenter<ListNewsView> implements OnResponseListener<List<NewsAuto>> {
     public static final int TYPE_APP = 1;
-    public static final int TYPE_CATEGORY = 2;
-    public static final int TYPE_MATCH = 3;
+    public static final int TYPE_TRENDING = 2;
+    public static final int TYPE_VIDEO = 3;
     public static final int TYPE_VIDEO_MATCH = 4;
 
     private final NewsInteractor mInteractor;
@@ -42,7 +42,12 @@ public class ListNewsPresenter extends BasePresenter<ListNewsView> implements On
             case TYPE_APP:
                 mInteractor.loadNewsLatest(this);
                 break;
-
+            case TYPE_TRENDING:
+                mInteractor.loadNewsTrend(this);
+                break;
+            case TYPE_VIDEO:
+                mInteractor.loadNewsVideo(this);
+                break;
         }
     }
 }

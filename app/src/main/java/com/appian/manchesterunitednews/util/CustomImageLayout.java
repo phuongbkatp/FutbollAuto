@@ -26,13 +26,9 @@ public class CustomImageLayout extends LinearLayout {
         View view = inflate(context, R.layout.custom_image_layout, null);
         ImageView imageView = view.findViewById(R.id.image);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        ViewGroup.LayoutParams lp = imageView.getLayoutParams();
-        lp.height =
-                LayoutParams.WRAP_CONTENT;
-        lp.width =
-                LayoutParams.MATCH_PARENT;
-
-        Glide.with(context).load(link).into(imageView);
+        RequestOptions options = new RequestOptions();
+        options.fitCenter();
+        Glide.with(context).load(link).apply(options).into(imageView);
         //imageView.setLayoutParams(lp);
 
         TextView textView = view.findViewById(R.id.txt_caption);
