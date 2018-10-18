@@ -60,7 +60,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
 
     private CommentsAdapter mAdapter;
     private MediaController mediacontroller;
-    private boolean isPlaying = false;
+    private boolean isPlaying = true;
     private ImageButton playPause;
 
     @Override
@@ -115,11 +115,11 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         playPause.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (isPlaying) {
-                    playPause.setPressed(false);
+                    playPause.setSelected(true);
                     mContentVideo.pause();
                 }else{
-                    playPause.setPressed(true);
-                    mContentVideo.resume();
+                    playPause.setSelected(false);
+                    mContentVideo.start();
                 }
                 isPlaying = !isPlaying;
             }
