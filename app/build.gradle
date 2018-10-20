@@ -74,6 +74,7 @@ dependencies {
     implementation 'com.github.haipv-ptit:social-ads:bec674d24e'
     implementation 'com.github.haipv-ptit:Social_Auth:1c511cb021'
     implementation 'org.bitbucket.haipv_dev:football:525934a762'
+    implementation 'com.github.haipv-ptit:FbVnApi:d155167442'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'com.evrencoskun.library:tableview:0.8.8'
