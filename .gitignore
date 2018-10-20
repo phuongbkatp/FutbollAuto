@@ -8,6 +8,6 @@
 /captures
 .externalNativeBuild
 /app/src/main/java/com/appian/manutdvietnam/data/provider/sofa
-/settings.gradle
+settings.gradle
 /.idea
 /gradle.properties
