@@ -29,7 +29,7 @@
     <string name="player_detail_preferred_foot_text">Chân thuận</string>
     <string name="player_detail_position_text">Vị trí</string>
     <string name="player_detail_shirt_number_text">Số áo</string>
-    <string name="league_menu">Giải đấu</string>
+    <string name="league_menu">GIẢI ĐẤU</string>
     <string name="log_in_menu">Đăng kí hoặc Đăng nhập</string>
     <string name="log_in_description">Hãy đăng nhập để viết bình luận</string>
     <string name="privacy_des"><u>Chính sách riêng tư và Điều khoản sử dụng</u></string>
@@ -74,7 +74,7 @@
     <string name="fixture_tab">Lịch thi đấu</string>
     <string name="matchday_tab">Vòng đấu</string>
     <string name="standing_tab">Bảng xếp hạng</string>
-    <string name="setting_menu">Cài đặt</string>
+    <string name="setting_menu">CÀI ĐẶT</string>
     <string name="best_player_info">Cầu thủ xuất sắc</string>
 
     <string name="notification_setting">Thông báo</string>

@@ -13,12 +13,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="commonTextStyle">
-        <item name="android:fontFamily">sans-serif-black</item>
-    </style>
-    <style name="navigationTextStyle">
-        <item name="android:fontFamily">sans-serif</item>
-    </style>
+
     <style name="tabFixtureTextStyle" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/fixture_tab_text</item>
         <item name="android:textAllCaps">false</item>

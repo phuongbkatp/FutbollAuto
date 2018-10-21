@@ -5,40 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBgSettingGray"
-    android:theme="@style/navigationTextStyle">
+    android:background="@color/colorBgSettingGray">
 
-<!--    <LinearLayout
-        android:id="@+id/profile_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_margin_standard"
-        android:paddingTop="@dimen/activity_margin_standard">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profileImage"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/profile_pic"
-            android:layout_gravity="center_horizontal"
-            app:civ_border_color="@color/globalWhite"
-            app:civ_border_width="2dp" />
-
-        <TextView
-            android:id="@+id/tv_profile_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:text="@string/log_in_menu"
-            android:textColor="@color/globalWhite"
-            android:textStyle="bold"
-            android:textSize="@dimen/navigation_title_size"
- />
-    </LinearLayout>-->
 
     <TextView
         android:id="@+id/league_title"
@@ -48,7 +16,6 @@
         android:layout_marginStart="@dimen/setting_content_margin_left"
         android:layout_marginTop="@dimen/setting_sub_title_margin_top"
         android:text="@string/league_menu"
-        android:textAllCaps="true"
         android:textColor="@color/text_color_common"
         android:textSize="@dimen/detail_news_title"
         app:layout_constraintTop_toTopOf="parent"
@@ -73,7 +40,6 @@
         android:layout_marginStart="@dimen/setting_content_margin_left"
         android:layout_marginTop="@dimen/setting_sub_title_margin_top"
         android:text="@string/setting_menu"
-        android:textAllCaps="true"
         android:textColor="@color/text_color_common"
         android:textSize="@dimen/detail_news_title"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,6 +60,8 @@
             android:layout_height="@dimen/setting_item_height"
             android:orientation="horizontal"
             android:background="@color/globalWhite"
+            android:paddingLeft="12dp"
+            android:paddingStart="12dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
@@ -128,6 +96,8 @@
             android:background="@color/globalWhite"
             android:layout_marginTop="1dp"
             android:orientation="horizontal"
+            android:paddingLeft="12dp"
+            android:paddingStart="12dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rl_setting">
@@ -165,6 +135,8 @@
             android:background="@color/globalWhite"
             android:layout_marginTop="1dp"
             android:orientation="horizontal"
+            android:paddingLeft="12dp"
+            android:paddingStart="12dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_share">

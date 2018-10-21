@@ -4,8 +4,7 @@
     android:layout_height="@dimen/setting_item_height"
     android:background="@color/globalWhite"
     android:orientation="horizontal"
-    android:padding="12dp"
-    android:theme="@style/navigationTextStyle">
+    android:padding="12dp">
     <FrameLayout
         android:layout_width="@dimen/navigation_icon_size"
         android:layout_height="@dimen/navigation_icon_size"
