@@ -50,7 +50,7 @@
     <string name="coach_detail_career">Career</string>
     <string name="coach_detail_points_per_match">Points per match</string>
 
-    <string name="league_menu">LEAGUES</string>
+    <string name="league_menu">Leagues</string>
     <string name="log_in_menu">Login or Signup</string>
     <string name="log_in_description">Please sign up or log in to leave a comment in news or topic</string>
     <string name="privacy_des"><u>Privacy Policy Terms of Use</u></string>
@@ -105,7 +105,7 @@
     <string name="matchday_tab">Match Day</string>
     <string name="standing_tab">Standing</string>
 
-    <string name="setting_menu">SETTINGS</string>
+    <string name="setting_menu">Settings</string>
     <string name="best_player_info">Best player</string>
 
     <string name="notification_setting">Notification</string>
