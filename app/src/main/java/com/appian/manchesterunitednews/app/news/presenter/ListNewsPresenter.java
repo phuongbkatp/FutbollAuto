@@ -4,7 +4,6 @@ import com.appian.manchesterunitednews.app.BasePresenter;
 import com.appian.manchesterunitednews.app.news.view.ListNewsView;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
 import com.appian.manchesterunitednews.data.interactor.OnResponseListener;
-import com.appnet.android.football.fbvn.data.News;
 import com.appnet.android.football.fbvn.data.NewsAuto;
 
 import java.util.List;
@@ -37,16 +36,16 @@ public class ListNewsPresenter extends BasePresenter<ListNewsView> implements On
         getView().onLoadListNewsFail();
     }
 
-    public void loadListNews(int type) {
+    public void loadListNews(int type, String team, String language) {
         switch (type) {
             case TYPE_APP:
-                mInteractor.loadNewsLatest(this);
+                mInteractor.loadNews(this, team, "latest", language);
                 break;
             case TYPE_TRENDING:
-                mInteractor.loadNewsTrend(this);
+                mInteractor.loadNews(this, team, "top", language);
                 break;
             case TYPE_VIDEO:
-                mInteractor.loadNewsVideo(this);
+                mInteractor.loadNews(this, team, "video", language);
                 break;
         }
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Man United News</string>
+    <string name="app_name">Man United Daily News</string>
     <string name="match_detail_event_gold_assist">Kiến tạo: %s</string>
     <string name="match_detail_substitution_title">Dự bị</string>
     <string name="home_menu">Trang chủ</string>
@@ -29,7 +29,7 @@
     <string name="player_detail_preferred_foot_text">Chân thuận</string>
     <string name="player_detail_position_text">Vị trí</string>
     <string name="player_detail_shirt_number_text">Số áo</string>
-    <string name="league_menu">GIẢI ĐẤU</string>
+    <string name="league_menu">Giải đấu</string>
     <string name="log_in_menu">Đăng kí hoặc Đăng nhập</string>
     <string name="log_in_description">Hãy đăng nhập để viết bình luận</string>
     <string name="privacy_des"><u>Chính sách riêng tư và Điều khoản sử dụng</u></string>
@@ -74,7 +74,7 @@
     <string name="fixture_tab">Lịch thi đấu</string>
     <string name="matchday_tab">Vòng đấu</string>
     <string name="standing_tab">Bảng xếp hạng</string>
-    <string name="setting_menu">CÀI ĐẶT</string>
+    <string name="setting_menu">Cài đặt</string>
     <string name="best_player_info">Cầu thủ xuất sắc</string>
 
     <string name="notification_setting">Thông báo</string>
@@ -108,7 +108,9 @@
     <string name="error_login_message">Đăng nhập lỗi : %s</string>
     <string name="welcome_title">Trang cá nhân</string>
     <string name="news_detail_comment">Bình luận</string>
-
+    <string name="welcome">WELCOME</string>
+    <string name="english">English</string>
+    <string name="vietnamese">Vietnamese</string>
     <string name="coach_detail_pref_formation_text">Sơ đồ yêu thích</string>
     <string name="coach_detail_matches_text">Số trận</string>
     <string name="coach_detail_points_match_text">Điểm/Trận</string>

@@ -1,8 +1,10 @@
 package com.appian.manchesterunitednews.app.more;
 
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -103,13 +105,33 @@ public class MoreFragment extends BaseFragment
         mSeasonLeagueTeamPresenter.attachView(this);
         loadLeftMenu();
 
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(getContext());
-
         View btnShare = view.findViewById(R.id.btn_share);
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 shareVia();
+            }
+        });
+
+        View btnRate = view.findViewById(R.id.btn_review);
+        btnRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
+                Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                // To count with Play market backstack, After pressing back button,
+                // to taken back to our application, we need to add following flags to intent.
+                int flags = Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    flags |= Intent.FLAG_ACTIVITY_NEW_DOCUMENT;
+                }
+                goToMarket.addFlags(flags);
+                try {
+                    startActivity(goToMarket);
+                } catch (ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("http://play.google.com/store/apps/details?id=" + getActivity().getPackageName())));
+                }
             }
         });
         ReceiverHelper.registerUserProfileChanged(getContext(), mUserProfileChangedReceiver);
@@ -120,7 +142,7 @@ public class MoreFragment extends BaseFragment
         AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(getContext());
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, appConfig.getShareContent());
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Everything about Manchester United FC in your hands now. Link: http://play.google.com/store/apps/details?id=" + getContext().getPackageName());
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share_via)));
     }

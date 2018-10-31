@@ -24,6 +24,11 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!AppConfigManager.isFirstTime(this)) {
+            Intent intent = new Intent(this, ChooseLanguageActivity.class);
+            startActivity(intent);
+            AppConfigManager.setIsFirstTime(this, true);
+        }
         setContentView(R.layout.splash_activity);
         Context context = getApplicationContext();
         AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(context);
@@ -31,6 +36,7 @@ public class SplashActivity extends BaseActivity {
             showNetworkDialog();
             return;
         }
+
         loadAppConfig();
         if (getIntent() != null && getIntent().getExtras() != null) {
             boolean notification = NotificationFactory.handleNotification(getApplicationContext(), getIntent().getExtras());

@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Man United News</string>
+    <string name="app_name">Man United Daily News</string>
     <string name="match_detail_gold_space">-</string>
     <string name="match_detail_event_minute">%d\'</string>
     <string name="match_detail_event_add_minute">%1$d + %2$d\'</string>
@@ -223,6 +223,9 @@
     <string name="comment_detail_news">Newest comments</string>
     <string name="to_be_your_first_comment">Comment for this article</string>
     <string name="load_more_comments">Load more comments</string>
+    <string name="welcome">WELCOME</string>
+    <string name="english">English</string>
+    <string name="vietnamese">Vietnamese</string>
 
     <string name="disclaimer_title">You are now leaving %s</string>
     <string name="disclaimer_text_1">The third party website that you are about to visit is not hosted by %s</string>

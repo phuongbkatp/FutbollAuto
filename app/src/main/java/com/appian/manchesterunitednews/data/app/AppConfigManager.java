@@ -34,6 +34,8 @@ public class AppConfigManager {
     private static final String KEY_ADMOB_INTERSTITIAL_1 = "android_admob_interstitial_1";
     private static final String KEY_FB_NATIVE_1 = "android_fb_native_1";
     private static final String KEY_FB_NATIVE_2 = "android_fb_native_2";
+    private static final String FIRST_TIME = "first_time";
+
 
     private static AppConfigManager sInstance;
 
@@ -75,6 +77,16 @@ public class AppConfigManager {
         return Language.getLanguage(context);
     }
 
+    public static boolean isFirstTime (Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREF_APP_CONFIG, Context.MODE_PRIVATE);
+         return prefs.getBoolean(FIRST_TIME, true);
+    }
+    public static void setIsFirstTime (Context context, boolean isFirst) {
+        SharedPreferences prefs = context.getSharedPreferences(PREF_APP_CONFIG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(FIRST_TIME, isFirst);
+        editor.apply();
+    }
     public AppConfig getAppConfig(Context context) {
         if (mAppConfig == null) {
             SharedPreferences prefs = context.getSharedPreferences(PREF_APP_CONFIG, Context.MODE_PRIVATE);

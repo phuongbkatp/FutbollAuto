@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.appian.manchesterunitednews.Constant;
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseFragment;
 import com.appian.manchesterunitednews.app.detailnews.DetailArticleActivity;
@@ -40,7 +41,9 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private int mTypeId = 0;
     private int mCurrentPage = 1;
     private int mStartingPage = 1;
-    private String mLanguage = Language.getDefaultLanguage();
+    private String mLanguage;
+    private String mTeam;
+
     private int mAppId = 0;
 
     private ListNewsPresenter mListNewsPresenter;
@@ -64,6 +67,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mTeam = Constant.APP_KEY;
         AppConfig config = AppConfigManager.getInstance().getAppConfig(getContext());
         mLanguage = AppConfigManager.getInstance().getLanguage(getContext());
         mCurrentPage = mStartingPage;
@@ -76,7 +80,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         }
         mListNewsPresenter = new ListNewsPresenter(new NewsInteractor());
         mListNewsPresenter.attachView(this);
-        loadNews();
+        loadNews(mTeam, mLanguage);
     }
 
     @Override
@@ -108,7 +112,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         mOnLoadMoreListener = new EndlessRecyclerViewScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int page) {
-                loadNews();
+                loadNews(mTeam, mLanguage);
             }
         };
         lvNews.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
@@ -131,14 +135,14 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void onRefresh() {
-        loadNews();
+        loadNews(mTeam, mLanguage);
         mOnLoadMoreListener.resetState();
         mCurrentPage = mStartingPage;
     }
 
-    private void loadNews() {
+    private void loadNews(String team, String language) {
         showLoading(true);
-        mListNewsPresenter.loadListNews(mNewsType);
+        mListNewsPresenter.loadListNews(mNewsType,team, language);
     }
 
     @Override

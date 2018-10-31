@@ -1,13 +1,10 @@
 package com.appian.manchesterunitednews.data.interactor;
 
-import com.appian.manchesterunitednews.data.RestfulService;
 import com.appian.manchesterunitednews.data.RestfulServiceAuto;
 import com.appnet.android.football.fbvn.data.DetailNewsAuto;
 import com.appnet.android.football.fbvn.data.DetailNewsDataAuto;
 import com.appnet.android.football.fbvn.data.NewsAuto;
 import com.appnet.android.football.fbvn.data.NewsDataAuto;
-import com.appnet.android.football.fbvn.data.News;
-import com.appnet.android.football.fbvn.data.NewsData;
 
 import java.util.List;
 
@@ -38,28 +35,14 @@ public class NewsInteractor {
         });
     }
 
-    public void loadNewsLatest(final OnResponseListener<List<NewsAuto>> listener) {
+    public void loadNews(final OnResponseListener<List<NewsAuto>> listener, String team, String category, String language) {
         if (listener == null) {
             return;
         }
-        Call<NewsDataAuto> call = RestfulServiceAuto.getInstance().loadNewsLatest();
+        Call<NewsDataAuto> call = RestfulServiceAuto.getInstance().loadNews(team, category, language);
         enqueue(call, listener);
     }
 
-    public void loadNewsTrend(final OnResponseListener<List<NewsAuto>> listener) {
-        if (listener == null) {
-            return;
-        }
-        Call<NewsDataAuto> call = RestfulServiceAuto.getInstance().loadNewsTrend();
-        enqueue(call, listener);
-    }
-    public void loadNewsVideo(final OnResponseListener<List<NewsAuto>> listener) {
-        if (listener == null) {
-            return;
-        }
-        Call<NewsDataAuto> call = RestfulServiceAuto.getInstance().loadNewsVideo();
-        enqueue(call, listener);
-    }
     private void enqueue(Call<NewsDataAuto> call, final OnResponseListener<List<NewsAuto>> listener) {
         call.enqueue(new Callback<NewsDataAuto>() {
             @Override
