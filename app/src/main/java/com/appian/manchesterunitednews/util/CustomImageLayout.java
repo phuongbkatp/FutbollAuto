@@ -29,10 +29,10 @@ public class CustomImageLayout extends LinearLayout {
         RequestOptions options = new RequestOptions();
         options.fitCenter();
         Glide.with(context).load(link).apply(options).into(imageView);
-        //imageView.setLayoutParams(lp);
 
         TextView textView = view.findViewById(R.id.txt_caption);
         textView.setText(caption);
-        addView(view);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT,  LinearLayout.LayoutParams.WRAP_CONTENT);
+        addView(view, params);
     }
 }

@@ -162,11 +162,14 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
                 LinearLayout textView = new CustomTextView(getContext(), item.getText(), item.isHead());
                 ll_content.addView(textView);
             } else if (item.getType() != null && item.getType().equals("image")) {
-                if (item.getLinkImg() == null || item.getText() == null) return;
+                if (item.getLinkImg() == null) {
+                    continue;
+                }
                 CustomImageLayout imgLayout = new CustomImageLayout(getContext(), item.getLinkImg(), item.getText());
-                ll_content.addView(imgLayout);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT,  LinearLayout.LayoutParams.WRAP_CONTENT);
+                ll_content.addView(imgLayout, params);
 
-                ll_content.addView(new RecyclerView(getContext()));
+                //ll_content.addView(new RecyclerView(getContext()));
             } else if (item.getType() != null && item.getType().equals("table")) {
                 mColumnHeaderList = item.getRowHeaderList();
                 mCellList = item.getCellList();
