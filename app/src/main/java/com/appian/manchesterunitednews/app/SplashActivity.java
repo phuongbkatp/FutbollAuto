@@ -9,25 +9,31 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.app.AppConfigManager;
+import com.appian.manchesterunitednews.data.app.Language;
 import com.appian.manchesterunitednews.network.NetworkHelper;
 import com.appian.manchesterunitednews.service.notification.NotificationFactory;
+import com.appian.manchesterunitednews.util.ViewHelper;
 
 public class SplashActivity extends BaseActivity {
     private static final int SPLASH_TIME_OUT = 3000;
     private Handler mHandler;
-
+    private RelativeLayout mRlEnglish;
+    private LinearLayout mChooseLanguage;
+    private RelativeLayout mRlVietnamese;
+    private View view_English;
+    private View view_Vietnamese;
+    String language;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (!AppConfigManager.isFirstTime(this)) {
-            Intent intent = new Intent(this, ChooseLanguageActivity.class);
-            startActivity(intent);
-            AppConfigManager.setIsFirstTime(this, true);
-        }
+
         setContentView(R.layout.splash_activity);
         if (getIntent() != null && getIntent().getExtras() != null) {
             boolean notification = NotificationFactory.handleNotification(getApplicationContext(), getIntent().getExtras());
@@ -39,6 +45,44 @@ public class SplashActivity extends BaseActivity {
         } else {
             launchMainScreen();
         }
+        mRlEnglish = findViewById(R.id.english_layout);
+        view_English = findViewById(R.id.english_view);
+        mChooseLanguage = findViewById(R.id.choose_language);
+        language = AppConfigManager.getInstance().getLanguage(this);
+        if (language.equals(Language.ENGLISH)) {
+            ViewHelper.setBackground(view_English, getResources().getDrawable(R.drawable.theme_enable_circle));
+        } else {
+            ViewHelper.setBackground(view_English, getResources().getDrawable(R.drawable.theme_disable_circle));
+
+        }
+        mRlEnglish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Language.setLocale(SplashActivity.this, Language.ENGLISH);
+                ViewHelper.setBackground(view_English, getResources().getDrawable(R.drawable.theme_enable_circle));
+                ViewHelper.setBackground(view_Vietnamese, getResources().getDrawable(R.drawable.theme_disable_circle));
+
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        mRlVietnamese = findViewById(R.id.vietnam_layout);
+        view_Vietnamese = findViewById(R.id.vietnam_view);
+        if (language.equals(Language.VIETNAMESE)) {
+            ViewHelper.setBackground(view_Vietnamese, getResources().getDrawable(R.drawable.theme_disable_circle));
+        } else {
+            ViewHelper.setBackground(view_Vietnamese, getResources().getDrawable(R.drawable.theme_disable_circle));
+        }
+        mRlVietnamese.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Language.setLocale(SplashActivity.this, Language.VIETNAMESE);
+                ViewHelper.setBackground(view_Vietnamese, getResources().getDrawable(R.drawable.theme_enable_circle));
+                ViewHelper.setBackground(view_English, getResources().getDrawable(R.drawable.theme_disable_circle));
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void launchMainScreen() {
@@ -46,9 +90,14 @@ public class SplashActivity extends BaseActivity {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(i);
-                finish();
+                if (AppConfigManager.isFirstTime(SplashActivity.this)) {
+                    mChooseLanguage.setVisibility(View.VISIBLE);
+                    AppConfigManager.setIsFirstTime(SplashActivity.this, false);
+                } else {
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(i);
+                    finish();
+                }
             }
         }, SPLASH_TIME_OUT);
     }

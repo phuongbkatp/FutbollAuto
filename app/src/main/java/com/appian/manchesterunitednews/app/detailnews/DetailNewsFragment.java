@@ -27,6 +27,7 @@ import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
 import com.appian.manchesterunitednews.util.CustomImageLayout;
 import com.appian.manchesterunitednews.util.CustomTableLayout;
 import com.appian.manchesterunitednews.util.CustomTextView;
+import com.appian.manchesterunitednews.util.CustomVideoLayout;
 import com.appian.manchesterunitednews.util.ImageLoader;
 import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.football.fbvn.data.Cell;
@@ -170,6 +171,14 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
                     continue;
                 }
                 CustomImageLayout imgLayout = new CustomImageLayout(getContext(), item.getLinkImg(), item.getText());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                ll_content.addView(imgLayout, params);
+                //ll_content.addView(new RecyclerView(getContext()));
+            } else if (item.getType() != null && item.getType().equals("video")) {
+                if (item.getLinkImg() == null) {
+                    continue;
+                }
+                CustomVideoLayout imgLayout = new CustomVideoLayout(getContext(), item.getLinkImg());
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 ll_content.addView(imgLayout, params);
                 //ll_content.addView(new RecyclerView(getContext()));
