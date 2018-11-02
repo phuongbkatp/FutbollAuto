@@ -2,6 +2,7 @@ package com.appian.manchesterunitednews.app.detailnews;
 
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
     private ProgressBar progressBar;
     private TextView mTvTimeNews;
     private LinearLayout ll_content;
+    private ContentLoadingProgressBar mLoadingView;
 
     private List<RowHeader> mRowHeaderList;
     private List<ColumnHeader> mColumnHeaderList;
@@ -110,14 +112,14 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         mImgThumbnail = view.findViewById(R.id.img_news_detail_thumbnail);
         mContentVideo = view.findViewById(R.id.content_video);
         playPause = view.findViewById(R.id.play_or_pause);
-
+        mLoadingView = view.findViewById(R.id.loading_view);
 
         playPause.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (isPlaying) {
                     playPause.setSelected(true);
                     mContentVideo.pause();
-                }else{
+                } else {
                     playPause.setSelected(false);
                     mContentVideo.start();
                 }
@@ -131,6 +133,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
     }
 
     private void fillData() {
+        mLoadingView.hide();
         if (mNews == null || getView() == null) {
             return;
         }
@@ -160,21 +163,21 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         for (ContentDetailNewsAuto item : listContent) {
             if (item.getType() != null && item.getType().equals("text")) {
                 LinearLayout textView = new CustomTextView(getContext(), item.getText(), item.isHead());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT,  LinearLayout.LayoutParams.WRAP_CONTENT);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 ll_content.addView(textView, params);
             } else if (item.getType() != null && item.getType().equals("image")) {
                 if (item.getLinkImg() == null) {
                     continue;
                 }
                 CustomImageLayout imgLayout = new CustomImageLayout(getContext(), item.getLinkImg(), item.getText());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT,  LinearLayout.LayoutParams.WRAP_CONTENT);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 ll_content.addView(imgLayout, params);
                 //ll_content.addView(new RecyclerView(getContext()));
             } else if (item.getType() != null && item.getType().equals("table")) {
                 mColumnHeaderList = item.getRowHeaderList();
                 mCellList = item.getCellList();
                 CustomTableLayout tableLayout = new CustomTableLayout(getContext(), item.getText(), mColumnHeaderList, mCellList);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT,  LinearLayout.LayoutParams.WRAP_CONTENT);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 ll_content.addView(tableLayout, params);
             }
         }
@@ -194,7 +197,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         mContentVideo.setVideoURI(uri);
         progressBar.setVisibility(View.VISIBLE);
         mContentVideo.start();
-        
+
         mContentVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             // Close the progress bar and play the video
             public void onPrepared(MediaPlayer mp) {

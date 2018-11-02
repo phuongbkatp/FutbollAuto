@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,7 +35,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private static final int LIMIT_NEWS = 6;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private LinearLayout mLlNoData;
-
+    private ContentLoadingProgressBar mLoadingView;
     private NewsRecycleAdapter mNewsAdapter;
 
     private int mNewsType = 0;
@@ -89,6 +90,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         RecyclerView lvNews = view.findViewById(R.id.lv_news);
         mSwipeRefreshLayout = view.findViewById(R.id.news_swipe_refresh_layout);
         mLlNoData = view.findViewById(R.id.ll_news_no_data);
+        mLoadingView = view.findViewById(R.id.loading_view);
 
         mCurrentPage = mStartingPage;
         mSwipeRefreshLayout.setOnRefreshListener(this);
@@ -183,6 +185,9 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private void showLoading(boolean isLoading) {
         if (getView() != null) {
             mSwipeRefreshLayout.setRefreshing(isLoading);
+        }
+        if(!isLoading) {
+            mLoadingView.hide();
         }
     }
 }
