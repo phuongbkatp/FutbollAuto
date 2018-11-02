@@ -169,11 +169,18 @@ public class MainActivity extends BaseActivity
                 switchFragment(TAG_FRAGMENT_SQUAD);
                 break;
             case R.id.llLeagueMenu:
+                // Fake Premier league
+                /*
                 LeagueSeason leagueSeason = mLeagueSesons.get(0);
                 Bundle args = new Bundle();
                 args.putInt("league_id", leagueSeason.getSofaLeagueId());
                 args.putInt("season_id", leagueSeason.getSofaId());
                 args.putString("league_name", leagueSeason.getLeagueName());
+                */
+                Bundle args = new Bundle();
+                args.putInt("league_id", 17);
+                args.putInt("season_id", 17359);
+                args.putString("league_name", "Premier League");
                 switchFragment(TAG_FRAGMENT_LEAGUE, args);
                 break;
             case R.id.rlSetting:
