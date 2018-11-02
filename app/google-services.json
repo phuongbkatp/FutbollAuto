@@ -8,37 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:894091287873:android:5a64604a36ebf382",
-        "android_client_info": {
-          "package_name": "com.appian.arsenalnews"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "894091287873-b11abq96cbq1hvtu08e45ajjl8tkp9qa.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC_PGO-gJQhZQuPmx-CajbRE9lh1wt3s1w"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:894091287873:android:5bdae4f6e090dbd6",
         "android_client_info": {
           "package_name": "com.appian.barcavietnam"
@@ -75,11 +44,10 @@
               "client_type": 3
             },
             {
-              "client_id": "894091287873-kd29dttakcr7uurjb7uqiorv2p2lnc1j.apps.googleusercontent.com",
+              "client_id": "894091287873-a08qua4jp26a2c54kj69iiotndlioapn.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.football.manudailynews",
-                "app_store_id": "1439927615"
+                "bundle_id": "com.football.realmadridnewsapp"
               }
             }
           ]
@@ -189,11 +157,10 @@
               "client_type": 3
             },
             {
-              "client_id": "894091287873-kd29dttakcr7uurjb7uqiorv2p2lnc1j.apps.googleusercontent.com",
+              "client_id": "894091287873-a08qua4jp26a2c54kj69iiotndlioapn.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.football.manudailynews",
-                "app_store_id": "1439927615"
+                "bundle_id": "com.football.realmadridnewsapp"
               }
             }
           ]
