@@ -68,8 +68,8 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mTeam = Constant.APP_KEY;
         AppConfig config = AppConfigManager.getInstance().getAppConfig(getContext());
+        mTeam = config.getAppKey();
         mLanguage = AppConfigManager.getInstance().getLanguage(getContext());
         mCurrentPage = mStartingPage;
         mNewsAdapter = new NewsRecycleAdapter(getContext(), config.getFbAdsNative1());

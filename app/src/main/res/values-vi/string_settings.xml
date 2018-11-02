@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="setting_notification_news">Tin tức</string>
-    <string name="setting_notification_reminder">Nhắc nhở trước trận đấu</string>
-    <string name="setting_notification_start">Bắt đầu hiệp đấu</string>
-    <string name="setting_notification_goals">Bàn thắng</string>
-    <string name="setting_notification_cards">Thẻ phạt</string>
-    <string name="setting_notification_substitution">Thay người</string>
-    <string name="setting_notification_injury">Chấn thương</string>
-    <string name="setting_notification_halftime">Kết thúc hiệp 1</string>
-    <string name="setting_notification_finish">Kết thúc trận đấu</string>
-    <string name="setting_notification_lineups">Đội hình ra sân</string>
-    <string name="setting_notification_best_player">Cầu thủ xuất sắc nhất trận</string>
-    <string name="setting_notification_other">Các sự kiện trận đấu khác</string>
-    <string name="setting_notification_all">Nhận thông báo</string>
+    <string name="setting_notification_match">Trận đấu</string>
 </resources>

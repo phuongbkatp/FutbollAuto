@@ -14,7 +14,6 @@ import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appian.manchesterunitednews.network.NetworkHelper;
-import com.appian.manchesterunitednews.service.app.AppHelper;
 import com.appian.manchesterunitednews.service.notification.NotificationFactory;
 
 public class SplashActivity extends BaseActivity {
@@ -37,7 +36,6 @@ public class SplashActivity extends BaseActivity {
             return;
         }
 
-        loadAppConfig();
         if (getIntent() != null && getIntent().getExtras() != null) {
             boolean notification = NotificationFactory.handleNotification(getApplicationContext(), getIntent().getExtras());
             if(notification) {
@@ -60,10 +58,6 @@ public class SplashActivity extends BaseActivity {
                 finish();
             }
         }, SPLASH_TIME_OUT);
-    }
-
-    private void loadAppConfig() {
-        AppHelper.loadAppConfig(getApplicationContext());
     }
 
     @Override

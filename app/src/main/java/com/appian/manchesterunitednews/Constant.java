@@ -5,9 +5,6 @@ public final class Constant {
     private static final String PRODUCT_URL = "https://footballlivenews.com/api/frontend/";
     public static final String BASE_URL = PRODUCT_URL;
 
-    public static final String APP_KEY = "manutd";
-    public static final int NO_TEAM_ID = 0;
-
     public static final String SOFA_MATCH_STATUS_FINISHED = "finished";
     public static final String SOFA_MATCH_STATUS_NOT_STARTED = "notstarted";
     public static final String SOFA_MATCH_STATUS_IN_PROGRESS = "inprogress";
@@ -37,10 +34,6 @@ public final class Constant {
     public static final String NOTIFICATION_TYPE_NEWS = "news";
     public static final String NOTIFICATION_TYPE_MATCH = "match";
 
-    public static final String OBJECT_TYPE_APP = "app";
-    public static final String OBJECT_TYPE_CATEGORY = "category";
-
     public static final String OBJECT_TYPE_SOFA_MATCH = "sofa_match";
     public static final String OBJECT_TYPE_NEWS = "news";
-
 }

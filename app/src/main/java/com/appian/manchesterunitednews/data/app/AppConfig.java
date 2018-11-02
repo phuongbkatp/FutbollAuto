@@ -7,11 +7,17 @@ import com.appian.manchesterunitednews.BuildConfig;
 import java.util.HashMap;
 
 public class AppConfig {
+    private static final HashMap<String, Integer> TEAM_ID = new HashMap<>();
+
+    static {
+        TEAM_ID.put("manutd", 35);
+        TEAM_ID.put("barca", 2817);
+        TEAM_ID.put("real", 2829);
+    }
+
     private static final String TEST_ADMOB_BANNER = "ca-app-pub-3940256099942544/2934735716";
     private static final String TEST_ADMOB_INTERSTITIAL = "ca-app-pub-3940256099942544/4411468910";
 
-    private int teamId;
-    private int teamSofaId;
     private int appId;
     private int currentSeasonId;
     private int tab1Id;
@@ -34,11 +40,15 @@ public class AppConfig {
     }
 
     public int getTeamId() {
-        return teamId;
+        return TEAM_ID.get(BuildConfig.FLAVOR);
     }
 
     public int getTeamSofaId() {
-        return teamSofaId;
+        return TEAM_ID.get(BuildConfig.FLAVOR);
+    }
+
+    public String getAppKey() {
+        return BuildConfig.FLAVOR;
     }
 
     public int getAppId() {
@@ -54,14 +64,14 @@ public class AppConfig {
     }
 
     public String getAdmobBanner1() {
-        if(isDebug()) {
+        if (isDebug()) {
             return TEST_ADMOB_BANNER;
         }
         return admobBanner1;
     }
 
     public String getAdmobInterstitial() {
-        if(isDebug()) {
+        if (isDebug()) {
             return TEST_ADMOB_INTERSTITIAL;
         }
         return admobInterstitial;
@@ -232,8 +242,6 @@ public class AppConfig {
             AppConfig data = new AppConfig();
             data.appId = appId;
             data.currentSeasonId = currentSeasonId;
-            data.teamId = teamId;
-            data.teamSofaId = teamSofaId;
             data.tab1Id = tab1Id;
             data.tab2Id = tab2Id;
             data.tab3Id = tab3Id;

@@ -1,27 +1,78 @@
 {
   "project_info": {
-    "project_number": "692518047612",
-    "firebase_url": "https://footballauto-75a89.firebaseio.com",
-    "project_id": "footballauto-75a89",
-    "storage_bucket": "footballauto-75a89.appspot.com"
+    "project_number": "894091287873",
+    "firebase_url": "https://football-9ab79.firebaseio.com",
+    "project_id": "football-9ab79",
+    "storage_bucket": "football-9ab79.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:692518047612:android:580bd9504ae47544",
+        "mobilesdk_app_id": "1:894091287873:android:5bdae4f6e090dbd6",
+        "android_client_info": {
+          "package_name": "com.appian.barcavietnam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "894091287873-2dnc3n6a170pv5khc824khfugblq1t07.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appian.barcavietnam",
+            "certificate_hash": "e40f965333c06d2e84d07ce8381ad74758196e9f"
+          }
+        },
+        {
+          "client_id": "894091287873-b11abq96cbq1hvtu08e45ajjl8tkp9qa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_PGO-gJQhZQuPmx-CajbRE9lh1wt3s1w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "894091287873-847de6vj8tv91cb5soa2m09r2iloo9f4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "894091287873-a08qua4jp26a2c54kj69iiotndlioapn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.football.realmadridnewsapp"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894091287873:android:580bd9504ae47544",
         "android_client_info": {
           "package_name": "com.appian.barcelonanews"
         }
       },
       "oauth_client": [
         {
-          "client_id": "692518047612-u3cte2upc8gi70r9agi8hskaobra2fdi.apps.googleusercontent.com",
+          "client_id": "894091287873-b11abq96cbq1hvtu08e45ajjl8tkp9qa.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAZ4XtKP0-qM5MT9U-z_3wJnFdg4sv1eiM"
+          "current_key": "AIzaSyC_PGO-gJQhZQuPmx-CajbRE9lh1wt3s1w"
         }
       ],
       "services": {
@@ -39,20 +90,20 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:692518047612:android:85c06d5c1cc8f427",
+        "mobilesdk_app_id": "1:894091287873:android:85c06d5c1cc8f427",
         "android_client_info": {
           "package_name": "com.appian.manchesterunitednews"
         }
       },
       "oauth_client": [
         {
-          "client_id": "692518047612-u3cte2upc8gi70r9agi8hskaobra2fdi.apps.googleusercontent.com",
+          "client_id": "894091287873-b11abq96cbq1hvtu08e45ajjl8tkp9qa.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAZ4XtKP0-qM5MT9U-z_3wJnFdg4sv1eiM"
+          "current_key": "AIzaSyC_PGO-gJQhZQuPmx-CajbRE9lh1wt3s1w"
         }
       ],
       "services": {
@@ -70,20 +121,28 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:692518047612:android:8fca24f0f23317aa",
+        "mobilesdk_app_id": "1:894091287873:android:bb73bb9af7295d9d",
         "android_client_info": {
-          "package_name": "com.appian.realmadridnews"
+          "package_name": "com.appian.manutdvietnam"
         }
       },
       "oauth_client": [
         {
-          "client_id": "692518047612-u3cte2upc8gi70r9agi8hskaobra2fdi.apps.googleusercontent.com",
+          "client_id": "894091287873-vukrebuc0ef07g04ic0t5dg87vj88kgc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appian.manutdvietnam",
+            "certificate_hash": "e40f965333c06d2e84d07ce8381ad74758196e9f"
+          }
+        },
+        {
+          "client_id": "894091287873-b11abq96cbq1hvtu08e45ajjl8tkp9qa.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAZ4XtKP0-qM5MT9U-z_3wJnFdg4sv1eiM"
+          "current_key": "AIzaSyC_PGO-gJQhZQuPmx-CajbRE9lh1wt3s1w"
         }
       ],
       "services": {
@@ -91,8 +150,20 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "894091287873-847de6vj8tv91cb5soa2m09r2iloo9f4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "894091287873-a08qua4jp26a2c54kj69iiotndlioapn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.football.realmadridnewsapp"
+              }
+            }
+          ]
         },
         "ads_service": {
           "status": 2

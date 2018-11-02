@@ -63,21 +63,6 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
     private void initSetting() {
-        // All notification
-        Preference allPref = findPreference(NotificationHelper.KEY_NOTIFICATION_ON_OFF_ALL);
-        boolean isFollowAll = NotificationHelper.isFollowAll(getActivity());
-        Preference notiPref = findPreference(NotificationHelper.KEY_CATEGORY_NOTIFICATION);
-        notiPref.setEnabled(isFollowAll);
-        allPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object o) {
-                Preference pref = findPreference(NotificationHelper.KEY_CATEGORY_NOTIFICATION);
-                boolean value = Boolean.TRUE.equals(o);
-                AppHelper.followAll(getActivity(), value);
-                pref.setEnabled(value);
-                return true;
-            }
-        });
         // News
         Preference newsPref = findPreference(NotificationHelper.KEY_BREAK_NEWS);
         newsPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -85,6 +70,16 @@ public class SettingsFragment extends PreferenceFragment {
             public boolean onPreferenceChange(Preference preference, Object o) {
                 boolean value = Boolean.TRUE.equals(o);
                 AppHelper.followNews(getActivity(), value);
+                return true;
+            }
+        });
+        // Match event
+        Preference matchPref = findPreference(NotificationHelper.KEY_MATCH_EVENT);
+        matchPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                boolean value = Boolean.TRUE.equals(o);
+                AppHelper.followEventMatch(getActivity(), value);
                 return true;
             }
         });
@@ -100,27 +95,6 @@ public class SettingsFragment extends PreferenceFragment {
                 return true;
             }
         });
-        Preference.OnPreferenceChangeListener onNotificationChange = new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object o) {
-                String key = preference.getKey();
-                boolean value = Boolean.TRUE.equals(o);
-                AppHelper.followEventMatch(getActivity(), key, value);
-                return true;
-            }
-        };
-        // Match events
-        String keys[] = {NotificationHelper.KEY_MATCH_REMINDER, NotificationHelper.KEY_MATCH_START,
-                NotificationHelper.KEY_MATCH_GOAL, NotificationHelper.KEY_MATCH_CARD,
-                NotificationHelper.KEY_MATCH_SUBSTITUTION, NotificationHelper.KEY_MATCH_FINISH,
-                NotificationHelper.KEY_MATCH_LINEUPS, NotificationHelper.KEY_MATCH_OTHER_EVENTS
-        };
-        for (String key : keys) {
-            Preference pref = findPreference(key);
-            if (pref != null) {
-                pref.setOnPreferenceChangeListener(onNotificationChange);
-            }
-        }
         // Privacy and policy
         // News
         Preference policyPref = findPreference(NotificationHelper.KEY_PRIVACY_POLICY);
