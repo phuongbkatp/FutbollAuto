@@ -29,13 +29,6 @@ public class SplashActivity extends BaseActivity {
             AppConfigManager.setIsFirstTime(this, true);
         }
         setContentView(R.layout.splash_activity);
-        Context context = getApplicationContext();
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(context);
-        if ((appConfig.getTeamId() == 0 || appConfig.getAppId() == 0) && !NetworkHelper.isNetworkAvailable(context)) {
-            showNetworkDialog();
-            return;
-        }
-
         if (getIntent() != null && getIntent().getExtras() != null) {
             boolean notification = NotificationFactory.handleNotification(getApplicationContext(), getIntent().getExtras());
             if(notification) {

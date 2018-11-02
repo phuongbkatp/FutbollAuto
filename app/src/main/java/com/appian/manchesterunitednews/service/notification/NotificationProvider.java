@@ -1,11 +1,13 @@
 package com.appian.manchesterunitednews.service.notification;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
@@ -24,13 +26,32 @@ public class NotificationProvider {
     }
 
     private void init() {
-        mBuilder = new NotificationCompat.Builder(mContext);
+
+        mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        if(mNotificationManager == null) {
+            return;
+        }
+        String name = "daily_news_channel";
+        String id = "daily_news_channel_id"; // The user-visible name of the channel.
+        String description = "daily_news_channel_first_channel"; // The user-visible description of the channel.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel mChannel = mNotificationManager.getNotificationChannel(id);
+            if (mChannel == null) {
+                mChannel = new NotificationChannel(id, name, importance);
+                mChannel.setDescription(description);
+                mChannel.enableVibration(true);
+                mNotificationManager.createNotificationChannel(mChannel);
+            }
+            mBuilder = new NotificationCompat.Builder(mContext, id);
+        } else {
+            mBuilder = new NotificationCompat.Builder(mContext, id);
+        }
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         mBuilder.setSound(alarmSound);
         mBuilder.setSmallIcon(R.mipmap.ic_launcher);
         mBuilder.setAutoCancel(true);
         mIntent = new Intent();
-        mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
     public void setTitle(String title) {

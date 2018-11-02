@@ -71,7 +71,7 @@ public class NotificationFactory {
     private static boolean handleMatchNotification(Context context, Bundle data) {
         int id;
         try {
-            id = Integer.parseInt(data.getString("sofa_id"));
+            id = Integer.parseInt(data.getString("id"));
         } catch (NumberFormatException e) {
             id = 0;
         }
@@ -85,7 +85,7 @@ public class NotificationFactory {
     private static NotificationProvider createMatchNotification(Context context, Map<String, String> data) {
         int id;
         try {
-            id = Integer.parseInt(data.get("sofa_id"));
+            id = Integer.parseInt(data.get("id"));
         } catch (NumberFormatException e) {
             id = 0;
         }

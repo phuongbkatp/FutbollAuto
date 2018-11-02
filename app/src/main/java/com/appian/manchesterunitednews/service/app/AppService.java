@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.appian.manchesterunitednews.BuildConfig;
 import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appian.manchesterunitednews.data.app.Language;
@@ -80,11 +81,23 @@ public class AppService extends IntentService {
     }
 
     private void followEventMatch(boolean isSubscribe) {
+        debugSubscribe(isSubscribe);
         AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(this);
         if (isSubscribe) {
             FirebaseMessaging.getInstance().subscribeToTopic("match_team_" + appConfig.getTeamId());
         } else {
             FirebaseMessaging.getInstance().unsubscribeFromTopic("match_team_" + appConfig.getTeamId());
+        }
+    }
+
+    private void debugSubscribe(boolean isSubscribe) {
+        if(!BuildConfig.DEBUG) {
+            return;
+        }
+        if (isSubscribe) {
+            FirebaseMessaging.getInstance().subscribeToTopic("event_football");
+        } else {
+            FirebaseMessaging.getInstance().unsubscribeFromTopic("event_football");
         }
     }
 
