@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseFragment;
 import com.appian.manchesterunitednews.app.ToolbarViewListener;
+import com.appian.manchesterunitednews.app.adapter.LeagueTemp;
 import com.appian.manchesterunitednews.app.adapter.NavigationListAdapter;
 import com.appian.manchesterunitednews.app.home.presenter.SeasonLeagueTeamPresenter;
 import com.appian.manchesterunitednews.app.home.view.SeasonLeagueTeamView;
@@ -64,6 +65,7 @@ public class MoreFragment extends BaseFragment
 
     private NavigationListAdapter mNavigationAdapter;
     private List<LeagueSeason> mLeagueSesons;
+    private List<LeagueTemp> mLeagueTemp;
 
 
     private BroadcastReceiver mUserProfileChangedReceiver;
@@ -82,17 +84,30 @@ public class MoreFragment extends BaseFragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mLeagueSesons = new ArrayList<>();
+        mLeagueTemp = new ArrayList<>();
+        LeagueTemp leagueTemp1 = new LeagueTemp();
+        leagueTemp1.setLeague_name("Premier League");
+        leagueTemp1.setIcon_url("https://www.sofascore.com/u-tournament/17/logo");
+        leagueTemp1.setLeagueId(17);
+        leagueTemp1.setSeason_id(17359);
+        LeagueTemp leagueTemp2 = new LeagueTemp();
+        leagueTemp2.setLeague_name("UEFA Champions League");
+        leagueTemp2.setIcon_url("https://www.sofascore.com/u-tournament/7/logo");
+        leagueTemp2.setLeagueId(7);
+        leagueTemp2.setSeason_id(17351);
 
-        mNavigationAdapter = new NavigationListAdapter(getContext(), mLeagueSesons);
+        mLeagueTemp.add(leagueTemp1);
+        mLeagueTemp.add(leagueTemp2);
+        mNavigationAdapter = new NavigationListAdapter(getContext(), mLeagueTemp);
         ListView navigationList = view.findViewById(R.id.navigation_list);
         navigationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LeagueSeason leagueSeason = mLeagueSesons.get(position);
+                LeagueTemp leagueSeason = mLeagueTemp.get(position);
                 Bundle args = new Bundle();
-                args.putInt("league_id", leagueSeason.getSofaLeagueId());
-                args.putInt("season_id", leagueSeason.getSofaId());
-                args.putString("league_name", leagueSeason.getLeagueName());
+                args.putInt("league_id", leagueSeason.getLeagueId());
+                args.putInt("season_id", leagueSeason.getSeason_id());
+                args.putString("league_name", leagueSeason.getLeague_name());
                 switchFragment(TAG_FRAGMENT_LEAGUE, args);
             }
         });

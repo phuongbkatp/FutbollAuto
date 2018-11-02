@@ -14,9 +14,9 @@ import com.appnet.android.football.fbvn.data.LeagueSeason;
 
 import java.util.List;
 
-public class NavigationListAdapter extends BaseListAdapter<LeagueSeason> {
+public class NavigationListAdapter extends BaseListAdapter<LeagueTemp> {
 
-    public NavigationListAdapter(Context context, List<LeagueSeason> data) {
+    public NavigationListAdapter(Context context, List<LeagueTemp> data) {
         super(context, data);
     }
 
@@ -32,10 +32,10 @@ public class NavigationListAdapter extends BaseListAdapter<LeagueSeason> {
         } else {
             holder = (Holder) view.getTag();
         }
-        LeagueSeason item = mData.get(i);
-        ImageLoader.displayImage(item.getLeagueLogo(), holder.icon);
+        LeagueTemp item = mData.get(i);
+        ImageLoader.displayImage(item.getIcon_url(), holder.icon);
         holder.icon.setColorFilter(ContextCompat.getColor(mContext, R.color.navigation_icon_color), android.graphics.PorterDuff.Mode.SRC_IN);
-        holder.title.setText(item.getLeagueName());
+        holder.title.setText(item.getLeague_name());
 
         return view;
     }
