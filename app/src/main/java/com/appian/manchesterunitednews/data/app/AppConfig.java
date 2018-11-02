@@ -13,10 +13,11 @@ public class AppConfig {
         TEAM_ID.put("manutd", 35);
         TEAM_ID.put("barca", 2817);
         TEAM_ID.put("real", 2829);
+        TEAM_ID.put("arsenal", 42);
     }
 
-    private static final String TEST_ADMOB_BANNER = "ca-app-pub-3940256099942544/2934735716";
-    private static final String TEST_ADMOB_INTERSTITIAL = "ca-app-pub-3940256099942544/4411468910";
+    private static final String TEST_ADMOB_BANNER = "";
+    private static final String TEST_ADMOB_INTERSTITIAL = "";
 
     private int appId;
     private int currentSeasonId;

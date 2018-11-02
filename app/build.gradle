@@ -33,6 +33,11 @@ android {
             versionCode 1
             versionName "1.0.0"
         }
+        arsenal {
+            applicationId "com.appian.arsenalnews"
+            versionCode 1
+            versionName "1.0.0"
+        }
     }
 }
 
