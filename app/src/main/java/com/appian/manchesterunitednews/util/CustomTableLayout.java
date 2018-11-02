@@ -40,6 +40,7 @@ public class CustomTableLayout extends LinearLayout {
 
         // Let's set datas of the TableView on the Adapter
         adapter.setAllItems(columnList, null, cellList);
-        addView(view);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT,  LinearLayout.LayoutParams.WRAP_CONTENT);
+        addView(view, params);
     }
 }

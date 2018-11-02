@@ -160,7 +160,8 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         for (ContentDetailNewsAuto item : listContent) {
             if (item.getType() != null && item.getType().equals("text")) {
                 LinearLayout textView = new CustomTextView(getContext(), item.getText(), item.isHead());
-                ll_content.addView(textView);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT,  LinearLayout.LayoutParams.WRAP_CONTENT);
+                ll_content.addView(textView, params);
             } else if (item.getType() != null && item.getType().equals("image")) {
                 if (item.getLinkImg() == null) {
                     continue;
@@ -168,13 +169,13 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
                 CustomImageLayout imgLayout = new CustomImageLayout(getContext(), item.getLinkImg(), item.getText());
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT,  LinearLayout.LayoutParams.WRAP_CONTENT);
                 ll_content.addView(imgLayout, params);
-
                 //ll_content.addView(new RecyclerView(getContext()));
             } else if (item.getType() != null && item.getType().equals("table")) {
                 mColumnHeaderList = item.getRowHeaderList();
                 mCellList = item.getCellList();
                 CustomTableLayout tableLayout = new CustomTableLayout(getContext(), item.getText(), mColumnHeaderList, mCellList);
-                ll_content.addView(tableLayout);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT,  LinearLayout.LayoutParams.WRAP_CONTENT);
+                ll_content.addView(tableLayout, params);
             }
         }
     }

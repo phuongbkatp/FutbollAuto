@@ -1,6 +1,7 @@
 package com.appian.manchesterunitednews.util;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,12 @@ public class CustomImageLayout extends LinearLayout {
         Glide.with(context).load(link).apply(options).into(imageView);
 
         TextView textView = view.findViewById(R.id.txt_caption);
-        textView.setText(caption);
+        if(TextUtils.isEmpty(caption)) {
+            textView.setVisibility(View.GONE);
+        } else {
+            textView.setVisibility(View.VISIBLE);
+            textView.setText(caption);
+        }
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT,  LinearLayout.LayoutParams.WRAP_CONTENT);
         addView(view, params);
     }

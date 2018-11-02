@@ -26,7 +26,8 @@ public class CustomTextView extends LinearLayout {
         if (isHead) {
             textView.setTypeface(textView.getTypeface(), Typeface.BOLD_ITALIC);
         }
-        addView(view);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT,  LinearLayout.LayoutParams.WRAP_CONTENT);
+        addView(view, params);
     }
 
 }
