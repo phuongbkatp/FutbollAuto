@@ -42,8 +42,9 @@ public class CustomVideoLayout extends LinearLayout {
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
-        bitmap = Bitmap.createScaledBitmap(bitmap, 400, 240, false);
-
+        if (bitmap != null) {
+            bitmap = Bitmap.createScaledBitmap(bitmap, 400, 240, false);
+        }
         videoView.setVideoUrl(link);
         Glide.with(this).load(bitmap).into(videoView.getImageView());
 

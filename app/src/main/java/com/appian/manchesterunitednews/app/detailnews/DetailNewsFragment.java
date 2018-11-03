@@ -165,9 +165,13 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
                 if (item.getLinkImg() == null) {
                     continue;
                 }
-                CustomVideoLayout imgLayout = new CustomVideoLayout(getContext(), item.getLinkImg());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                ll_content.addView(imgLayout, params);
+                String video_link = item.getLinkImg();
+                String[] array = video_link.split("\\,");
+                for (String url_video : array) {
+                    CustomVideoLayout imgLayout = new CustomVideoLayout(getContext(), url_video);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    ll_content.addView(imgLayout, params);
+                }
                 //ll_content.addView(new RecyclerView(getContext()));
             } else if (item.getType() != null && item.getType().equals("table")) {
 /*                mColumnHeaderList = item.getRowHeaderList();
