@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/globalWhite">
 
     <android.support.v4.widget.NestedScrollView
@@ -24,33 +25,14 @@
                 android:id="@+id/rl_video"
                 android:layout_width="match_parent"
                 android:visibility="gone"
-                android:layout_height="300dp">
+                android:layout_height="wrap_content">
 
-                <VideoView
+                <com.marcinmoskala.videoplayview.VideoPlayView
+                    android:id="@+id/content_video"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:id="@+id/content_video"/>
-
-                <ImageButton
-                    android:id="@+id/play_or_pause"
-                    android:layout_margin="10dip"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/play_button"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
-                <ProgressBar
-                    android:layout_width="200dp"
                     android:layout_height="200dp"
-                    android:id="@+id/progrss"
-                    android:visibility="gone"
-                    android:layout_centerInParent="true"/>
+                    app:playButton="@drawable/play_icon"
+                    app:loop="true" />
 
             </RelativeLayout>
 

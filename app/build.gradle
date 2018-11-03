@@ -78,5 +78,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'com.evrencoskun.library:tableview:0.8.8'
     implementation 'com.github.haipv-ptit:FbVnApi:1532874c50'
+    compile 'com.github.marcinmoskala:VideoPlayView:0.0.2'
 }
 apply plugin: 'com.google.gms.google-services'

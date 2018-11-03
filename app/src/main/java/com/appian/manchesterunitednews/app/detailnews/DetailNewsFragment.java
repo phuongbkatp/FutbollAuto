@@ -36,7 +36,9 @@ import com.appian.manchesterunitednews.util.MyTableViewAdapter;
 import com.appnet.android.football.fbvn.data.RowHeader;
 import com.appnet.android.football.fbvn.data.ContentDetailNewsAuto;
 import com.appnet.android.football.fbvn.data.DetailNewsAuto;
+import com.bumptech.glide.Glide;
 import com.evrencoskun.tableview.TableView;
+import com.marcinmoskala.videoplayview.VideoPlayView;
 
 import java.util.List;
 
@@ -45,7 +47,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
     private TextView mTvDescription;
     private TextView mTvSource;
     private ImageView mImgThumbnail;
-    private VideoView mContentVideo;
+    private VideoPlayView mContentVideo;
     private RelativeLayout mRlVideo;
     private ProgressBar progressBar;
     private TextView mTvTimeNews;
@@ -62,9 +64,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
     private DetailNewsPresenter mPresenter;
 
     private CommentsAdapter mAdapter;
-    private MediaController mediacontroller;
-    private boolean isPlaying = true;
-    private ImageButton playPause;
+
 
     @Override
     public void showNews(DetailNewsAuto news) {
@@ -112,23 +112,9 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         mTvSource = view.findViewById(R.id.tv_news_detail_source);
         mImgThumbnail = view.findViewById(R.id.img_news_detail_thumbnail);
         mContentVideo = view.findViewById(R.id.content_video);
-        playPause = view.findViewById(R.id.play_or_pause);
         mLoadingView = view.findViewById(R.id.loading_view);
 
-        playPause.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                if (isPlaying) {
-                    playPause.setSelected(true);
-                    mContentVideo.pause();
-                } else {
-                    playPause.setSelected(false);
-                    mContentVideo.start();
-                }
-                isPlaying = !isPlaying;
-            }
-        });
         mRlVideo = view.findViewById(R.id.rl_video);
-        progressBar = view.findViewById(R.id.progrss);
         mTvTimeNews = view.findViewById(R.id.tv_time_news);
         ll_content = view.findViewById(R.id.ll_content);
     }
@@ -152,7 +138,8 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         String url = mNews.getMetaDetailNewsAuto().getVideo();
         if (!url.equals("")) {
             mRlVideo.setVisibility(View.VISIBLE);
-            playVideo(url);
+            mContentVideo.setVideoUrl(url);
+            Glide.with(this).load(mNews.getMetaDetailNewsAuto().getImage()).into(mContentVideo.getImageView());
         } else {
             mRlVideo.setVisibility(View.GONE);
         }
@@ -183,11 +170,11 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
                 ll_content.addView(imgLayout, params);
                 //ll_content.addView(new RecyclerView(getContext()));
             } else if (item.getType() != null && item.getType().equals("table")) {
-                mColumnHeaderList = item.getRowHeaderList();
+/*                mColumnHeaderList = item.getRowHeaderList();
                 mCellList = item.getCellList();
                 CustomTableLayout tableLayout = new CustomTableLayout(getContext(), item.getText(), mColumnHeaderList, mCellList);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                ll_content.addView(tableLayout, params);
+                ll_content.addView(tableLayout, params);*/
             }
         }
     }
@@ -198,20 +185,4 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         mPresenter.detachView();
     }
 
-    private void playVideo(String uriPath) {
-        mediacontroller = new MediaController(getContext());
-        mediacontroller.setAnchorView(mContentVideo);
-        Uri uri = Uri.parse(uriPath);
-
-        mContentVideo.setVideoURI(uri);
-        progressBar.setVisibility(View.VISIBLE);
-        mContentVideo.start();
-
-        mContentVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            // Close the progress bar and play the video
-            public void onPrepared(MediaPlayer mp) {
-                progressBar.setVisibility(View.GONE);
-            }
-        });
-    }
 }
