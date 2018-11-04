@@ -123,7 +123,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         ll_content = view.findViewById(R.id.ll_content);
         AppConfig config = AppConfigManager.getInstance().getAppConfig(getContext());
 
-        mDetailNewsAdapter = new DetailNewsRecycleAdapter(getContext(), config.getFbAdsNative2());
+        mDetailNewsAdapter = new DetailNewsRecycleAdapter(getContext(), "");
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
