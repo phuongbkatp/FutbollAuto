@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.appian.manchesterunitednews.MainApplication;
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseStateFragment;
 import com.appian.manchesterunitednews.app.BaseStateFragmentPagerAdapter;
@@ -20,7 +19,6 @@ import com.appian.manchesterunitednews.app.fixture.FixtureFragment;
 import com.appian.manchesterunitednews.app.fixture.MatchDayFragment;
 import com.appian.manchesterunitednews.app.table.TableFragment;
 import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appnet.android.ads.OnAdLoadListener;
 import com.appnet.android.ads.admob.BannerAdMob;
 
@@ -48,9 +46,6 @@ public class LeagueFragment extends BaseStateFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Context context = MainApplication.getApplication();
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(context);
-        mTeamId = appConfig.getTeamSofaId();
         FragmentManager fm = getChildFragmentManager();
         adapter = new MatchPagerAdapter(fm);
         Bundle args = getArguments();
@@ -59,8 +54,9 @@ public class LeagueFragment extends BaseStateFragment {
             mSeasonId = args.getInt("season_id");
             mLeagueName = args.getString("league_name", "");
         }
-        mBannerAdMob = new BannerAdMob(context, appConfig.getAdmobBanner1());
+
     }
+
 
     public void updateLeagueSeason(Bundle args) {
         if (args != null) {
@@ -179,6 +175,9 @@ public class LeagueFragment extends BaseStateFragment {
         if (context instanceof ToolbarViewListener) {
             mToolBar = (ToolbarViewListener) context;
         }
+        AppConfig appConfig = AppConfig.getInstance();
+        mTeamId = appConfig.getTeamId(context);
+        mBannerAdMob = new BannerAdMob(context, appConfig.getAdmobBanner1());
     }
 
     private void updateTitle() {

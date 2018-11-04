@@ -19,7 +19,6 @@ import com.appian.manchesterunitednews.app.match.BannerFragment;
 import com.appian.manchesterunitednews.app.news.NewsFragment;
 import com.appian.manchesterunitednews.app.news.presenter.ListNewsPresenter;
 import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appian.manchesterunitednews.network.ConnectivityEvent;
 import com.appian.manchesterunitednews.network.NetworkHelper;
 import com.appnet.android.football.sofa.data.Event;
@@ -49,12 +48,12 @@ public class HomeFragment extends BaseFragment implements TeamLastNextMatchView 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(getContext());
-        mTeamId = appConfig.getTeamSofaId();
+        AppConfig appConfig = AppConfig.getInstance();
+        mTeamId = appConfig.getTeamId(getContext());
         List<Fragment> fList = new ArrayList<>();
-        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_APP, 0));
-        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_TRENDING, 0));
-        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_VIDEO, 0));
+        fList.add(NewsFragment.newInstance(ListNewsPresenter.TYPE_APP));
+        fList.add(NewsFragment.newInstance(ListNewsPresenter.TYPE_TRENDING));
+        fList.add(NewsFragment.newInstance(ListNewsPresenter.TYPE_VIDEO));
         mNewsAdapterViewPager = new AdapterViewPager(getChildFragmentManager(), fList);
         mLastNextFragments = new ArrayList<>();
         mLastNextAdapterViewPager = new AdapterViewPager(getChildFragmentManager(), mLastNextFragments);
@@ -85,7 +84,6 @@ public class HomeFragment extends BaseFragment implements TeamLastNextMatchView 
         ViewPager newsViewPager = view.findViewById(R.id.viewpager);
 
         Context context = getContext();
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(context);
         newsViewPager.setAdapter(mNewsAdapterViewPager);
         newsViewPager.setOffscreenPageLimit(3);
 

@@ -22,6 +22,7 @@ public class MainApplication extends MultiDexApplication {
         FacebookSdk.sdkInitialize(getApplicationContext());
         Utils.initAdmob(this);
         AppHelper.initSubscribe(getApplicationContext());
+        AppHelper.initRemoteConfig();
     }
 
     public static MainApplication getApplication() {

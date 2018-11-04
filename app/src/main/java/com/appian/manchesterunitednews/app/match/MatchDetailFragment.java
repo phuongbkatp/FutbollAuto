@@ -28,7 +28,6 @@ import com.appian.manchesterunitednews.app.match.view.MatchDetailView;
 import com.appian.manchesterunitednews.app.match.view.MatchIncidentView;
 import com.appian.manchesterunitednews.app.match.view.MatchTeamPerformanceView;
 import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appian.manchesterunitednews.data.interactor.MatchInteractor;
 import com.appian.manchesterunitednews.data.interactor.TeamInteractor;
 import com.appian.manchesterunitednews.util.ImageLoader;
@@ -266,7 +265,7 @@ public class MatchDetailFragment extends BaseLiveFragment implements
 
 
     private void initAd(View root) {
-        AppConfig config = AppConfigManager.getInstance().getAppConfig(getContext());
+        AppConfig config = AppConfig.getInstance();
         final ViewGroup fbAdContainer = root.findViewById(R.id.fl_ads);
         FacebookNativeAd.Builder builder = new FacebookNativeAd.Builder(getContext(), config.getFbAdsNative2());
         builder.addDisplayView(fbAdContainer);
