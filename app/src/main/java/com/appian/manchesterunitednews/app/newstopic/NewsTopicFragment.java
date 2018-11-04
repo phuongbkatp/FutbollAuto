@@ -17,9 +17,7 @@ import com.appian.manchesterunitednews.app.news.NewsFragment;
 import com.appian.manchesterunitednews.app.news.presenter.ListNewsPresenter;
 import com.appian.manchesterunitednews.app.news.view.ListNewsView;
 import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
-import com.appnet.android.football.fbvn.data.News;
 import com.appnet.android.football.fbvn.data.NewsAuto;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -38,18 +36,15 @@ public class NewsTopicFragment extends BaseFragment implements ListNewsView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(getContext());
         List<Fragment> fList = new ArrayList<>();
-        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_APP, appConfig.getTabId(3)));
-        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_APP, appConfig.getTabId(4)));
-        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_APP, appConfig.getTabId(5)));
+        fList.add(NewsFragment.newInstance(ListNewsPresenter.TYPE_APP));
+        fList.add(NewsFragment.newInstance(ListNewsPresenter.TYPE_APP));
+        fList.add(NewsFragment.newInstance(ListNewsPresenter.TYPE_APP));
         mNewsAdapterViewPager = new AdapterViewPager(getChildFragmentManager(), fList);
         mTopicFragments = new ArrayList<>();
         mTopicAdapterViewPager = new AdapterViewPager(getChildFragmentManager(), mTopicFragments);
         mListNewsPresenter = new ListNewsPresenter(new NewsInteractor());
         mListNewsPresenter.attachView(this);
-        String language = AppConfigManager.getInstance().getLanguage(getContext());
-        //mListNewsPresenter.loadListNews(appConfig.getAppId(), ListNewsPresenter.TYPE_CATEGORY, appConfig.getCategoryEventId(), language, 1, 10);
     }
 
     @Override
@@ -73,18 +68,18 @@ public class NewsTopicFragment extends BaseFragment implements ListNewsView {
 
         tabHost.setupWithViewPager(newsViewPager);
         Context context = getContext();
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(context);
+        AppConfig appConfig = AppConfig.getInstance();
         TabLayout.Tab tab0 = tabHost.getTabAt(0);
         if(tab0 != null) {
-            tab0.setText(appConfig.getTabTitle(context, 3));
+            tab0.setText("");
         }
         TabLayout.Tab tab1 = tabHost.getTabAt(1);
         if(tab1 != null) {
-            tab1.setText(appConfig.getTabTitle(context, 4));
+            tab1.setText("");
         }
         TabLayout.Tab tab2 = tabHost.getTabAt(2);
         if(tab2 != null) {
-            tab2.setText(appConfig.getTabTitle(context, 5));
+            tab2.setText("");
         }
         topicViewPager.setAdapter(mTopicAdapterViewPager);
         indicator.setViewPager(topicViewPager);

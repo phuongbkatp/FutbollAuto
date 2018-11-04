@@ -1,7 +1,6 @@
 package com.appian.manchesterunitednews.app.more;
 
 import android.content.ActivityNotFoundException;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,35 +12,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseFragment;
 import com.appian.manchesterunitednews.app.ToolbarViewListener;
 import com.appian.manchesterunitednews.app.adapter.LeagueTemp;
 import com.appian.manchesterunitednews.app.adapter.NavigationListAdapter;
-import com.appian.manchesterunitednews.app.home.presenter.SeasonLeagueTeamPresenter;
-import com.appian.manchesterunitednews.app.home.view.SeasonLeagueTeamView;
 import com.appian.manchesterunitednews.app.league.LeagueFragment;
 import com.appian.manchesterunitednews.app.setting.SettingActivity;
 import com.appian.manchesterunitednews.app.user.LogInActivity;
-import com.appian.manchesterunitednews.app.user.OnBtnLogoutClickListener;
 import com.appian.manchesterunitednews.app.user.UserFragment;
-import com.appian.manchesterunitednews.data.account.AccountManager;
-import com.appian.manchesterunitednews.data.account.UserAccount;
-import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
-import com.appian.manchesterunitednews.network.ConnectivityEvent;
-import com.appian.manchesterunitednews.receiver.ReceiverHelper;
-import com.appian.manchesterunitednews.util.ImageLoader;
-import com.appnet.android.football.fbvn.data.LeagueSeason;
-import com.appnet.android.social.auth.OnLogoutListener;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +34,7 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class MoreFragment extends BaseFragment
-        implements View.OnClickListener,
-        SeasonLeagueTeamView {
+        implements View.OnClickListener {
     private static final String TAG_FRAGMENT_LEAGUE = "fragment_league";
 
     private static final String TAG_FRAGMENT_PROFILE = "fragment_profile";
@@ -64,13 +44,8 @@ public class MoreFragment extends BaseFragment
     private ToolbarViewListener mToolbar;
 
     private NavigationListAdapter mNavigationAdapter;
-    private List<LeagueSeason> mLeagueSesons;
     private List<LeagueTemp> mLeagueTemp;
 
-
-    private BroadcastReceiver mUserProfileChangedReceiver;
-
-    private SeasonLeagueTeamPresenter mSeasonLeagueTeamPresenter;
 
     private boolean mIShowAds;
 
@@ -83,7 +58,6 @@ public class MoreFragment extends BaseFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mLeagueSesons = new ArrayList<>();
         mLeagueTemp = new ArrayList<>();
         LeagueTemp leagueTemp1 = new LeagueTemp();
         leagueTemp1.setLeague_name("Premier League");
@@ -116,9 +90,6 @@ public class MoreFragment extends BaseFragment
         View viewSetting = view.findViewById(R.id.rl_setting);
 
         viewSetting.setOnClickListener(this);
-        mSeasonLeagueTeamPresenter = new SeasonLeagueTeamPresenter();
-        mSeasonLeagueTeamPresenter.attachView(this);
-        loadLeftMenu();
 
         View btnShare = view.findViewById(R.id.btn_share);
         btnShare.setOnClickListener(new View.OnClickListener() {
@@ -149,12 +120,10 @@ public class MoreFragment extends BaseFragment
                 }
             }
         });
-        ReceiverHelper.registerUserProfileChanged(getContext(), mUserProfileChangedReceiver);
         setTitle();
     }
 
     private void shareVia() {
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(getContext());
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, "Everything about Manchester United FC in your hands now. Link: http://play.google.com/store/apps/details?id=" + getContext().getPackageName());
@@ -166,7 +135,6 @@ public class MoreFragment extends BaseFragment
     @Override
     public void onStart() {
         super.onStart();
-        registerEventBus(true);
     }
 
     @Override
@@ -175,19 +143,6 @@ public class MoreFragment extends BaseFragment
         mIShowAds = false;
     }
 
-    private void loadLeftMenu() {
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(getContext());
-        mSeasonLeagueTeamPresenter.loadSeasonLeaguesByTeam(appConfig.getCurrentSeasonId(), appConfig.getTeamId(getContext()));
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(ConnectivityEvent event) {
-        if (event.isConnected()) {
-            if (mLeagueSesons != null && mLeagueSesons.isEmpty()) {
-                loadLeftMenu();
-            }
-        }
-    }
 
     @Override
     public void onClick(View v) {
@@ -255,8 +210,6 @@ public class MoreFragment extends BaseFragment
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ReceiverHelper.unregisterReceiver(getContext(), mUserProfileChangedReceiver);
-        mSeasonLeagueTeamPresenter.detachView();
     }
 
     @Override
@@ -268,28 +221,8 @@ public class MoreFragment extends BaseFragment
 
 
     @Override
-    public void showSeasonLeagueTeam(List<LeagueSeason> data) {
-        mLeagueSesons.clear();
-        mLeagueSesons.addAll(data);
-        mNavigationAdapter.notifyDataSetChanged();
-    }
-
-
-    @Override
     public void onStop() {
         super.onStop();
-        registerEventBus(false);
-    }
-
-    private void registerEventBus(boolean isRegister) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            return;
-        }
-        if (isRegister) {
-            EventBus.getDefault().register(this);
-        } else {
-            EventBus.getDefault().unregister(this);
-        }
     }
 
     @Override

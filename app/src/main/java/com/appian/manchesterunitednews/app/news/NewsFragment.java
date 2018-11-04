@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,21 +11,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.appian.manchesterunitednews.Constant;
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseFragment;
 import com.appian.manchesterunitednews.app.detailnews.DetailArticleActivity;
 import com.appian.manchesterunitednews.app.news.presenter.ListNewsPresenter;
 import com.appian.manchesterunitednews.app.news.view.ListNewsView;
 import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appian.manchesterunitednews.data.app.Language;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
 import com.appian.manchesterunitednews.util.CustomDialogFragment;
 import com.appian.manchesterunitednews.util.EndlessRecyclerViewScrollListener;
 import com.appian.manchesterunitednews.util.ItemClickSupport;
 import com.appian.manchesterunitednews.util.SimpleDividerItemDecoration;
-import com.appnet.android.football.fbvn.data.News;
 import com.appnet.android.football.fbvn.data.NewsAuto;
 
 import java.util.List;
@@ -39,13 +35,10 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private NewsRecycleAdapter mNewsAdapter;
 
     private int mNewsType = 0;
-    private int mTypeId = 0;
     private int mCurrentPage = 1;
     private int mStartingPage = 1;
     private String mLanguage;
     private String mTeam;
-
-    private int mAppId = 0;
 
     private ListNewsPresenter mListNewsPresenter;
     private EndlessRecyclerViewScrollListener mOnLoadMoreListener;
@@ -61,6 +54,14 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         return fragment;
     }
 
+    public static NewsFragment newInstance(int type) {
+        Bundle args = new Bundle();
+        args.putInt("type", type);
+        NewsFragment fragment = new NewsFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     public NewsFragment() {
 
     }
@@ -68,16 +69,14 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppConfig config = AppConfigManager.getInstance().getAppConfig(getContext());
+        AppConfig config = AppConfig.getInstance();
         mTeam = config.getAppKey();
-        mLanguage = AppConfigManager.getInstance().getLanguage(getContext());
+        mLanguage = Language.getLanguage(getContext());
         mCurrentPage = mStartingPage;
         mNewsAdapter = new NewsRecycleAdapter(getContext(), config.getFbAdsNative1());
         Bundle agrs = getArguments();
         if (agrs != null) {
             mNewsType = agrs.getInt("type");
-            mTypeId = agrs.getInt("id");
-            mAppId = agrs.getInt("appId");
         }
         mListNewsPresenter = new ListNewsPresenter(new NewsInteractor());
         mListNewsPresenter.attachView(this);

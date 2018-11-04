@@ -17,7 +17,7 @@ import com.appian.manchesterunitednews.app.player.PlayerDetailsActivity;
 import com.appian.manchesterunitednews.app.team.presenter.TeamSquadPresenter;
 import com.appian.manchesterunitednews.app.team.view.TeamSquadView;
 import com.appian.manchesterunitednews.app.widget.SectionWrapper;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
+import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.util.ItemClickSupport;
 import com.appnet.android.football.sofa.data.Player;
 
@@ -45,7 +45,7 @@ public class SquadFragment extends BaseFragment implements SwipeRefreshLayout.On
         super.onCreate(savedInstanceState);
         mPlayerList = new ArrayList<>();
         mSquadAdapter = new SquadAdapter(getActivity(), mPlayerList);
-        mTeamId = AppConfigManager.getInstance().getAppConfig(getContext()).getTeamId(getContext());
+        mTeamId = AppConfig.getInstance().getTeamId(getContext());
         mTeamSquadPresenter = new TeamSquadPresenter();
         mTeamSquadPresenter.attachView(this);
         loadPlayer();

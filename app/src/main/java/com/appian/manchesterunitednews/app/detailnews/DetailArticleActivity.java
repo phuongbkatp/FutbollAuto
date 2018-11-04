@@ -4,31 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseActivity;
-import com.appian.manchesterunitednews.app.adapter.AdapterViewPager;
-import com.appian.manchesterunitednews.app.detailnews.presenter.DetailNewsPresenter;
-import com.appian.manchesterunitednews.app.news.presenter.ListNewsPresenter;
 import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appian.manchesterunitednews.util.ViewHelper;
 import com.appnet.android.ads.admob.InterstitialAdMob;
-import com.viewpagerindicator.CirclePageIndicator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DetailArticleActivity extends BaseActivity {
     private static final String TAG_DETAIL_NEWS = "detail_news";
 
     public static final String LINK = "link";
 
-    private ViewPager mViewPagerNews;
     private InterstitialAdMob mInterstitialAdMob;
-    private DetailNewsPresenter mDetailNewsPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +41,7 @@ public class DetailArticleActivity extends BaseActivity {
                 onBackPressed();
             }
         });
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(this);
+        AppConfig appConfig = AppConfig.getInstance();
         mInterstitialAdMob = new InterstitialAdMob(getApplicationContext(), appConfig.getAdmobInterstitial());
         mInterstitialAdMob.loadAd();
     }

@@ -2,4 +2,5 @@
 <resources>
     <string name="facebook_ads_list_news_feed" translatable="false">192934784628708_192937434628443</string>
     <string name="facebook_ads_match_detail" translatable="false">192934784628708_192938287961691</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
 </resources>

@@ -1,23 +1,17 @@
 package com.appian.manchesterunitednews.app.detailnews;
 
-import android.media.MediaPlayer;
-import android.net.Uri;
-import android.support.v4.widget.ContentLoadingProgressBar;
-import android.support.v7.widget.LinearLayoutManager;
-import android.widget.ImageButton;
-import android.widget.MediaController;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.ContentLoadingProgressBar;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseStateFragment;
@@ -25,22 +19,15 @@ import com.appian.manchesterunitednews.app.comment.CommentsAdapter;
 import com.appian.manchesterunitednews.app.detailnews.presenter.DetailNewsPresenter;
 import com.appian.manchesterunitednews.app.detailnews.view.DetailNewsView;
 import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
-import com.appian.manchesterunitednews.util.CustomImageLayout;
-import com.appian.manchesterunitednews.util.CustomTableLayout;
-import com.appian.manchesterunitednews.util.CustomTextView;
-import com.appian.manchesterunitednews.util.CustomVideoLayout;
 import com.appian.manchesterunitednews.util.ImageLoader;
 import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.football.fbvn.data.Cell;
 import com.appnet.android.football.fbvn.data.ColumnHeader;
-import com.appian.manchesterunitednews.util.MyTableViewAdapter;
-import com.appnet.android.football.fbvn.data.RowHeader;
 import com.appnet.android.football.fbvn.data.ContentDetailNewsAuto;
 import com.appnet.android.football.fbvn.data.DetailNewsAuto;
+import com.appnet.android.football.fbvn.data.RowHeader;
 import com.bumptech.glide.Glide;
-import com.evrencoskun.tableview.TableView;
 import com.marcinmoskala.videoplayview.VideoPlayView;
 
 import java.util.List;
@@ -121,7 +108,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         mRlVideo = view.findViewById(R.id.rl_video);
         mTvTimeNews = view.findViewById(R.id.tv_time_news);
         ll_content = view.findViewById(R.id.ll_content);
-        AppConfig config = AppConfigManager.getInstance().getAppConfig(getContext());
+        AppConfig config = AppConfig.getInstance();
 
         mDetailNewsAdapter = new DetailNewsRecycleAdapter(getContext(), config.getFbAdsNative2());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());

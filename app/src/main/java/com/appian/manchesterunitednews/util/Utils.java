@@ -7,8 +7,6 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 import com.appian.manchesterunitednews.R;
-import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.google.android.gms.ads.MobileAds;
 
 import java.text.ParseException;
@@ -221,7 +219,6 @@ public final class Utils {
     }
 
     public static void initAdmob(Context context) {
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(context);
-        MobileAds.initialize(context, appConfig.getAdmobAppId());
+        MobileAds.initialize(context, context.getString(R.string.admob_app_id));
     }
 }

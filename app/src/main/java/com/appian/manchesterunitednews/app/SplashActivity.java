@@ -1,6 +1,5 @@
 package com.appian.manchesterunitednews.app;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -14,10 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.appian.manchesterunitednews.R;
-import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appian.manchesterunitednews.data.app.Language;
-import com.appian.manchesterunitednews.network.NetworkHelper;
+import com.appian.manchesterunitednews.service.app.AppHelper;
 import com.appian.manchesterunitednews.service.notification.NotificationFactory;
 import com.appian.manchesterunitednews.util.ViewHelper;
 
@@ -48,7 +45,7 @@ public class SplashActivity extends BaseActivity {
         mRlEnglish = findViewById(R.id.english_layout);
         view_English = findViewById(R.id.english_view);
         mChooseLanguage = findViewById(R.id.choose_language);
-        language = AppConfigManager.getInstance().getLanguage(this);
+        language = Language.getLanguage(this);
         if (language.equals(Language.ENGLISH)) {
             ViewHelper.setBackground(view_English, getResources().getDrawable(R.drawable.theme_enable_circle));
         } else {
@@ -90,9 +87,9 @@ public class SplashActivity extends BaseActivity {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (AppConfigManager.isFirstTime(SplashActivity.this)) {
+                if (AppHelper.isFirstTime(SplashActivity.this)) {
                     mChooseLanguage.setVisibility(View.VISIBLE);
-                    AppConfigManager.setIsFirstTime(SplashActivity.this, false);
+                    AppHelper.setIsFirstTime(SplashActivity.this, false);
                 } else {
                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(i);

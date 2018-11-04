@@ -16,18 +16,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.appian.manchesterunitednews.Constant;
-import com.appian.manchesterunitednews.MainApplication;
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseStateFragment;
 import com.appian.manchesterunitednews.app.BaseStateFragmentPagerAdapter;
 import com.appian.manchesterunitednews.app.ToolbarViewListener;
-import com.appian.manchesterunitednews.app.comment.CommentFragment;
 import com.appian.manchesterunitednews.app.match.lineups.LineupsFragment;
 import com.appian.manchesterunitednews.app.match.statistics.StatisticsFragment;
 import com.appian.manchesterunitednews.app.news.NewsFragment;
 import com.appian.manchesterunitednews.app.news.presenter.ListNewsPresenter;
 import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appian.manchesterunitednews.network.ConnectivityEvent;
 import com.appian.manchesterunitednews.network.NetworkHelper;
 import com.appnet.android.ads.OnAdLoadListener;
@@ -62,9 +59,13 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
         if (args != null) {
             mMatchId = args.getInt(Constant.KEY_SOFA_MATCH_ID, 0);
         }
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(getContext());
+    }
 
-        mBannerAdMob = new BannerAdMob(MainApplication.getApplication(), appConfig.getAdmobBanner1());
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        AppConfig appConfig = AppConfig.getInstance();
+        mBannerAdMob = new BannerAdMob(context, appConfig.getAdmobBanner1());
     }
 
     @Override

@@ -20,7 +20,7 @@ import com.appian.manchesterunitednews.app.team.presenter.TeamDetailPresenter;
 import com.appian.manchesterunitednews.app.team.presenter.TeamPerformancePresenter;
 import com.appian.manchesterunitednews.app.team.view.TeamDetailView;
 import com.appian.manchesterunitednews.app.team.view.TeamPerformanceView;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
+import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.interactor.TeamInteractor;
 import com.appian.manchesterunitednews.util.ImageLoader;
 import com.appian.manchesterunitednews.util.Utils;
@@ -59,7 +59,7 @@ public class ClubFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int teamId = AppConfigManager.getInstance().getAppConfig(getContext()).getTeamId(getContext());
+        int teamId = AppConfig.getInstance().getTeamId(getContext());
         TeamInteractor teamInteractor = new TeamInteractor();
         mTeamPerformancePresenter = new TeamPerformancePresenter(teamInteractor);
         mTeamPerformancePresenter.attachView(this);

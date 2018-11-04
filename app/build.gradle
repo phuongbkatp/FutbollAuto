@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 28
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -63,9 +63,10 @@ dependencies {
     implementation 'com.akexorcist:RoundCornerProgressBar:2.0.3'
     implementation 'jp.wasabeef:glide-transformations:3.0.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
-    implementation 'com.google.firebase:firebase-messaging:12.0.0'
-    implementation 'com.google.android.gms:play-services-ads:12.0.0'
-    implementation 'com.google.android.gms:play-services-auth:12.0.0'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation 'com.google.android.gms:play-services-ads:17.0.0'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    implementation 'com.google.firebase:firebase-config:16.1.0'
     testImplementation 'junit:junit:4.12'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'com.github.fernandodev.easyratingdialog:easyratingdialog:1.1.2'
@@ -78,6 +79,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'com.evrencoskun.library:tableview:0.8.8'
     implementation 'com.github.haipv-ptit:FbVnApi:1532874c50'
-    compile 'com.github.marcinmoskala:VideoPlayView:0.0.2'
+    implementation 'com.github.marcinmoskala:VideoPlayView:0.0.2'
 }
 apply plugin: 'com.google.gms.google-services'

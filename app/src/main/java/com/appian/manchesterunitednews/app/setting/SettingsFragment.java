@@ -21,7 +21,7 @@ import com.appian.manchesterunitednews.MainApplication;
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.ToolbarViewListener;
 import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
+import com.appian.manchesterunitednews.data.app.Language;
 import com.appian.manchesterunitednews.data.app.helper.NotificationHelper;
 import com.appian.manchesterunitednews.service.app.AppHelper;
 import com.appian.manchesterunitednews.util.CacheHelper;
@@ -85,7 +85,7 @@ public class SettingsFragment extends PreferenceFragment {
         });
         // Language
         ListPreference langPref = (ListPreference) findPreference(NotificationHelper.KEY_LANGUAGE_SETTING);
-        String lang = AppConfigManager.getInstance().getLanguage(getActivity());
+        String lang = Language.getLanguage(getActivity());
         langPref.setValue(lang);
         langPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -101,7 +101,7 @@ public class SettingsFragment extends PreferenceFragment {
         policyPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                AppConfig config = AppConfigManager.getInstance().getAppConfig(getActivity());
+                AppConfig config = AppConfig.getInstance();
                 openWebPage(config.getPolicyUrl());
                 return true;
             }

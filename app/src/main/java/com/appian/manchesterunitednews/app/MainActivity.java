@@ -1,9 +1,7 @@
 package com.appian.manchesterunitednews.app;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -16,34 +14,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appian.manchesterunitednews.R;
-import com.appian.manchesterunitednews.app.home.presenter.SeasonLeagueTeamPresenter;
-import com.appian.manchesterunitednews.app.home.view.SeasonLeagueTeamView;
 import com.appian.manchesterunitednews.app.league.LeagueFragment;
 import com.appian.manchesterunitednews.app.more.MoreFragment;
-import com.appian.manchesterunitednews.app.newstopic.NewsTopicFragment;
 import com.appian.manchesterunitednews.app.setting.SettingActivity;
 import com.appian.manchesterunitednews.app.team.TeamFragment;
 import com.appian.manchesterunitednews.app.user.LogInActivity;
 import com.appian.manchesterunitednews.app.user.UserFragment;
 import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appian.manchesterunitednews.data.app.Language;
-import com.appian.manchesterunitednews.network.ConnectivityEvent;
-import com.appian.manchesterunitednews.receiver.ReceiverHelper;
 import com.appian.manchesterunitednews.util.BottomNavigationViewHelper;
 import com.appnet.android.ads.admob.InterstitialAdMob;
-import com.appnet.android.football.fbvn.data.LeagueSeason;
 import com.github.fernandodev.easyratingdialog.library.EasyRatingDialog;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ToolbarViewListener, SeasonLeagueTeamView {
+        implements NavigationView.OnNavigationItemSelectedListener, ToolbarViewListener {
     private static final String TAG_FRAGMENT_LEAGUE = "fragment_league";
     private static final String TAG_FRAGMENT_HOME = "fragment_home";
     private static final String TAG_FRAGMENT_TOPIC = "fragment_topic";
@@ -58,15 +42,9 @@ public class MainActivity extends BaseActivity
 
     private TextView txtTitle;
 
-    private List<LeagueSeason> mLeagueSesons;
-
     private InterstitialAdMob mInterstitialAdMob;
 
     private EasyRatingDialog easyRatingDialog;
-
-    private BroadcastReceiver mUserProfileChangedReceiver;
-
-    private SeasonLeagueTeamPresenter mSeasonLeagueTeamPresenter;
 
     BottomNavigationView bottomNavigation;
     private boolean mIShowAds;
@@ -75,12 +53,11 @@ public class MainActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mLeagueSesons = new ArrayList<>();
         txtTitle = findViewById(R.id.txtTitle);
 
         easyRatingDialog = new EasyRatingDialog(this);
 
-        bottomNavigation = (BottomNavigationView) findViewById(R.id.bottom_navigationView);
+        bottomNavigation = findViewById(R.id.bottom_navigationView);
         BottomNavigationViewHelper.removeShiftMode(bottomNavigation);
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -92,10 +69,7 @@ public class MainActivity extends BaseActivity
 
         switchFragment(TAG_FRAGMENT_HOME, null);
 
-        mSeasonLeagueTeamPresenter = new SeasonLeagueTeamPresenter();
-        mSeasonLeagueTeamPresenter.attachView(this);
-        loadLeftMenu();
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(this);
+        AppConfig appConfig = AppConfig.getInstance();
         mInterstitialAdMob = new InterstitialAdMob(this, appConfig.getAdmobInterstitial());
     }
 
@@ -143,20 +117,6 @@ public class MainActivity extends BaseActivity
             }, 2000);
         } else {
             switchFragment(TAG_FRAGMENT_HOME);
-        }
-    }
-
-    private void loadLeftMenu() {
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(this);
-        mSeasonLeagueTeamPresenter.loadSeasonLeaguesByTeam(appConfig.getCurrentSeasonId(), appConfig.getTeamId(getApplicationContext()));
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(ConnectivityEvent event) {
-        if (event.isConnected()) {
-            if (mLeagueSesons != null && mLeagueSesons.isEmpty()) {
-                loadLeftMenu();
-            }
         }
     }
 
@@ -254,14 +214,6 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ReceiverHelper.unregisterReceiver(this, mUserProfileChangedReceiver);
-        mSeasonLeagueTeamPresenter.detachView();
-    }
-
-    @Override
-    public void showSeasonLeagueTeam(List<LeagueSeason> data) {
-        mLeagueSesons.clear();
-        mLeagueSesons.addAll(data);
     }
 
     @Override
@@ -272,17 +224,6 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onStop() {
         super.onStop();
-        registerEventBus(false);
     }
 
-    private void registerEventBus(boolean isRegister) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            return;
-        }
-        if (isRegister) {
-            EventBus.getDefault().register(this);
-        } else {
-            EventBus.getDefault().unregister(this);
-        }
-    }
 }
