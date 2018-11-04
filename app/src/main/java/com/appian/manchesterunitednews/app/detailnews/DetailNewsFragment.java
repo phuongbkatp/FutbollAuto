@@ -3,6 +3,7 @@ package com.appian.manchesterunitednews.app.detailnews;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v4.widget.ContentLoadingProgressBar;
+import android.support.v7.widget.LinearLayoutManager;
 import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import com.appian.manchesterunitednews.app.BaseStateFragment;
 import com.appian.manchesterunitednews.app.comment.CommentsAdapter;
 import com.appian.manchesterunitednews.app.detailnews.presenter.DetailNewsPresenter;
 import com.appian.manchesterunitednews.app.detailnews.view.DetailNewsView;
+import com.appian.manchesterunitednews.data.app.AppConfig;
+import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
 import com.appian.manchesterunitednews.util.CustomImageLayout;
 import com.appian.manchesterunitednews.util.CustomTableLayout;
@@ -51,7 +54,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
     private RelativeLayout mRlVideo;
     private ProgressBar progressBar;
     private TextView mTvTimeNews;
-    private LinearLayout ll_content;
+    private RecyclerView ll_content;
     private ContentLoadingProgressBar mLoadingView;
 
     private List<RowHeader> mRowHeaderList;
@@ -61,6 +64,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
     private String link;
     private DetailNewsAuto mNews;
 
+    private DetailNewsRecycleAdapter mDetailNewsAdapter;
     private DetailNewsPresenter mPresenter;
 
     private CommentsAdapter mAdapter;
@@ -117,6 +121,14 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         mRlVideo = view.findViewById(R.id.rl_video);
         mTvTimeNews = view.findViewById(R.id.tv_time_news);
         ll_content = view.findViewById(R.id.ll_content);
+        AppConfig config = AppConfigManager.getInstance().getAppConfig(getContext());
+
+        mDetailNewsAdapter = new DetailNewsRecycleAdapter(getContext(), config.getFbAdsNative2());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        ll_content.setLayoutManager(layoutManager);
+        ll_content.setAdapter(mDetailNewsAdapter);
     }
 
     private void fillData() {
@@ -148,39 +160,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         if (listContent.size() == 0) {
             return;
         }
-        for (ContentDetailNewsAuto item : listContent) {
-            if (item.getType() != null && item.getType().equals("text")) {
-                LinearLayout textView = new CustomTextView(getContext(), item.getText(), item.isHead());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                ll_content.addView(textView, params);
-            } else if (item.getType() != null && item.getType().equals("image")) {
-                if (item.getLinkImg() == null) {
-                    continue;
-                }
-                CustomImageLayout imgLayout = new CustomImageLayout(getContext(), item.getLinkImg(), item.getText());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                ll_content.addView(imgLayout, params);
-                //ll_content.addView(new RecyclerView(getContext()));
-            } else if (item.getType() != null && item.getType().equals("video")) {
-                if (item.getLinkImg() == null) {
-                    continue;
-                }
-                String video_link = item.getLinkImg();
-                String[] array = video_link.split("\\,");
-                for (String url_video : array) {
-                    CustomVideoLayout imgLayout = new CustomVideoLayout(getContext(), url_video);
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    ll_content.addView(imgLayout, params);
-                }
-                //ll_content.addView(new RecyclerView(getContext()));
-            } else if (item.getType() != null && item.getType().equals("table")) {
-/*                mColumnHeaderList = item.getRowHeaderList();
-                mCellList = item.getCellList();
-                CustomTableLayout tableLayout = new CustomTableLayout(getContext(), item.getText(), mColumnHeaderList, mCellList);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                ll_content.addView(tableLayout, params);*/
-            }
-        }
+        mDetailNewsAdapter.updateData(listContent);
     }
 
     @Override
