@@ -177,7 +177,7 @@ public class MoreFragment extends BaseFragment
 
     private void loadLeftMenu() {
         AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(getContext());
-        mSeasonLeagueTeamPresenter.loadSeasonLeaguesByTeam(appConfig.getCurrentSeasonId(), appConfig.getTeamId());
+        mSeasonLeagueTeamPresenter.loadSeasonLeaguesByTeam(appConfig.getCurrentSeasonId(), appConfig.getTeamId(getContext()));
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

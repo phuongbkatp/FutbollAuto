@@ -73,7 +73,8 @@ public class AppConfigManager {
         mAppConfig = getAppConfig(context);
     }
 
-    public String getLanguage(Context context) {
+    public String
+    getLanguage(Context context) {
         return Language.getLanguage(context);
     }
 

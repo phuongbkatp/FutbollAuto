@@ -50,7 +50,7 @@ public class LeagueFragment extends BaseStateFragment {
         super.onCreate(savedInstanceState);
         Context context = MainApplication.getApplication();
         AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(context);
-        mTeamId = appConfig.getTeamSofaId();
+        mTeamId = appConfig.getTeamId(getContext());
         FragmentManager fm = getChildFragmentManager();
         adapter = new MatchPagerAdapter(fm);
         Bundle args = getArguments();

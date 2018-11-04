@@ -148,7 +148,7 @@ public class MainActivity extends BaseActivity
 
     private void loadLeftMenu() {
         AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(this);
-        mSeasonLeagueTeamPresenter.loadSeasonLeaguesByTeam(appConfig.getCurrentSeasonId(), appConfig.getTeamId());
+        mSeasonLeagueTeamPresenter.loadSeasonLeaguesByTeam(appConfig.getCurrentSeasonId(), appConfig.getTeamId(getApplicationContext()));
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

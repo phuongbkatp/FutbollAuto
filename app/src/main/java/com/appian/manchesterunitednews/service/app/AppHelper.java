@@ -61,9 +61,9 @@ public final class AppHelper {
         }
         AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(context);
         if (isSubscribe) {
-            FirebaseMessaging.getInstance().subscribeToTopic("match_team_" + appConfig.getTeamId());
+            FirebaseMessaging.getInstance().subscribeToTopic("match_team_" + appConfig.getTeamId(context));
         } else {
-            FirebaseMessaging.getInstance().unsubscribeFromTopic("match_team_" + appConfig.getTeamId());
+            FirebaseMessaging.getInstance().unsubscribeFromTopic("match_team_" + appConfig.getTeamId(context));
         }
     }
 

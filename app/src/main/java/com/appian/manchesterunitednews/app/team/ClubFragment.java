@@ -59,7 +59,7 @@ public class ClubFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int teamId = AppConfigManager.getInstance().getAppConfig(getContext()).getTeamSofaId();
+        int teamId = AppConfigManager.getInstance().getAppConfig(getContext()).getTeamId(getContext());
         TeamInteractor teamInteractor = new TeamInteractor();
         mTeamPerformancePresenter = new TeamPerformancePresenter(teamInteractor);
         mTeamPerformancePresenter.attachView(this);

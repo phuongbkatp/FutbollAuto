@@ -3,18 +3,11 @@ package com.appian.manchesterunitednews.data.app;
 import android.content.Context;
 
 import com.appian.manchesterunitednews.BuildConfig;
+import com.appian.manchesterunitednews.R;
 
 import java.util.HashMap;
 
 public class AppConfig {
-    private static final HashMap<String, Integer> TEAM_ID = new HashMap<>();
-
-    static {
-        TEAM_ID.put("manutd", 35);
-        TEAM_ID.put("barca", 2817);
-        TEAM_ID.put("real", 2829);
-    }
-
     private static final String TEST_ADMOB_BANNER = "ca-app-pub-3940256099942544/2934735716";
     private static final String TEST_ADMOB_INTERSTITIAL = "ca-app-pub-3940256099942544/4411468910";
 
@@ -39,12 +32,8 @@ public class AppConfig {
         tabMapTitle = new HashMap<>();
     }
 
-    public int getTeamId() {
-        return TEAM_ID.get(BuildConfig.FLAVOR);
-    }
-
-    public int getTeamSofaId() {
-        return TEAM_ID.get(BuildConfig.FLAVOR);
+    public int getTeamId(Context context) {
+        return context.getResources().getInteger(R.integer.team_id);
     }
 
     public String getAppKey() {

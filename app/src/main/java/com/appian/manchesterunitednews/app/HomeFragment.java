@@ -50,7 +50,7 @@ public class HomeFragment extends BaseFragment implements TeamLastNextMatchView 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(getContext());
-        mTeamId = appConfig.getTeamSofaId();
+        mTeamId = appConfig.getTeamId(getContext());
         List<Fragment> fList = new ArrayList<>();
         fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_APP, 0));
         fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_TRENDING, 0));

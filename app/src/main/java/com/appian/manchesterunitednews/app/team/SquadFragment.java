@@ -45,7 +45,7 @@ public class SquadFragment extends BaseFragment implements SwipeRefreshLayout.On
         super.onCreate(savedInstanceState);
         mPlayerList = new ArrayList<>();
         mSquadAdapter = new SquadAdapter(getActivity(), mPlayerList);
-        mTeamId = AppConfigManager.getInstance().getAppConfig(getContext()).getTeamSofaId();
+        mTeamId = AppConfigManager.getInstance().getAppConfig(getContext()).getTeamId(getContext());
         mTeamSquadPresenter = new TeamSquadPresenter();
         mTeamSquadPresenter.attachView(this);
         loadPlayer();
