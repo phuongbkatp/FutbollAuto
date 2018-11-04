@@ -5,9 +5,14 @@ import android.content.Context;
 import com.appian.manchesterunitednews.BuildConfig;
 import com.appian.manchesterunitednews.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AppConfig {
     private static final String TEST_ADMOB_BANNER = "ca-app-pub-3940256099942544/2934735716";
     private static final String TEST_ADMOB_INTERSTITIAL = "ca-app-pub-3940256099942544/4411468910";
+
+    private RemoteConfigData mConfigData;
 
     private static AppConfig sInstance;
 
@@ -53,6 +58,17 @@ public class AppConfig {
 
     public String getPolicyUrl() {
         return "";
+    }
+
+    public void setRemoteConfigData(RemoteConfigData dataConfig) {
+        mConfigData = dataConfig;
+    }
+
+    public List<RemoteConfigData.League> getLeagues() {
+        if(mConfigData == null || mConfigData.getLeagues() == null) {
+            return new ArrayList<>();
+        }
+        return mConfigData.getLeagues();
     }
 
     private static boolean isDebug() {

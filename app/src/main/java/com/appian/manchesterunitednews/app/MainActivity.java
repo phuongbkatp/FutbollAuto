@@ -22,9 +22,12 @@ import com.appian.manchesterunitednews.app.user.LogInActivity;
 import com.appian.manchesterunitednews.app.user.UserFragment;
 import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.app.Language;
+import com.appian.manchesterunitednews.data.app.RemoteConfigData;
 import com.appian.manchesterunitednews.util.BottomNavigationViewHelper;
 import com.appnet.android.ads.admob.InterstitialAdMob;
 import com.github.fernandodev.easyratingdialog.library.EasyRatingDialog;
+
+import java.util.List;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, ToolbarViewListener {
@@ -129,18 +132,21 @@ public class MainActivity extends BaseActivity
                 switchFragment(TAG_FRAGMENT_SQUAD);
                 break;
             case R.id.llLeagueMenu:
-                // Fake Premier league
-                /*
-                LeagueSeason leagueSeason = mLeagueSesons.get(0);
+                AppConfig appConfig = AppConfig.getInstance();
+                List<RemoteConfigData.League> leagues = appConfig.getLeagues();
+                int leagueId = 0;
+                int seasonId = 0;
+                String name = "";
+                if(!leagues.isEmpty()) {
+                    RemoteConfigData.League league = leagues.get(0);
+                    leagueId = league.getId();
+                    seasonId = league.getSeason();
+                    name = league.getName();
+                }
                 Bundle args = new Bundle();
-                args.putInt("league_id", leagueSeason.getSofaLeagueId());
-                args.putInt("season_id", leagueSeason.getSofaId());
-                args.putString("league_name", leagueSeason.getLeagueName());
-                */
-                Bundle args = new Bundle();
-                args.putInt("league_id", 17);
-                args.putInt("season_id", 17359);
-                args.putString("league_name", "Premier League");
+                args.putInt("league_id", leagueId);
+                args.putInt("season_id", seasonId);
+                args.putString("league_name", name);
                 switchFragment(TAG_FRAGMENT_LEAGUE, args);
                 break;
             case R.id.rlSetting:

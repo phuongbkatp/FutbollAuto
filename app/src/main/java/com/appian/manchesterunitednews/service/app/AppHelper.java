@@ -3,16 +3,20 @@ package com.appian.manchesterunitednews.service.app;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.appian.manchesterunitednews.BuildConfig;
 import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.app.Language;
+import com.appian.manchesterunitednews.data.app.RemoteConfigData;
 import com.appian.manchesterunitednews.data.app.helper.NotificationHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 public final class AppHelper {
     private static final String PREF_APP_CONFIG = "app_config";
@@ -103,8 +107,24 @@ public final class AppHelper {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            config.activateFetched();
+                        if (!task.isSuccessful()) {
+                            return;
+                        }
+                        String app = BuildConfig.FLAVOR+"_config";
+                        config.activateFetched();
+                        String json = config.getString(app);
+                        if(TextUtils.isEmpty(json)) {
+                            return;
+                        }
+                        Gson gson = new Gson();
+                        try {
+                            RemoteConfigData data = gson.fromJson(json, RemoteConfigData.class);
+                            if(data == null) {
+                                return;
+                            }
+                            AppConfig.getInstance().setRemoteConfigData(data);
+                        } catch (JsonSyntaxException e) {
+                            e.printStackTrace();
                         }
                     }
                 });

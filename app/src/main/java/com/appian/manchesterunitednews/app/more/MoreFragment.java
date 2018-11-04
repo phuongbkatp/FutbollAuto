@@ -17,14 +17,14 @@ import android.widget.ListView;
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseFragment;
 import com.appian.manchesterunitednews.app.ToolbarViewListener;
-import com.appian.manchesterunitednews.app.adapter.LeagueTemp;
 import com.appian.manchesterunitednews.app.adapter.NavigationListAdapter;
 import com.appian.manchesterunitednews.app.league.LeagueFragment;
 import com.appian.manchesterunitednews.app.setting.SettingActivity;
 import com.appian.manchesterunitednews.app.user.LogInActivity;
 import com.appian.manchesterunitednews.app.user.UserFragment;
+import com.appian.manchesterunitednews.data.app.AppConfig;
+import com.appian.manchesterunitednews.data.app.RemoteConfigData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -44,7 +44,6 @@ public class MoreFragment extends BaseFragment
     private ToolbarViewListener mToolbar;
 
     private NavigationListAdapter mNavigationAdapter;
-    private List<LeagueTemp> mLeagueTemp;
 
 
     private boolean mIShowAds;
@@ -58,30 +57,17 @@ public class MoreFragment extends BaseFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mLeagueTemp = new ArrayList<>();
-        LeagueTemp leagueTemp1 = new LeagueTemp();
-        leagueTemp1.setLeague_name("Premier League");
-        leagueTemp1.setIcon_url("https://www.sofascore.com/u-tournament/17/logo");
-        leagueTemp1.setLeagueId(17);
-        leagueTemp1.setSeason_id(17359);
-        LeagueTemp leagueTemp2 = new LeagueTemp();
-        leagueTemp2.setLeague_name("UEFA Champions League");
-        leagueTemp2.setIcon_url("https://www.sofascore.com/u-tournament/7/logo");
-        leagueTemp2.setLeagueId(7);
-        leagueTemp2.setSeason_id(17351);
-
-        mLeagueTemp.add(leagueTemp1);
-        mLeagueTemp.add(leagueTemp2);
-        mNavigationAdapter = new NavigationListAdapter(getContext(), mLeagueTemp);
+        final List<RemoteConfigData.League> currentLeagues = AppConfig.getInstance().getLeagues();
+        mNavigationAdapter = new NavigationListAdapter(getContext(), AppConfig.getInstance().getLeagues());
         ListView navigationList = view.findViewById(R.id.navigation_list);
         navigationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LeagueTemp leagueSeason = mLeagueTemp.get(position);
+                RemoteConfigData.League leagueSeason = currentLeagues.get(position);
                 Bundle args = new Bundle();
-                args.putInt("league_id", leagueSeason.getLeagueId());
-                args.putInt("season_id", leagueSeason.getSeason_id());
-                args.putString("league_name", leagueSeason.getLeague_name());
+                args.putInt("league_id", leagueSeason.getId());
+                args.putInt("season_id", leagueSeason.getSeason());
+                args.putString("league_name", leagueSeason.getName());
                 switchFragment(TAG_FRAGMENT_LEAGUE, args);
             }
         });
