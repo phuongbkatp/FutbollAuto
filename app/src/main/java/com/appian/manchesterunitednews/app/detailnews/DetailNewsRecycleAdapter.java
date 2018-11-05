@@ -127,8 +127,21 @@ class DetailNewsRecycleAdapter extends FbAdRecyclerAdapter<ContentDetailNewsAuto
         while (index < size && k < count) {
             ContentDetailNewsAuto item = getItem(index);
             if (item != null) {
-                data.add(item);
-                k++;
+                String video_link = item.getLinkImg();
+                if (! video_link.equals("")) {
+
+                    String[] array = video_link.split("\\,");
+                    for (String url_video : array) {
+                        ContentDetailNewsAuto data_temp = new ContentDetailNewsAuto();
+                        data_temp.setLinkImg(url_video);
+                        data_temp.setType("video");
+                        data.add(data_temp);
+                        k++;
+                    }
+                } else {
+                    data.add(item);
+                    k++;
+                }
             }
             index++;
         }
