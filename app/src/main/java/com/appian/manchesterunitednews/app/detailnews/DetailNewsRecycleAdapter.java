@@ -3,6 +3,7 @@ package com.appian.manchesterunitednews.app.detailnews;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ class DetailNewsRecycleAdapter extends FbAdRecyclerAdapter<ContentDetailNewsAuto
     private static final int COLLUMN_VIEW_TYPE = 4;
     private static final int MAX_FB_ADS = 0;
 
+    private VideoPlayView mVideoView;
     DetailNewsRecycleAdapter(Context context, String unitId) {
         super(context, unitId, MAX_FB_ADS);
     }
@@ -99,23 +101,12 @@ class DetailNewsRecycleAdapter extends FbAdRecyclerAdapter<ContentDetailNewsAuto
             ImageLoader.displayImage(item.getLinkImg(), itemHolder.imageView);
         } else if (getViewType(position) == VIDEO_VIEW_TYPE) {
             VideoViewHolder itemHolder = (VideoViewHolder) holder;
-            Bitmap bitmap = null;
-            try {
-                bitmap = retriveVideoFrameFromVideo(item.getLinkImg());
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
-            if (bitmap != null) {
-                bitmap = Bitmap.createScaledBitmap(bitmap, 400, 240, false);
-            }
+            mVideoView = itemHolder.videoView;
+            AsyncTaskRunner runner = new AsyncTaskRunner();
+            runner.execute(item);
             itemHolder.videoView.setVideoUrl(item.getLinkImg());
-            Glide.with(mContext).load(bitmap).into(itemHolder.videoView.getImageView());
         }
-/*        if(item.isVideoType()) {
-            itemHolder.IconVideo.setVisibility(View.VISIBLE);
-        } else {
-            itemHolder.IconVideo.setVisibility(View.GONE);
-        }*/
+
     }
 
     private class TextViewHolder extends RecyclerView.ViewHolder {
@@ -171,5 +162,29 @@ class DetailNewsRecycleAdapter extends FbAdRecyclerAdapter<ContentDetailNewsAuto
             }
         }
         return bitmap;
+    }
+
+    private class AsyncTaskRunner extends AsyncTask<ContentDetailNewsAuto, String, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(ContentDetailNewsAuto... item) {
+            Bitmap bitmap = null;
+            try {
+                bitmap = retriveVideoFrameFromVideo(item[0].getLinkImg());
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+            if (bitmap != null) {
+                bitmap = Bitmap.createScaledBitmap(bitmap, 400, 240, false);
+            }
+            return bitmap;
+        }
+
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            Glide.with(mContext).load(result).into(mVideoView.getImageView());
+        }
+
     }
 }

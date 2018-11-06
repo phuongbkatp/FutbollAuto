@@ -10,7 +10,7 @@
     <com.marcinmoskala.videoplayview.VideoPlayView
         android:id="@+id/content_video"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
         app:playButton="@drawable/play_icon"
         app:loop="true" />
 
