@@ -118,36 +118,6 @@ class DetailNewsRecycleAdapter extends FbAdRecyclerAdapter<ContentDetailNewsAuto
         }*/
     }
 
-    @Override
-    public List<ContentDetailNewsAuto> getNextItems(int position, int count) {
-        List<ContentDetailNewsAuto> data = new ArrayList<>();
-        int size = getItemCount();
-        int index = position + 1;
-        int k = 0;
-        while (index < size && k < count) {
-            ContentDetailNewsAuto item = getItem(index);
-            if (item != null) {
-                String video_link = item.getLinkImg();
-                if (! video_link.equals("")) {
-
-                    String[] array = video_link.split("\\,");
-                    for (String url_video : array) {
-                        ContentDetailNewsAuto data_temp = new ContentDetailNewsAuto();
-                        data_temp.setLinkImg(url_video);
-                        data_temp.setType("video");
-                        data.add(data_temp);
-                        k++;
-                    }
-                } else {
-                    data.add(item);
-                    k++;
-                }
-            }
-            index++;
-        }
-        return data;
-    }
-
     private class TextViewHolder extends RecyclerView.ViewHolder {
         TextView mContent;
 

@@ -83,23 +83,6 @@ class NewsRecycleAdapter extends FbAdRecyclerAdapter<NewsAuto> {
         }*/
     }
 
-    @Override
-    public List<NewsAuto> getNextItems(int position, int count) {
-        List<NewsAuto> data = new ArrayList<>();
-        int size = getItemCount();
-        int index = position + 1;
-        int k = 0;
-        while (index < size && k < count) {
-            NewsAuto item = getItem(index);
-            if (item != null) {
-                data.add(item);
-                k++;
-            }
-            index++;
-        }
-        return data;
-    }
-
     private class RecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView TvTitle;
         TextView TvDate;

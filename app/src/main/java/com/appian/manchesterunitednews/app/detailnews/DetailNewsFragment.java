@@ -30,6 +30,7 @@ import com.appnet.android.football.fbvn.data.RowHeader;
 import com.bumptech.glide.Glide;
 import com.marcinmoskala.videoplayview.VideoPlayView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DetailNewsFragment extends BaseStateFragment implements DetailNewsView {
@@ -115,6 +116,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         ll_content.setLayoutManager(layoutManager);
+        ll_content.setNestedScrollingEnabled(false);
         ll_content.setAdapter(mDetailNewsAdapter);
     }
 
@@ -147,7 +149,27 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         if (listContent.size() == 0) {
             return;
         }
-        mDetailNewsAdapter.updateData(listContent);
+        // Multi video
+        List<ContentDetailNewsAuto> newListContent = new ArrayList<>();
+        for(ContentDetailNewsAuto item : listContent) {
+            if(!item.getType().equalsIgnoreCase("video")) {
+                newListContent.add(item);
+                continue;
+            }
+            String link = item.getLinkImg();
+            if(TextUtils.isEmpty(link)) {
+                continue;
+            }
+            String[] links = link.split(",");
+            for(String src : links) {
+                ContentDetailNewsAuto newItem = new ContentDetailNewsAuto();
+                newItem.setLinkImg(src);
+                newItem.setType(item.getType());
+                newItem.setText(item.getText());
+                newListContent.add(newItem);
+            }
+        }
+        mDetailNewsAdapter.updateData(newListContent);
     }
 
     @Override
