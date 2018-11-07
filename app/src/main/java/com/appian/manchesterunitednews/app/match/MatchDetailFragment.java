@@ -267,7 +267,7 @@ public class MatchDetailFragment extends BaseLiveFragment implements
     private void initAd(View root) {
         AppConfig config = AppConfig.getInstance();
         final ViewGroup fbAdContainer = root.findViewById(R.id.fl_ads);
-        FacebookNativeAd.Builder builder = new FacebookNativeAd.Builder(getContext(), config.getFbAdsNative2());
+        FacebookNativeAd.Builder builder = new FacebookNativeAd.Builder(getContext(), config.getFbAdsNative2(getContext()));
         builder.addDisplayView(fbAdContainer);
         builder.setOnAdLoadListener(new OnAdLoadListener() {
             @Override

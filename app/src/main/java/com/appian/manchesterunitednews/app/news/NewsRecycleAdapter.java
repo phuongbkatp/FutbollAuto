@@ -2,6 +2,7 @@ package com.appian.manchesterunitednews.app.news;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,20 +13,20 @@ import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.util.ImageLoader;
 import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.ads.widget.FbAdRecyclerAdapter;
-import com.appnet.android.football.fbvn.data.News;
 import com.appnet.android.football.fbvn.data.NewsAuto;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.facebook.ads.AdError;
 
 class NewsRecycleAdapter extends FbAdRecyclerAdapter<NewsAuto> {
     private static final int SMALL_NEWS_VIEW_TYPE = 1;
     private static final int LARGE_NEWS_VIEW_TYPE = 2;
     private static final int TOPIC_NEWS_VIEW_TYPE = 3;
-    private static final int MAX_FB_ADS = 6;
 
     NewsRecycleAdapter(Context context, String unitId) {
-        super(context, unitId, MAX_FB_ADS);
+        super(context, unitId, 0);
+    }
+
+    NewsRecycleAdapter(Context context, String unitId, int maxFbAds) {
+        super(context, unitId, maxFbAds);
     }
 
     @Override

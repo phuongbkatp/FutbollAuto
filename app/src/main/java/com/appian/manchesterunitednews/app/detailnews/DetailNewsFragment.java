@@ -114,10 +114,10 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         mDetailNewsAdapter = new DetailNewsRecycleAdapter(getContext(), "");
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
         ll_content.setLayoutManager(layoutManager);
         ll_content.setNestedScrollingEnabled(false);
         ll_content.setAdapter(mDetailNewsAdapter);
+      //  mDetailNewsAdapter.loadAd();
     }
 
     private void fillData() {

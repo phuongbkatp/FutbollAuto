@@ -73,7 +73,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         mTeam = config.getAppKey();
         mLanguage = Language.getLanguage(getContext());
         mCurrentPage = mStartingPage;
-        mNewsAdapter = new NewsRecycleAdapter(getContext(), config.getFbAdsNative1());
+        mNewsAdapter = new NewsRecycleAdapter(getContext(), config.getFbAdsNative1(getContext()), 5);
         Bundle agrs = getArguments();
         if (agrs != null) {
             mNewsType = agrs.getInt("type");
@@ -118,6 +118,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         };
         lvNews.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
         lvNews.addOnScrollListener(mOnLoadMoreListener);
+        mNewsAdapter.setStepAds(6);
         mNewsAdapter.loadAd();
     }
 

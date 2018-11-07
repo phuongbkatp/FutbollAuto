@@ -7,7 +7,6 @@ import com.appian.manchesterunitednews.data.app.Language;
 import com.appian.manchesterunitednews.service.app.AppHelper;
 import com.appian.manchesterunitednews.util.FontsOverride;
 import com.appian.manchesterunitednews.util.Utils;
-import com.facebook.FacebookSdk;
 
 public class MainApplication extends MultiDexApplication {
     private static MainApplication sInstance;
@@ -19,7 +18,6 @@ public class MainApplication extends MultiDexApplication {
             sInstance = this;
         }
         FontsOverride.setDefaultFont(this, "DEFAULT", "sfregular.otf");
-        FacebookSdk.sdkInitialize(getApplicationContext());
         Utils.initAdmob(this);
         AppHelper.initSubscribe(getApplicationContext());
         AppHelper.initRemoteConfig();

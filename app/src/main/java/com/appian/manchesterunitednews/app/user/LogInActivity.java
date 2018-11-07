@@ -63,27 +63,27 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_google_log_in:
-                showLoading(true);
-                mAuthManager.signInGoogle(this, getResources().getString(R.string.google_sign_in_server_client_id), this);
-                break;
-            case R.id.btn_facebook_log_in:
-                showLoading(true);
-                mAuthManager.signInFacebook(this,this);
-                break;
-            case R.id.btn_log_in_normal:
-                Intent intent = new Intent(this, LogInNormalActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.tv_log_in_sign_up:
-                Intent intent2 = new Intent(this, SignupActivity.class);
-                startActivityForResult(intent2, RC_REGISTER_ACCOUNT);
-                break;
-            case R.id.img_back_arrow:
-                finish();
-                break;
-        }
+//        switch (view.getId()) {
+//            case R.id.btn_google_log_in:
+//                showLoading(true);
+//                mAuthManager.signInGoogle(this, getResources().getString(R.string.google_sign_in_server_client_id), this);
+//                break;
+//            case R.id.btn_facebook_log_in:
+//                showLoading(true);
+//                mAuthManager.signInFacebook(this,this);
+//                break;
+//            case R.id.btn_log_in_normal:
+//                Intent intent = new Intent(this, LogInNormalActivity.class);
+//                startActivity(intent);
+//                break;
+//            case R.id.tv_log_in_sign_up:
+//                Intent intent2 = new Intent(this, SignupActivity.class);
+//                startActivityForResult(intent2, RC_REGISTER_ACCOUNT);
+//                break;
+//            case R.id.img_back_arrow:
+//                finish();
+//                break;
+//        }
     }
 
     @Override

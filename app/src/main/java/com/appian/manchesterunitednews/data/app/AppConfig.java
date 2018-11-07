@@ -48,12 +48,12 @@ public class AppConfig {
         return "";
     }
 
-    public String getFbAdsNative1() {
-        return "";
+    public String getFbAdsNative1(Context context) {
+        return context.getResources().getString(R.string.facebook_ads_list_news_feed);
     }
 
-    public String getFbAdsNative2() {
-        return "";
+    public String getFbAdsNative2(Context context) {
+        return context.getResources().getString(R.string.facebook_ads_match_detail);
     }
 
     public String getPolicyUrl() {
