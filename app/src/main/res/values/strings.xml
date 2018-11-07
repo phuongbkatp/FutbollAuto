@@ -74,7 +74,7 @@
 
     <string name="all_news">TOP</string>
     <string name="trend_news">TREND</string>
-    <string name="video_news">VIDEO</string>
+    <string name="video_news">RELATED</string>
 
     <string name="about_match">MATCH</string>
     <string name="expert_news">COMMENTARY</string>
