@@ -77,7 +77,7 @@ dependencies {
     implementation 'com.github.fernandodev.easyratingdialog:easyratingdialog:1.1.2'
     implementation 'com.facebook.android:facebook-android-sdk:4.38.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
-    implementation 'com.github.haipv-ptit:social-ads:6b3782fcd1'
+    implementation 'com.github.haipv-ptit:social-ads:f3bfb56f48'
     implementation 'com.github.haipv-ptit:Social_Auth:1c511cb021'
     implementation 'org.bitbucket.haipv_dev:football:525934a762'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
@@ -85,6 +85,5 @@ dependencies {
     implementation 'com.evrencoskun.library:tableview:0.8.8'
     implementation 'com.github.haipv-ptit:FbVnApi:1532874c50'
     implementation 'com.github.marcinmoskala:VideoPlayView:0.0.2'
-    compile project (':ads')
 }
 apply plugin: 'com.google.gms.google-services'
