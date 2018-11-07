@@ -177,7 +177,7 @@ public class LeagueFragment extends BaseStateFragment {
         }
         AppConfig appConfig = AppConfig.getInstance();
         mTeamId = appConfig.getTeamId(context);
-        mBannerAdMob = new BannerAdMob(context, appConfig.getAdmobBanner1());
+        mBannerAdMob = new BannerAdMob(context, appConfig.getAdbMobMatchDetail(context));
     }
 
     private void updateTitle() {

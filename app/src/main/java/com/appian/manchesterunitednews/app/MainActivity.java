@@ -73,7 +73,7 @@ public class MainActivity extends BaseActivity
         switchFragment(TAG_FRAGMENT_HOME, null);
 
         AppConfig appConfig = AppConfig.getInstance();
-        mInterstitialAdMob = new InterstitialAdMob(this, appConfig.getAdmobInterstitial());
+        mInterstitialAdMob = new InterstitialAdMob(this, appConfig.getAdmobInterstitial(getApplicationContext()));
     }
 
     @Override

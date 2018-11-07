@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/globalWhite">
-
-    <android.support.v4.widget.NestedScrollView
+    <LinearLayout
+        android:id="@+id/admob_banner_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top">
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:visibility="gone"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/view_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/admob_banner_container">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,19 +29,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/header_navigation_news"
                 android:scaleType="centerCrop"
-                android:visibility="gone"/>
+                android:visibility="gone" />
+
             <RelativeLayout
                 android:id="@+id/rl_video"
                 android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <com.marcinmoskala.videoplayview.VideoPlayView
                     android:id="@+id/content_video"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    app:playButton="@drawable/play_icon"
-                    app:loop="true" />
+                    app:loop="true"
+                    app:playButton="@drawable/play_icon" />
 
             </RelativeLayout>
 
@@ -47,8 +57,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_margin_standard"
-                    android:layout_marginRight="@dimen/activity_margin_standard"
                     android:layout_marginTop="@dimen/activity_margin_standard"
+                    android:layout_marginRight="@dimen/activity_margin_standard"
                     android:textColor="@color/text_color_common"
                     android:textSize="@dimen/detail_news_title"
                     android:textStyle="bold" />
@@ -58,17 +68,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_margin_standard"
-                    android:layout_marginRight="@dimen/activity_margin_standard"
                     android:layout_marginTop="@dimen/activity_margin_standard"
+                    android:layout_marginRight="@dimen/activity_margin_standard"
                     android:textColor="@color/text_color_common"
                     android:textSize="@dimen/detail_content_text_size"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginBottom="@dimen/activity_margin_standard"
                     android:layout_marginTop="@dimen/activity_margin_standard"
+                    android:layout_marginBottom="@dimen/activity_margin_standard"
                     android:background="@color/draw_circle_color" />
 
                 <RelativeLayout
@@ -84,8 +94,8 @@
                         android:id="@+id/tv_news_detail_source"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
                         android:textColor="@color/player_value"
                         android:textSize="@dimen/list_news_time" />
 
@@ -102,8 +112,8 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginBottom="@dimen/activity_margin_standard"
                     android:layout_marginTop="@dimen/activity_margin_standard"
+                    android:layout_marginBottom="@dimen/activity_margin_standard"
                     android:background="@color/draw_circle_color" />
 
 
@@ -114,10 +124,12 @@
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
     <android.support.v4.widget.ContentLoadingProgressBar
         android:id="@+id/loading_view"
         style="?android:attr/progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|center_vertical"/>
-</FrameLayout>
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

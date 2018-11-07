@@ -65,7 +65,7 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
     public void onAttach(Context context) {
         super.onAttach(context);
         AppConfig appConfig = AppConfig.getInstance();
-        mBannerAdMob = new BannerAdMob(context, appConfig.getAdmobBanner1());
+        mBannerAdMob = new BannerAdMob(context, appConfig.getAdbMobMatchDetail(context));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.appian.manchesterunitednews.app.detailnews;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -22,6 +24,8 @@ import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
 import com.appian.manchesterunitednews.util.ImageLoader;
 import com.appian.manchesterunitednews.util.Utils;
+import com.appnet.android.ads.OnAdLoadListener;
+import com.appnet.android.ads.admob.BannerAdMob;
 import com.appnet.android.football.fbvn.data.Cell;
 import com.appnet.android.football.fbvn.data.ColumnHeader;
 import com.appnet.android.football.fbvn.data.ContentDetailNewsAuto;
@@ -44,6 +48,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
     private TextView mTvTimeNews;
     private RecyclerView ll_content;
     private ContentLoadingProgressBar mLoadingView;
+    private ViewGroup mAdViewContainer;
 
     private List<RowHeader> mRowHeaderList;
     private List<ColumnHeader> mColumnHeaderList;
@@ -57,6 +62,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
 
     private CommentsAdapter mAdapter;
 
+    private BannerAdMob mBannerAdMob;
 
     @Override
     public void showNews(DetailNewsAuto news) {
@@ -98,6 +104,12 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         fillData();
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mBannerAdMob = new BannerAdMob(context, AppConfig.getInstance().getAdbMobNewsDetail(context));
+    }
+
     private void initView(View view) {
         mTvTitle = view.findViewById(R.id.tv_news_detail_title);
         mTvDescription = view.findViewById(R.id.tv_news_detail_description);
@@ -109,7 +121,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         mRlVideo = view.findViewById(R.id.rl_video);
         mTvTimeNews = view.findViewById(R.id.tv_time_news);
         ll_content = view.findViewById(R.id.ll_content);
-        AppConfig config = AppConfig.getInstance();
+        mAdViewContainer = view.findViewById(R.id.admob_banner_container);
 
         mDetailNewsAdapter = new DetailNewsRecycleAdapter(getContext(), "");
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -118,6 +130,19 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         ll_content.setNestedScrollingEnabled(false);
         ll_content.setAdapter(mDetailNewsAdapter);
       //  mDetailNewsAdapter.loadAd();
+        mBannerAdMob.addView(mAdViewContainer);
+        mBannerAdMob.setOnLoadListener(new OnAdLoadListener() {
+            @Override
+            public void onAdLoaded() {
+                mAdViewContainer.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAdFailed() {
+                mAdViewContainer.setVisibility(View.GONE);
+            }
+        });
+        mBannerAdMob.loadAd();
     }
 
     private void fillData() {

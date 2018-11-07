@@ -42,7 +42,7 @@ public class DetailArticleActivity extends BaseActivity {
             }
         });
         AppConfig appConfig = AppConfig.getInstance();
-        mInterstitialAdMob = new InterstitialAdMob(getApplicationContext(), appConfig.getAdmobInterstitial());
+        mInterstitialAdMob = new InterstitialAdMob(getApplicationContext(), appConfig.getAdmobInterstitial(getApplicationContext()));
         mInterstitialAdMob.loadAd();
     }
 

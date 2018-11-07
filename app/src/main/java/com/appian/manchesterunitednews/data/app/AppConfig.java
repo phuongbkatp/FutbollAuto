@@ -34,18 +34,25 @@ public class AppConfig {
         return BuildConfig.FLAVOR;
     }
 
-    public String getAdmobBanner1() {
+    public String getAdbMobMatchDetail(Context context) {
         if (isDebug()) {
             return TEST_ADMOB_BANNER;
         }
-        return "";
+        return context.getResources().getString(R.string.admob_match_detail_banner);
     }
 
-    public String getAdmobInterstitial() {
+    public String getAdbMobNewsDetail(Context context) {
+        if (isDebug()) {
+            return TEST_ADMOB_BANNER;
+        }
+        return context.getResources().getString(R.string.admob_news_detail_banner);
+    }
+
+    public String getAdmobInterstitial(Context context) {
         if (isDebug()) {
             return TEST_ADMOB_INTERSTITIAL;
         }
-        return "";
+        return context.getResources().getString(R.string.admob_interstitial);
     }
 
     public String getFbAdsNative1(Context context) {

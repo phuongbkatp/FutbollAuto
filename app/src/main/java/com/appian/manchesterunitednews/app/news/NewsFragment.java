@@ -1,5 +1,6 @@
 package com.appian.manchesterunitednews.app.news;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -69,11 +70,17 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
         AppConfig config = AppConfig.getInstance();
         mTeam = config.getAppKey();
         mLanguage = Language.getLanguage(getContext());
         mCurrentPage = mStartingPage;
-        mNewsAdapter = new NewsRecycleAdapter(getContext(), config.getFbAdsNative1(getContext()), 5);
+        mNewsAdapter = new NewsRecycleAdapter(getContext(), context.getResources().getString(R.string.facebook_ads_list_news_feed), 5);
         Bundle agrs = getArguments();
         if (agrs != null) {
             mNewsType = agrs.getInt("type");
