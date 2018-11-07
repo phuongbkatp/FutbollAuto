@@ -20,8 +20,8 @@ android {
     productFlavors {
         manutd {
             applicationId "com.appian.manchesterunitednews"
-            versionCode 111
-            versionName "1.1.1"
+            versionCode 112
+            versionName "1.1.2"
         }
         barca {
             applicationId "com.appian.barcelonanews"
@@ -85,5 +85,6 @@ dependencies {
     implementation 'com.evrencoskun.library:tableview:0.8.8'
     implementation 'com.github.haipv-ptit:FbVnApi:1532874c50'
     implementation 'com.github.marcinmoskala:VideoPlayView:0.0.2'
+    compile project (':ads')
 }
 apply plugin: 'com.google.gms.google-services'
