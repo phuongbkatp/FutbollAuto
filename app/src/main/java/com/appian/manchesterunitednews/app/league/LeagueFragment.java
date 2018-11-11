@@ -19,6 +19,7 @@ import com.appian.manchesterunitednews.app.fixture.FixtureFragment;
 import com.appian.manchesterunitednews.app.fixture.MatchDayFragment;
 import com.appian.manchesterunitednews.app.table.TableFragment;
 import com.appian.manchesterunitednews.data.app.AppConfig;
+import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.ads.OnAdLoadListener;
 import com.appnet.android.ads.admob.BannerAdMob;
 
@@ -178,6 +179,7 @@ public class LeagueFragment extends BaseStateFragment {
         AppConfig appConfig = AppConfig.getInstance();
         mTeamId = appConfig.getTeamId(context);
         mBannerAdMob = new BannerAdMob(context, appConfig.getAdbMobMatchDetail(context));
+        Utils.addAdmobTestDevice(mBannerAdMob);
     }
 
     private void updateTitle() {

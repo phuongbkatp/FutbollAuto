@@ -24,6 +24,7 @@ import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.app.Language;
 import com.appian.manchesterunitednews.data.app.RemoteConfigData;
 import com.appian.manchesterunitednews.util.BottomNavigationViewHelper;
+import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.ads.admob.InterstitialAdMob;
 import com.github.fernandodev.easyratingdialog.library.EasyRatingDialog;
 
@@ -74,6 +75,7 @@ public class MainActivity extends BaseActivity
 
         AppConfig appConfig = AppConfig.getInstance();
         mInterstitialAdMob = new InterstitialAdMob(this, appConfig.getAdmobInterstitial(getApplicationContext()));
+        Utils.addAdmobTestDevice(mInterstitialAdMob);
     }
 
     @Override

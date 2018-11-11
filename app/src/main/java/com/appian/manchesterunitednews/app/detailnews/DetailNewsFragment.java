@@ -108,6 +108,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
     public void onAttach(Context context) {
         super.onAttach(context);
         mBannerAdMob = new BannerAdMob(context, AppConfig.getInstance().getAdbMobNewsDetail(context));
+        Utils.addAdmobTestDevice(mBannerAdMob);
     }
 
     private void initView(View view) {

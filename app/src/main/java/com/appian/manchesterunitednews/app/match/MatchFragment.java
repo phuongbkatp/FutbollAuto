@@ -27,6 +27,7 @@ import com.appian.manchesterunitednews.app.news.presenter.ListNewsPresenter;
 import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.network.ConnectivityEvent;
 import com.appian.manchesterunitednews.network.NetworkHelper;
+import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.ads.OnAdLoadListener;
 import com.appnet.android.ads.admob.BannerAdMob;
 
@@ -66,6 +67,7 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
         super.onAttach(context);
         AppConfig appConfig = AppConfig.getInstance();
         mBannerAdMob = new BannerAdMob(context, appConfig.getAdbMobMatchDetail(context));
+        Utils.addAdmobTestDevice(mBannerAdMob);
     }
 
     @Override

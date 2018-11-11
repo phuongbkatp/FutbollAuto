@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 import com.appian.manchesterunitednews.R;
+import com.appnet.android.ads.admob.AbstractAdMob;
 import com.google.android.gms.ads.MobileAds;
 
 import java.text.ParseException;
@@ -16,6 +17,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public final class Utils {
+    private static final String[] ADMOB_TEST_ID = {"779DF624C32BC4E7F95BD786CC47F69D"};
+
     private static final String DATE_TIME_FORMAT_TZ = "yyyy-MM-dd'T'HH:mm:ssX";
     private static final String D_D_M_FORMAT = "EEE, dd-MM";
     private static final String HH_MM_FORMAT = "HH:mm";
@@ -220,5 +223,11 @@ public final class Utils {
 
     public static void initAdmob(Context context) {
         MobileAds.initialize(context, context.getString(R.string.admob_app_id));
+    }
+
+    public static void addAdmobTestDevice(AbstractAdMob adMob) {
+        for(String id : ADMOB_TEST_ID) {
+            adMob.addTestDevice(id);
+        }
     }
 }

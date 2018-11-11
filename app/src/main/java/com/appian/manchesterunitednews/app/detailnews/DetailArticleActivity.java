@@ -9,6 +9,7 @@ import android.view.View;
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseActivity;
 import com.appian.manchesterunitednews.data.app.AppConfig;
+import com.appian.manchesterunitednews.util.Utils;
 import com.appian.manchesterunitednews.util.ViewHelper;
 import com.appnet.android.ads.admob.InterstitialAdMob;
 
@@ -43,6 +44,7 @@ public class DetailArticleActivity extends BaseActivity {
         });
         AppConfig appConfig = AppConfig.getInstance();
         mInterstitialAdMob = new InterstitialAdMob(getApplicationContext(), appConfig.getAdmobInterstitial(getApplicationContext()));
+        Utils.addAdmobTestDevice(mInterstitialAdMob);
         mInterstitialAdMob.loadAd();
     }
 
