@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public final class Utils {
-    private static final String[] ADMOB_TEST_ID = {"779DF624C32BC4E7F95BD786CC47F69D"};
+    private static final String[] ADMOB_TEST_ID = {"779DF624C32BC4E7F95BD786CC47F69D", "CD1AEE208FE5A067"};
 
     private static final String DATE_TIME_FORMAT_TZ = "yyyy-MM-dd'T'HH:mm:ssX";
     private static final String D_D_M_FORMAT = "EEE, dd-MM";
