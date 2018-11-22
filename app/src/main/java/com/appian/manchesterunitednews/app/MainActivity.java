@@ -2,8 +2,10 @@ package com.appian.manchesterunitednews.app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -23,11 +25,17 @@ import com.appian.manchesterunitednews.app.user.UserFragment;
 import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.app.Language;
 import com.appian.manchesterunitednews.data.app.RemoteConfigData;
+import com.appian.manchesterunitednews.data.interactor.AppConfigInteractor;
+import com.appian.manchesterunitednews.data.interactor.OnResponseListener;
+import com.appian.manchesterunitednews.service.app.AppHelper;
 import com.appian.manchesterunitednews.util.BottomNavigationViewHelper;
 import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.ads.admob.InterstitialAdMob;
+import com.appnet.android.football.fbvn.data.UserIp;
+import com.appnet.android.football.fbvn.data.UserIpData;
 import com.github.fernandodev.easyratingdialog.library.EasyRatingDialog;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends BaseActivity
@@ -58,7 +66,9 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         txtTitle = findViewById(R.id.txtTitle);
-
+        if (AppHelper.getCountryCode(getApplicationContext()).equals("")) {
+            loadAppConfig();
+        }
         easyRatingDialog = new EasyRatingDialog(this);
 
         bottomNavigation = findViewById(R.id.bottom_navigationView);
@@ -234,4 +244,19 @@ public class MainActivity extends BaseActivity
         super.onStop();
     }
 
+    public void loadAppConfig() {
+        final Context context = getApplicationContext();
+        AppConfigInteractor interactor = new AppConfigInteractor();
+        interactor.loadUserIp(new OnResponseListener<UserIpData>() {
+            @Override
+            public void onSuccess(UserIpData data) {
+                AppHelper.saveCountryCode(context, data.getData().getCode());
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
+    }
 }

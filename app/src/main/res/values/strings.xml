@@ -72,9 +72,9 @@
     <string name="comment_tab">COMMENT</string>
     <string name="lineup_tab">LINE-UP</string>
 
-    <string name="all_news">TOP</string>
-    <string name="trend_news">TREND</string>
-    <string name="video_news">RELATED</string>
+    <string name="all_news">Man United</string>
+    <string name="trend_news">International</string>
+    <string name="video_news">National</string>
 
     <string name="about_match">MATCH</string>
     <string name="expert_news">COMMENTARY</string>

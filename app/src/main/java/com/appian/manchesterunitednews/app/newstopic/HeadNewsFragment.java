@@ -54,7 +54,7 @@ public class HeadNewsFragment extends BaseFragment {
         TextView tvTitle = view.findViewById(R.id.tv_title);
         TextView tvTime = view.findViewById(R.id.tv_date);
         TextView tvComments = view.findViewById(R.id.tv_comments);
-        ImageLoader.displayImage(mThumbnail, imvThumbnail, R.drawable.mu_header);
+        ImageLoader.displayImage(mThumbnail, imvThumbnail, R.drawable.jersey);
         tvTitle.setText(mTitle);
         tvTime.setText(Utils.calculateTimeAgo(getContext(), mTime));
         tvComments.setText(String.valueOf(mComments));

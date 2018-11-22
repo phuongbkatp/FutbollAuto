@@ -20,6 +20,7 @@ import com.appian.manchesterunitednews.app.news.view.ListNewsView;
 import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.app.Language;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
+import com.appian.manchesterunitednews.service.app.AppHelper;
 import com.appian.manchesterunitednews.util.CustomDialogFragment;
 import com.appian.manchesterunitednews.util.EndlessRecyclerViewScrollListener;
 import com.appian.manchesterunitednews.util.ItemClickSupport;
@@ -78,7 +79,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         super.onAttach(context);
         AppConfig config = AppConfig.getInstance();
         mTeam = config.getAppKey();
-        mLanguage = Language.getLanguage(getContext());
+        mLanguage = AppHelper.getCountryCode(context);
         mCurrentPage = mStartingPage;
         mNewsAdapter = new NewsRecycleAdapter(getContext(), context.getResources().getString(R.string.facebook_ads_list_news_feed), 5);
         Bundle agrs = getArguments();

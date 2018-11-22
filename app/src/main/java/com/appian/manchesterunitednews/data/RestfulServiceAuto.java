@@ -7,6 +7,7 @@ import com.appian.manchesterunitednews.MainApplication;
 import com.appian.manchesterunitednews.network.NetworkHelper;
 import com.appnet.android.football.fbvn.data.DetailNewsDataAuto;
 import com.appnet.android.football.fbvn.data.NewsDataAuto;
+import com.appnet.android.football.fbvn.data.UserIpData;
 import com.appnet.android.football.fbvn.service.RestfulApiFootballAuto;
 
 import java.io.File;
@@ -28,6 +29,7 @@ public class RestfulServiceAuto {
     private static final int TIME_OUT = 30; // seconds
     private static final String CACHE_CONTROL = "public, max-age=";
     private static final String MAX_AGE_CACHE_NEWS_DETAIL = CACHE_CONTROL + 60 * 10;   // 5 mins
+    private static final String MAX_AGE_CACHE_APP_CONFIG = CACHE_CONTROL + 60 * 30;   // 30 minutes
 
     private static final String BASE_URL = "http://footballlivenews.com:8080/";
     private static RestfulServiceAuto sInstance;
@@ -65,6 +67,10 @@ public class RestfulServiceAuto {
 
     public Call<DetailNewsDataAuto> loadNewsDetail(String link) {
         return mRestfulApiFootball.loadNewsDetail(link);
+    }
+
+    public Call<UserIpData> loadUserIp() {
+        return mRestfulApiFootball.loadUserIp(MAX_AGE_CACHE_APP_CONFIG);
     }
 
 }

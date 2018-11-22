@@ -2,6 +2,7 @@ package com.appian.manchesterunitednews.service.app;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -21,6 +22,7 @@ import com.google.gson.JsonSyntaxException;
 public final class AppHelper {
     private static final String PREF_APP_CONFIG = "app_config";
     private static final String FIRST_TIME = "first_time";
+    private static final String COUNTRY_CODE = "country_code";
 
     private static final long CONFIG_EXPIRE_SECOND = 12 * 3600;     // 12 hours
 
@@ -139,5 +141,16 @@ public final class AppHelper {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean(FIRST_TIME, isFirst);
         editor.apply();
+    }
+    public static void saveCountryCode(Context context,String countrycode) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(COUNTRY_CODE, countrycode);
+        editor.apply();
+    }
+
+    public static String getCountryCode(Context context) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        return pref.getString(COUNTRY_CODE, "");
     }
 }

@@ -21,12 +21,7 @@ import com.appian.manchesterunitednews.util.ViewHelper;
 public class SplashActivity extends BaseActivity {
     private static final int SPLASH_TIME_OUT = 3000;
     private Handler mHandler;
-    private RelativeLayout mRlEnglish;
-    private LinearLayout mChooseLanguage;
-    private RelativeLayout mRlVietnamese;
-    private View view_English;
-    private View view_Vietnamese;
-    String language;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,44 +37,7 @@ public class SplashActivity extends BaseActivity {
         } else {
             launchMainScreen();
         }
-        mRlEnglish = findViewById(R.id.english_layout);
-        view_English = findViewById(R.id.english_view);
-        mChooseLanguage = findViewById(R.id.choose_language);
-        language = Language.getLanguage(this);
-        if (language.equals(Language.ENGLISH)) {
-            ViewHelper.setBackground(view_English, getResources().getDrawable(R.drawable.theme_enable_circle));
-        } else {
-            ViewHelper.setBackground(view_English, getResources().getDrawable(R.drawable.theme_disable_circle));
 
-        }
-        mRlEnglish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Language.setLocale(SplashActivity.this, Language.ENGLISH);
-                ViewHelper.setBackground(view_English, getResources().getDrawable(R.drawable.theme_enable_circle));
-                ViewHelper.setBackground(view_Vietnamese, getResources().getDrawable(R.drawable.theme_disable_circle));
-
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-        mRlVietnamese = findViewById(R.id.vietnam_layout);
-        view_Vietnamese = findViewById(R.id.vietnam_view);
-        if (language.equals(Language.VIETNAMESE)) {
-            ViewHelper.setBackground(view_Vietnamese, getResources().getDrawable(R.drawable.theme_disable_circle));
-        } else {
-            ViewHelper.setBackground(view_Vietnamese, getResources().getDrawable(R.drawable.theme_disable_circle));
-        }
-        mRlVietnamese.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Language.setLocale(SplashActivity.this, Language.VIETNAMESE);
-                ViewHelper.setBackground(view_Vietnamese, getResources().getDrawable(R.drawable.theme_enable_circle));
-                ViewHelper.setBackground(view_English, getResources().getDrawable(R.drawable.theme_disable_circle));
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private void launchMainScreen() {
@@ -87,14 +45,9 @@ public class SplashActivity extends BaseActivity {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (AppHelper.isFirstTime(SplashActivity.this)) {
-                    mChooseLanguage.setVisibility(View.VISIBLE);
-                    AppHelper.setIsFirstTime(SplashActivity.this, false);
-                } else {
-                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(i);
-                    finish();
-                }
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+                finish();
             }
         }, SPLASH_TIME_OUT);
     }
@@ -115,20 +68,4 @@ public class SplashActivity extends BaseActivity {
         }
     }
 
-    private void showNetworkDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        Resources res = getResources();
-        builder.setTitle(res.getString(R.string.title_network_error));
-        builder.setMessage(res.getString(R.string.body_network_error));
-        builder.setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                finish();
-            }
-        });
-        builder.setCancelable(false);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
 }
