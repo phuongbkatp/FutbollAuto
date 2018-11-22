@@ -31,8 +31,6 @@ import com.appian.manchesterunitednews.service.app.AppHelper;
 import com.appian.manchesterunitednews.util.BottomNavigationViewHelper;
 import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.ads.admob.InterstitialAdMob;
-import com.appnet.android.football.fbvn.data.UserIp;
-import com.appnet.android.football.fbvn.data.UserIpData;
 import com.github.fernandodev.easyratingdialog.library.EasyRatingDialog;
 
 import java.util.HashMap;
@@ -66,9 +64,7 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         txtTitle = findViewById(R.id.txtTitle);
-        if (AppHelper.getCountryCode(getApplicationContext()).equals("")) {
-            loadAppConfig();
-        }
+
         easyRatingDialog = new EasyRatingDialog(this);
 
         bottomNavigation = findViewById(R.id.bottom_navigationView);
@@ -244,19 +240,4 @@ public class MainActivity extends BaseActivity
         super.onStop();
     }
 
-    public void loadAppConfig() {
-        final Context context = getApplicationContext();
-        AppConfigInteractor interactor = new AppConfigInteractor();
-        interactor.loadUserIp(new OnResponseListener<UserIpData>() {
-            @Override
-            public void onSuccess(UserIpData data) {
-                AppHelper.saveCountryCode(context, data.getData().getCode());
-            }
-
-            @Override
-            public void onFailure(String error) {
-
-            }
-        });
-    }
 }
