@@ -23,6 +23,7 @@ import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
 import com.appian.manchesterunitednews.service.app.AppHelper;
 import com.appian.manchesterunitednews.util.CustomDialogFragment;
 import com.appian.manchesterunitednews.util.EndlessRecyclerViewScrollListener;
+import com.appian.manchesterunitednews.util.EventHelper;
 import com.appian.manchesterunitednews.util.ItemClickSupport;
 import com.appian.manchesterunitednews.util.SimpleDividerItemDecoration;
 import com.appnet.android.football.fbvn.data.NewsAuto;
@@ -135,7 +136,20 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         Intent intent = new Intent(this.getActivity(), DetailArticleActivity.class);
         intent.putExtra(DetailArticleActivity.LINK, link);
         startActivity(intent);
+        logClickItemEvent();
+    }
 
+    private void logClickItemEvent() {
+        String category = "latest";
+        if(mNewsType == ListNewsPresenter.TYPE_TRENDING) {
+            category = "top";
+        } else if(mNewsType == ListNewsPresenter.TYPE_VIDEO) {
+            category = "related";
+        }
+        Bundle bundle = new Bundle();
+        bundle.putString("category", category);
+        bundle.putString("lang", Language.getLanguage(getContext()));
+        EventHelper.log(getContext(), EventHelper.EVENT_TAP_NEWS_DETAIL, bundle);
     }
 
     @Override
