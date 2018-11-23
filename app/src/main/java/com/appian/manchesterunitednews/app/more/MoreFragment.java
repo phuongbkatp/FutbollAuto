@@ -112,7 +112,7 @@ public class MoreFragment extends BaseFragment
     private void shareVia() {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "Everything about Manchester United FC in your hands now. Link: http://play.google.com/store/apps/details?id=" + getContext().getPackageName());
+        sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_content) + getContext().getPackageName());
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share_via)));
     }
