@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.util.ImageLoader;
+import com.appian.manchesterunitednews.util.PreviewVideoLoadingTask;
 import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.ads.widget.FbAdRecyclerAdapter;
 import com.appnet.android.football.fbvn.data.ContentDetailNewsAuto;
@@ -100,10 +101,15 @@ class DetailNewsRecycleAdapter extends FbAdRecyclerAdapter<ContentDetailNewsAuto
             itemHolder.textView.setText(item.getText());
             ImageLoader.displayImage(item.getLinkImg(), itemHolder.imageView);
         } else if (getViewType(position) == VIDEO_VIEW_TYPE) {
-            VideoViewHolder itemHolder = (VideoViewHolder) holder;
-            mVideoView = itemHolder.videoView;
-            AsyncTaskRunner runner = new AsyncTaskRunner();
-            runner.execute(item);
+            final VideoViewHolder itemHolder = (VideoViewHolder) holder;
+            PreviewVideoLoadingTask task = new PreviewVideoLoadingTask(item.getLinkImg())
+                    .setBitMapLoaded(new PreviewVideoLoadingTask.OnBitmapLoaded() {
+                        @Override
+                        public void loadBitmap(Bitmap bitmap) {
+                            Glide.with(mContext).load(bitmap).into(itemHolder.videoView.getImageView());
+                        }
+                    });
+            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             itemHolder.videoView.setVideoUrl(item.getLinkImg());
         }
 
@@ -138,53 +144,4 @@ class DetailNewsRecycleAdapter extends FbAdRecyclerAdapter<ContentDetailNewsAuto
         }
     }
 
-    public static Bitmap retriveVideoFrameFromVideo(String videoPath)
-            throws Throwable {
-        Bitmap bitmap = null;
-        MediaMetadataRetriever mediaMetadataRetriever = null;
-        try {
-            mediaMetadataRetriever = new MediaMetadataRetriever();
-            if (Build.VERSION.SDK_INT >= 14)
-                mediaMetadataRetriever.setDataSource(videoPath, new HashMap<String, String>());
-            else
-                mediaMetadataRetriever.setDataSource(videoPath);
-
-            bitmap = mediaMetadataRetriever.getFrameAtTime(1, MediaMetadataRetriever.OPTION_CLOSEST);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new Throwable(
-                    "Exception in retriveVideoFrameFromVideo(String videoPath)"
-                            + e.getMessage());
-
-        } finally {
-            if (mediaMetadataRetriever != null) {
-                mediaMetadataRetriever.release();
-            }
-        }
-        return bitmap;
-    }
-
-    private class AsyncTaskRunner extends AsyncTask<ContentDetailNewsAuto, String, Bitmap> {
-
-        @Override
-        protected Bitmap doInBackground(ContentDetailNewsAuto... item) {
-            Bitmap bitmap = null;
-            try {
-                bitmap = retriveVideoFrameFromVideo(item[0].getLinkImg());
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
-            if (bitmap != null) {
-                bitmap = Bitmap.createScaledBitmap(bitmap, 400, 240, false);
-            }
-            return bitmap;
-        }
-
-
-        @Override
-        protected void onPostExecute(Bitmap result) {
-            Glide.with(mContext).load(result).into(mVideoView.getImageView());
-        }
-
-    }
 }

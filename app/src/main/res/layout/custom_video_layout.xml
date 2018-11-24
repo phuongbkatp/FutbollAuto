@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rl_video"
     android:layout_width="match_parent"
@@ -12,6 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="180dp"
         app:playButton="@drawable/play_icon"
-        app:loop="true" />
+        app:loadingButton="@drawable/loading"/>
 
-</RelativeLayout>
+</FrameLayout>
