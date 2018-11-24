@@ -3,8 +3,8 @@
     <string name="facebook_app_id" translatable="false">535056063573114</string>
     <string name="facebook_ads_list_news_feed" translatable="false">535056063573114_535062803572440</string>
     <string name="facebook_ads_match_detail" translatable="false">535056063573114_535063286905725</string>
-    <string name="admob_app_id" translatable="false">1</string>
-    <string name="admob_interstitial" translatable="false">1</string>
-    <string name="admob_match_detail_banner" translatable="false">1</string>
-    <string name="admob_news_detail_banner" translatable="false">1</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-1081577958380143~7319735059</string>
+    <string name="admob_interstitial" translatable="false">ca-app-pub-1081577958380143/1660214260</string>
+    <string name="admob_match_detail_banner" translatable="false">ca-app-pub-1081577958380143/8324613397</string>
+    <string name="admob_news_detail_banner" translatable="false">ca-app-pub-1081577958380143/2234929336</string>
 </resources>

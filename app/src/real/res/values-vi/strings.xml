@@ -1,3 +1,6 @@
 <resources>
-	<string name="app_name">Barcelona News</string>
+	<string name="app_name">Real Madrid News</string>
+	<string name="all_news">Real Madrid</string>
+	<string name="share_content">Everything about Real Madrid FC in your hands now. Link: http://play.google.com/store/apps/details?id=</string>
+
 </resources>
