@@ -22,6 +22,9 @@ public class NewsInteractor {
         call.enqueue(new Callback<DetailNewsDataAuto>() {
             @Override
             public void onResponse(Call<DetailNewsDataAuto> call, Response<DetailNewsDataAuto> response) {
+                if (response == null) {
+                    return;
+                }
                 if(response.body() == null && response.body().getStatus() != 0) {
                     return;
                 }
@@ -47,6 +50,9 @@ public class NewsInteractor {
         call.enqueue(new Callback<NewsDataAuto>() {
             @Override
             public void onResponse(Call<NewsDataAuto> call, Response<NewsDataAuto> response) {
+                if (response == null) {
+                    return;
+                }
                 if (response.body() == null && response.body().getStatus() != 0) {
                     listener.onSuccess(null);
                     return;

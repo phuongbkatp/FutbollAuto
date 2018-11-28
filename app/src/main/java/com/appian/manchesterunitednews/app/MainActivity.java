@@ -178,10 +178,6 @@ public class MainActivity extends BaseActivity
             if (fragment == null) {
                 fragment = new HomeFragment();
             }
-        } else if (TAG_FRAGMENT_TOPIC.equals(tag)) {
-            if (fragment == null) {
-                //fragment = new NewsTopicFragment();
-            }
         } else if (TAG_FRAGMENT_LEAGUE.equals(tag)) {
             if (fragment == null) {
                 fragment = LeagueFragment.newInstance(args);
@@ -191,10 +187,6 @@ public class MainActivity extends BaseActivity
         } else if (TAG_FRAGMENT_SQUAD.equals(tag)) {
             if (fragment == null) {
                 fragment = new TeamFragment();
-            }
-        } else if (TAG_FRAGMENT_PROFILE.equals(tag)) {
-            if (fragment == null) {
-                fragment = new UserFragment();
             }
         } else if (TAG_FRAGMENT_SETTING.equals(tag)) {
             if (fragment == null) {

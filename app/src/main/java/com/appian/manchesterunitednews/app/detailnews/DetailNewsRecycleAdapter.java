@@ -106,7 +106,9 @@ class DetailNewsRecycleAdapter extends FbAdRecyclerAdapter<ContentDetailNewsAuto
                     .setBitMapLoaded(new PreviewVideoLoadingTask.OnBitmapLoaded() {
                         @Override
                         public void loadBitmap(Bitmap bitmap) {
-                            Glide.with(mContext).load(bitmap).into(itemHolder.videoView.getImageView());
+                            if(bitmap != null && itemHolder.videoView != null) {
+                                Glide.with(mContext).load(bitmap).into(itemHolder.videoView.getImageView());
+                            }
                         }
                     });
             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
