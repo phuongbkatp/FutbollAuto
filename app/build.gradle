@@ -30,8 +30,8 @@ android {
         }
         barcavn {
             applicationId "com.appian.barcavietnam"
-            versionCode 101
-            versionName "1.0.1"
+            versionCode 103
+            versionName "1.0.3"
         }
         real {
             applicationId "com.appian.realmadridnews"
