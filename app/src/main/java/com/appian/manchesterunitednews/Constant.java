@@ -36,4 +36,7 @@ public final class Constant {
 
     public static final String OBJECT_TYPE_SOFA_MATCH = "sofa_match";
     public static final String OBJECT_TYPE_NEWS = "news";
+
+    public static final String APP_BARCA_VN = "barcavn";
+    public static final String APP_BARCA = "barca";
 }

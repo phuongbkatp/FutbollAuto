@@ -113,6 +113,7 @@
     <string name="welcome">WELCOME</string>
     <string name="english">English</string>
     <string name="vietnamese">Vietnamese</string>
+    <string name="french">French</string>
     <string name="coach_detail_pref_formation_text">Sơ đồ yêu thích</string>
     <string name="coach_detail_matches_text">Số trận</string>
     <string name="coach_detail_points_match_text">Điểm/Trận</string>
@@ -172,8 +173,9 @@
     <string name="no_line_up">Đội hình thi đấu sẽ được cập nhật trước trận đấu 1 tiếng</string>
     <string name="no_stats">Cập nhật khi trận đấu diễn ra</string>
     <string name="update_info_btn">"Cập nhật thông tin"</string>
-    <string name="language_english">Tiếng Anh</string>
+    <string name="language_english">English</string>
     <string name="language_vietnam">Tiếng Việt</string>
+    <string name="language_french">French</string>
     <string name="select_language">Lựa chọn ngôn ngữ</string>
     <string name="privacy_policy">Chính sách riêng tư</string>
     <string name="cancel_match">Bị huỷ</string>

@@ -16,14 +16,23 @@ public final class Language {
     public static final String EXTRA_LANGUAGE = "language";
     public static final String ENGLISH = "en";
     public static final String VIETNAMESE = "vi";
+    public static final String FRENCH = "fr";
 
     public static String getDefaultLanguage() {
         Locale locale = Locale.getDefault();
         String iso3 = locale.getISO3Language();
         if("vie".equalsIgnoreCase(iso3)){
             return VIETNAMESE;
+        } else if("fra".equalsIgnoreCase(iso3)) {
+            return FRENCH;
         }
         return ENGLISH;
+    }
+
+    public static boolean isFrench() {
+        Locale locale = Locale.getDefault();
+        String iso3 = locale.getISO3Language();
+        return "fra".equalsIgnoreCase(iso3);
     }
 
     public static Context onAttach(Context context) {
@@ -37,8 +46,14 @@ public final class Language {
 
     public static Context setLocale(Context context, String language) {
         persist(context, language);
-        Locale locale = (Language.VIETNAMESE.equals(language)) ? new Locale("vi") : Locale.ENGLISH;
-
+        Locale locale;
+        if(Language.VIETNAMESE.equals(language)) {
+            locale = new Locale("vi");
+        } else if(Language.FRENCH.equals(language)) {
+            locale = Locale.FRENCH;
+        } else {
+            locale = Locale.ENGLISH;
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return updateResources(context, locale);
         }

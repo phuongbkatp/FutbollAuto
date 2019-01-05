@@ -25,13 +25,13 @@ android {
         }
         barca {
             applicationId "com.appian.barcelonanews"
-            versionCode 102
-            versionName "1.0.2"
+            versionCode 103
+            versionName "1.0.3"
         }
         barcavn {
             applicationId "com.appian.barcavietnam"
-            versionCode 103
-            versionName "1.0.3"
+            versionCode 104
+            versionName "1.0.4"
         }
         real {
             applicationId "com.appian.realmadridnews"
