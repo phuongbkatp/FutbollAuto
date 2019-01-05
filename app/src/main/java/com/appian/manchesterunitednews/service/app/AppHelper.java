@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.appian.manchesterunitednews.BuildConfig;
+import com.appian.manchesterunitednews.Constant;
 import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.app.Language;
 import com.appian.manchesterunitednews.data.app.RemoteConfigData;
@@ -150,7 +151,11 @@ public final class AppHelper {
     }
 
     public static String getCountryCode(Context context) {
+        if(Language.isFrench()) {
+            return Language.FRENCH;
+        }
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         return pref.getString(COUNTRY_CODE, "");
     }
+
 }
