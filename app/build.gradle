@@ -23,6 +23,11 @@ android {
             versionCode 115
             versionName "1.1.5"
         }
+        mancity {
+            applicationId "com.appian.manchestercitynews"
+            versionCode 100
+            versionName "1.0.0"
+        }
         barca {
             applicationId "com.appian.barcelonanews"
             versionCode 103
