@@ -28,6 +28,11 @@ android {
             versionCode 100
             versionName "1.0.0"
         }
+        liverpool {
+            applicationId "com.appian.liverpoolnews"
+            versionCode 100
+            versionName "1.0.0"
+        }
         barca {
             applicationId "com.appian.barcelonanews"
             versionCode 103
