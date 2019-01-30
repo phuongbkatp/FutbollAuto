@@ -176,6 +176,7 @@
     <string name="language_english">English</string>
     <string name="language_vietnam">Tiếng Việt</string>
     <string name="language_french">French</string>
+    <string name="language_thai">Thai</string>
     <string name="select_language">Lựa chọn ngôn ngữ</string>
     <string name="privacy_policy">Chính sách riêng tư</string>
     <string name="cancel_match">Bị huỷ</string>

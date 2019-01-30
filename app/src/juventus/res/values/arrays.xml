@@ -3,11 +3,9 @@
     <string-array name="setting_language_texts">
         <item>@string/language_english</item>
         <item>@string/language_vietnam</item>
-        <item>@string/language_thai</item>
     </string-array>
     <string-array name="setting_language_values" translatable="false">
         <item>en</item>
         <item>vi</item>
-        <item>th</item>
     </string-array>
 </resources>

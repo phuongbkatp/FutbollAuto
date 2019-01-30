@@ -20,7 +20,6 @@ import com.appian.manchesterunitednews.app.news.view.ListNewsView;
 import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.app.Language;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
-import com.appian.manchesterunitednews.service.app.AppHelper;
 import com.appian.manchesterunitednews.util.CustomDialogFragment;
 import com.appian.manchesterunitednews.util.EndlessRecyclerViewScrollListener;
 import com.appian.manchesterunitednews.util.EventHelper;
@@ -31,7 +30,6 @@ import com.appnet.android.football.fbvn.data.NewsAuto;
 import java.util.List;
 
 public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, ListNewsView {
-    private static final int LIMIT_NEWS = 6;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private LinearLayout mLlNoData;
     private ContentLoadingProgressBar mLoadingView;
@@ -80,7 +78,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         super.onAttach(context);
         AppConfig config = AppConfig.getInstance();
         mTeam = config.getAppKey();
-        mLanguage = AppHelper.getCountryCode(context);
+        mLanguage = Language.getLanguage(context);
         mCurrentPage = mStartingPage;
         mNewsAdapter = new NewsRecycleAdapter(getContext(), context.getResources().getString(R.string.facebook_ads_list_news_feed), 5);
         Bundle agrs = getArguments();

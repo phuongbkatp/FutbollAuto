@@ -17,6 +17,7 @@ public final class Language {
     public static final String ENGLISH = "en";
     public static final String VIETNAMESE = "vi";
     public static final String FRENCH = "fr";
+    public static final String THAILAND = "th";
 
     public static String getDefaultLanguage() {
         Locale locale = Locale.getDefault();
@@ -25,14 +26,10 @@ public final class Language {
             return VIETNAMESE;
         } else if("fra".equalsIgnoreCase(iso3)) {
             return FRENCH;
+        } else if("tha".equalsIgnoreCase(iso3)) {
+            return THAILAND;
         }
         return ENGLISH;
-    }
-
-    public static boolean isFrench() {
-        Locale locale = Locale.getDefault();
-        String iso3 = locale.getISO3Language();
-        return "fra".equalsIgnoreCase(iso3);
     }
 
     public static Context onAttach(Context context) {
