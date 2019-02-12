@@ -25,15 +25,10 @@ import com.appian.manchesterunitednews.app.match.statistics.StatisticsFragment;
 import com.appian.manchesterunitednews.app.news.NewsFragment;
 import com.appian.manchesterunitednews.app.news.presenter.ListNewsPresenter;
 import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.network.ConnectivityEvent;
 import com.appian.manchesterunitednews.network.NetworkHelper;
 import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.ads.OnAdLoadListener;
 import com.appnet.android.ads.admob.BannerAdMob;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 public class MatchFragment extends BaseStateFragment implements ToolbarViewListener {
 
@@ -191,13 +186,7 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
     @Override
     public void onStart() {
         super.onStart();
-        registerEventBus(true);
         checkInternetConnection(NetworkHelper.isNetworkAvailable(getContext()));
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(ConnectivityEvent event) {
-        checkInternetConnection(event.isConnected());
     }
 
     @Override
@@ -241,20 +230,4 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
         mViewNoConnectivity.setVisibility(visible);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        registerEventBus(false);
-    }
-
-    private void registerEventBus(boolean isRegister) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            return;
-        }
-        if (isRegister) {
-            EventBus.getDefault().register(this);
-        } else {
-            EventBus.getDefault().unregister(this);
-        }
-    }
 }

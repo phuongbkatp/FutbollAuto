@@ -1,7 +1,6 @@
 package com.appian.manchesterunitednews.app;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,15 +18,10 @@ import com.appian.manchesterunitednews.app.match.BannerFragment;
 import com.appian.manchesterunitednews.app.news.NewsFragment;
 import com.appian.manchesterunitednews.app.news.presenter.ListNewsPresenter;
 import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.network.ConnectivityEvent;
 import com.appian.manchesterunitednews.network.NetworkHelper;
 import com.appnet.android.football.sofa.data.Event;
 import com.appnet.android.football.sofa.data.Tournament;
 import com.viewpagerindicator.CirclePageIndicator;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,16 +127,7 @@ public class HomeFragment extends BaseFragment implements TeamLastNextMatchView 
     @Override
     public void onStart() {
         super.onStart();
-        registerEventBus(true);
         checkInternetConnection(NetworkHelper.isNetworkAvailable(getContext()));
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(ConnectivityEvent event) {
-        if (event.isConnected()) {
-            loadTeamLastNext();
-        }
-        checkInternetConnection(event.isConnected());
     }
 
     @Override
@@ -189,20 +174,4 @@ public class HomeFragment extends BaseFragment implements TeamLastNextMatchView 
         mViewNoConnectivity.setVisibility(visible);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        registerEventBus(false);
-    }
-
-    private void registerEventBus(boolean isRegister) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            return;
-        }
-        if (isRegister) {
-            EventBus.getDefault().register(this);
-        } else {
-            EventBus.getDefault().unregister(this);
-        }
-    }
 }
