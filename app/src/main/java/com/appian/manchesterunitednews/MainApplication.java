@@ -1,6 +1,7 @@
 package com.appian.manchesterunitednews;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.multidex.MultiDexApplication;
 
 import com.appian.manchesterunitednews.data.app.Language;
@@ -17,10 +18,7 @@ public class MainApplication extends MultiDexApplication {
         if(sInstance == null) {
             sInstance = this;
         }
-        FontsOverride.setDefaultFont(this, "DEFAULT", "sfregular.otf");
-        Utils.initAdmob(this);
-        AppHelper.initSubscribe(getApplicationContext());
-        AppHelper.initRemoteConfig();
+        new BackgroundTask().execute(getApplication());
     }
 
     public static MainApplication getApplication() {
@@ -30,5 +28,18 @@ public class MainApplication extends MultiDexApplication {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(Language.onAttach(base));
+    }
+
+    private static class BackgroundTask extends AsyncTask<Context, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Context... contexts) {
+            Context context = contexts[0];
+            FontsOverride.setDefaultFont(context, "DEFAULT", "sfregular.otf");
+            Utils.initAdmob(context);
+            AppHelper.initSubscribe(context);
+            AppHelper.initRemoteConfig();
+            return null;
+        }
     }
 }

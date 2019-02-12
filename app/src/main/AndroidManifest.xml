@@ -101,13 +101,6 @@
             </intent-filter>
         </service>
         <service
-            android:name=".service.firebase.AppFirebaseInstanceIdService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
-        <service
             android:name=".network.NetworkService"
             android:exported="false" />
     </application>

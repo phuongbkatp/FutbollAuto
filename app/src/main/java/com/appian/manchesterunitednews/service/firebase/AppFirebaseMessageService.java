@@ -2,6 +2,7 @@ package com.appian.manchesterunitednews.service.firebase;
 
 import android.util.Log;
 
+import com.appian.manchesterunitednews.service.app.AppHelper;
 import com.appian.manchesterunitednews.service.notification.NotificationFactory;
 import com.appian.manchesterunitednews.service.notification.NotificationProvider;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -14,6 +15,12 @@ public class AppFirebaseMessageService extends FirebaseMessagingService {
     @Override
     public void onCreate() {
         super.onCreate();
+    }
+
+    @Override
+    public void onNewToken(String s) {
+        super.onNewToken(s);
+        AppHelper.refreshDeviceToken(getApplicationContext());
     }
 
     @Override

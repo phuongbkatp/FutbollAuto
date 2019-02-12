@@ -25,7 +25,7 @@ public class NewsInteractor {
                 if (response == null) {
                     return;
                 }
-                if(response.body() == null && response.body().getStatus() != 0) {
+                if(response.body() == null) {
                     return;
                 }
                 listener.onSuccess(response.body().getData());
@@ -53,7 +53,7 @@ public class NewsInteractor {
                 if (response == null) {
                     return;
                 }
-                if (response.body() == null && response.body().getStatus() != 0) {
+                if (response.body() == null) {
                     listener.onSuccess(null);
                     return;
                 }
