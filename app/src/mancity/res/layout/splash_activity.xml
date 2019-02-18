@@ -10,6 +10,12 @@
         android:layout_height="match_parent"
         android:background="@drawable/gradient_red_background" />
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="@mipmap/ic_launcher" />
+
     <LinearLayout
         android:id="@+id/choose_language"
         android:layout_width="match_parent"
