@@ -87,7 +87,6 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         }
         mListNewsPresenter = new ListNewsPresenter(new NewsInteractor());
         mListNewsPresenter.attachView(this);
-        loadNews(mTeam, mLanguage);
     }
 
     @Override
@@ -125,6 +124,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         };
         lvNews.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
         lvNews.addOnScrollListener(mOnLoadMoreListener);
+        loadNews(mTeam, mLanguage);
         mNewsAdapter.setStepAds(6);
         mNewsAdapter.loadAd();
     }
