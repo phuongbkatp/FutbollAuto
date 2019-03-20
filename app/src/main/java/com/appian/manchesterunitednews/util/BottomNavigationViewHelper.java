@@ -1,9 +1,7 @@
 package com.appian.manchesterunitednews.util;
 
-/**
- * Created by phuongbkatp on 8/20/2018.
- */
 import android.annotation.SuppressLint;
+import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
@@ -15,6 +13,7 @@ public class BottomNavigationViewHelper {
     @SuppressLint("RestrictedApi")
     public static void removeShiftMode(BottomNavigationView view) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
+        view.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
         try {
             Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
             shiftingMode.setAccessible(true);
@@ -22,8 +21,6 @@ public class BottomNavigationViewHelper {
             shiftingMode.setAccessible(false);
             for (int i = 0; i < menuView.getChildCount(); i++) {
                 BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
-                //noinspection RestrictedApi
-                item.setShiftingMode(false);
                 // set once again checked value, so view will be updated
                 //noinspection RestrictedApi
                 item.setChecked(item.getItemData().isChecked());

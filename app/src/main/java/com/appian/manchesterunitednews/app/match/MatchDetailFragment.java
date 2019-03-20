@@ -37,6 +37,7 @@ import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.interactor.MatchInteractor;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
 import com.appian.manchesterunitednews.data.interactor.TeamInteractor;
+import com.appian.manchesterunitednews.util.EventHelper;
 import com.appian.manchesterunitednews.util.ImageLoader;
 import com.appian.manchesterunitednews.util.Utils;
 import com.appian.manchesterunitednews.util.ViewHelper;
@@ -512,6 +513,7 @@ public class MatchDetailFragment extends BaseLiveFragment implements
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(link));
                 startActivity(intent);
+                EventHelper.log(getContext(), EventHelper.EVENT_TAP_VIDEO_HIGHLIGHTS, null);
                 dialogInterface.dismiss();
             }
         });
