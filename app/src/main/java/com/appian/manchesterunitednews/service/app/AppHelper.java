@@ -49,9 +49,9 @@ public final class AppHelper {
         }
         AppConfig appConfig = AppConfig.getInstance();
         if (isSubscribe) {
-            FirebaseMessaging.getInstance().subscribeToTopic("news_app_" + appConfig.getAppKey());
+            FirebaseMessaging.getInstance().subscribeToTopic("dailynews_app_" + appConfig.getAppKey());
         } else {
-            FirebaseMessaging.getInstance().unsubscribeFromTopic("news_app_" + appConfig.getAppKey());
+            FirebaseMessaging.getInstance().unsubscribeFromTopic("dailynews_app_" + appConfig.getAppKey());
         }
     }
 

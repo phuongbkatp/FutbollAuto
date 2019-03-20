@@ -2,24 +2,15 @@ package com.appian.manchesterunitednews.data;
 
 import android.content.Context;
 
-import com.appian.manchesterunitednews.BuildConfig;
 import com.appian.manchesterunitednews.MainApplication;
-import com.appian.manchesterunitednews.network.NetworkHelper;
 import com.appnet.android.football.fbvn.data.DetailNewsDataAuto;
 import com.appnet.android.football.fbvn.data.NewsDataAuto;
 import com.appnet.android.football.fbvn.data.UserIpData;
 import com.appnet.android.football.fbvn.service.RestfulApiFootballAuto;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Cache;
-import okhttp3.CacheControl;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -67,6 +58,10 @@ public class RestfulServiceAuto {
 
     public Call<DetailNewsDataAuto> loadNewsDetail(String link) {
         return mRestfulApiFootball.loadNewsDetail(link);
+    }
+
+    public Call<DetailNewsDataAuto> loadMatchVideo(String home, String awway) {
+        return mRestfulApiFootball.loadMatchVideo(home, awway);
     }
 
     public Call<UserIpData> loadUserIp() {

@@ -1,7 +1,11 @@
 package com.appian.manchesterunitednews.app.match;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,17 +28,22 @@ import com.appian.manchesterunitednews.app.ToolbarViewListener;
 import com.appian.manchesterunitednews.app.match.presenter.MatchDetailPresenter;
 import com.appian.manchesterunitednews.app.match.presenter.MatchIncidentPresenter;
 import com.appian.manchesterunitednews.app.match.presenter.MatchTeamPerformancePresenter;
+import com.appian.manchesterunitednews.app.match.presenter.MatchVideoPresenter;
 import com.appian.manchesterunitednews.app.match.view.MatchDetailView;
 import com.appian.manchesterunitednews.app.match.view.MatchIncidentView;
 import com.appian.manchesterunitednews.app.match.view.MatchTeamPerformanceView;
+import com.appian.manchesterunitednews.app.match.view.MatchVideoView;
 import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.interactor.MatchInteractor;
+import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
 import com.appian.manchesterunitednews.data.interactor.TeamInteractor;
 import com.appian.manchesterunitednews.util.ImageLoader;
 import com.appian.manchesterunitednews.util.Utils;
 import com.appian.manchesterunitednews.util.ViewHelper;
 import com.appnet.android.ads.OnAdLoadListener;
 import com.appnet.android.ads.fb.FacebookNativeAd;
+import com.appnet.android.football.fbvn.data.DetailNewsAuto;
+import com.appnet.android.football.fbvn.data.MetaDetailNewsAuto;
 import com.appnet.android.football.sofa.data.BestPlayer;
 import com.appnet.android.football.sofa.data.Event;
 import com.appnet.android.football.sofa.data.Incident;
@@ -48,7 +57,7 @@ import java.util.Date;
 import java.util.List;
 
 public class MatchDetailFragment extends BaseLiveFragment implements
-        MatchDetailView, MatchIncidentView, MatchTeamPerformanceView {
+        MatchDetailView, MatchIncidentView, MatchTeamPerformanceView, MatchVideoView {
     private static final String KEY_MATCH_ID = "MATCH_ID";
 
     private TextView mTvTournament;
@@ -78,6 +87,11 @@ public class MatchDetailFragment extends BaseLiveFragment implements
     private LinearLayout mLlHomePerformance;
     private LinearLayout mLlAwayPerformance;
     private LinearLayout mLLPerformance;
+    // Video
+    private View mVideoRow;
+    private ImageView mThumbVideo;
+    private TextView mTvSourceVideo;
+    private TextView mTvDateCreatedVideo;
 
     // Live animation
     private Animation mLiveAnimation;
@@ -90,6 +104,7 @@ public class MatchDetailFragment extends BaseLiveFragment implements
     private MatchDetailPresenter mMatchDetailPresenter;
     private MatchIncidentPresenter mMatchIncidentPresenter;
     private MatchTeamPerformancePresenter mMatchTeamPerformancePresenter;
+    private MatchVideoPresenter mMatchVideoPresenter;
 
     public static MatchDetailFragment newInstance(int matchId, StateFragment stateFragment) {
         Bundle args = new Bundle();
@@ -117,6 +132,7 @@ public class MatchDetailFragment extends BaseLiveFragment implements
         mMatchDetailPresenter = new MatchDetailPresenter(matchInteractor);
         mMatchIncidentPresenter = new MatchIncidentPresenter(matchInteractor);
         mMatchTeamPerformancePresenter = new MatchTeamPerformancePresenter(new TeamInteractor());
+        mMatchVideoPresenter = new MatchVideoPresenter(new NewsInteractor());
     }
 
     @Override
@@ -168,9 +184,15 @@ public class MatchDetailFragment extends BaseLiveFragment implements
         mLlHomePerformance = view.findViewById(R.id.ll_home_performance);
         mLlAwayPerformance = view.findViewById(R.id.ll_away_performance);
         mLLPerformance = view.findViewById(R.id.ll_performance);
+
+        mVideoRow = view.findViewById(R.id.match_video_row);
+        mThumbVideo = view.findViewById(R.id.img_thumb_news);
+        mTvSourceVideo = view.findViewById(R.id.tv_source);
+        mTvDateCreatedVideo = view.findViewById(R.id.tv_date);
     }
 
     private void initMvp() {
+        mMatchVideoPresenter.attachView(this);
         mMatchDetailPresenter.attachView(this);
         mMatchDetailPresenter.loadMatchDetail(mMatchId);
         mMatchIncidentPresenter.attachView(this);
@@ -222,7 +244,6 @@ public class MatchDetailFragment extends BaseLiveFragment implements
             mLiveAnimation.cancel();
             return;
         }
-        Resources res = getResources();
         // Live score
         if (!isLive() && Constant.SOFA_MATCH_STATUS_IN_PROGRESS.equals(event.getStatus().getType())) {
             startLive();
@@ -322,13 +343,12 @@ public class MatchDetailFragment extends BaseLiveFragment implements
             }
             mTvDate.setText(Utils.formatWeekTime(getContext(), event.getStartTimestamp()));
             mTvTime.setText(Utils.formatDateMonthYear(new Date(event.getStartTimestamp())));
-            if (event.getHomeTeam() != null) {
+            if (event.getHomeTeam() != null && event.getAwayTeam() != null) {
                 mTvHomeTeamName.setText(event.getHomeTeam().getShortName());
                 ImageLoader.displayImage(SofaImageHelper.getSofaImgTeam(event.getHomeTeam().getId()), mImgHomeTeamLogo);
-            }
-            if (event.getAwayTeam() != null) {
                 mTvAwayTeamName.setText(event.getAwayTeam().getShortName());
                 ImageLoader.displayImage(SofaImageHelper.getSofaImgTeam(event.getAwayTeam().getId()), mImgAwayTeamLogo);
+                loadMatchVideo(event);
             }
         }
 
@@ -340,6 +360,18 @@ public class MatchDetailFragment extends BaseLiveFragment implements
         fillBestPlayer(event);
         // Live score
         checkLiveScore(event);
+    }
+
+    private void loadMatchVideo(Event event) {
+        if(!Constant.SOFA_MATCH_STATUS_FINISHED.equals(event.getStatus().getType())) {
+            return;
+        }
+        long currentTime = System.currentTimeMillis();
+        long startTime = event.getStartTimestamp();
+        if(currentTime - startTime > 86400000*10) {
+            return;
+        }
+        mMatchVideoPresenter.loadMatchVideo(event.getHomeTeam().getName(), event.getAwayTeam().getName());
     }
 
     private void loadTeamPerformance(Event event) {
@@ -441,5 +473,49 @@ public class MatchDetailFragment extends BaseLiveFragment implements
         mMatchDetailPresenter.detachView();
         mMatchIncidentPresenter.detachView();
         mMatchTeamPerformancePresenter.detachView();
+        mMatchVideoPresenter.detachView();
+    }
+
+    @Override
+    public void showMatchVideo(final DetailNewsAuto data) {
+        if (data == null || TextUtils.isEmpty(data.getMetaDetailNewsAuto().getVideo())) {
+            mVideoRow.setVisibility(View.GONE);
+            return;
+        }
+        mVideoRow.setVisibility(View.VISIBLE);
+        final MetaDetailNewsAuto meta = data.getMetaDetailNewsAuto();
+        ImageLoader.displayImage(meta.getImage(), mThumbVideo, R.mipmap.ic_play_circle_outline_black_24dp);
+        mTvSourceVideo.setText(meta.getVideo());
+        mTvDateCreatedVideo.setText(Utils.formatDateMonthYear(new Date(meta.getCreatedTime())));
+        mVideoRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialogConfirm(meta.getVideo());
+            }
+        });
+    }
+
+    private void showDialogConfirm(final String link) {
+        Resources res = getResources();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(res.getString(R.string.disclaimer_title, res.getString(R.string.app_name).toUpperCase()));
+        builder.setMessage(res.getString(R.string.disclaimer_text_full, res.getString(R.string.app_name).toUpperCase(), res.getString(R.string.app_name).toUpperCase()));
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(link));
+                startActivity(intent);
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

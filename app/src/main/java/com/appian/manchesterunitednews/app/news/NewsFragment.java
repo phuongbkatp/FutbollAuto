@@ -20,7 +20,6 @@ import com.appian.manchesterunitednews.app.news.view.ListNewsView;
 import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.app.Language;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
-import com.appian.manchesterunitednews.util.CustomDialogFragment;
 import com.appian.manchesterunitednews.util.EndlessRecyclerViewScrollListener;
 import com.appian.manchesterunitednews.util.EventHelper;
 import com.appian.manchesterunitednews.util.ItemClickSupport;
@@ -43,7 +42,6 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     private ListNewsPresenter mListNewsPresenter;
     private EndlessRecyclerViewScrollListener mOnLoadMoreListener;
-    CustomDialogFragment mVideoAlertDialog;
 
     public static NewsFragment newInstance(int appId, int type, int id) {
         Bundle args = new Bundle();
@@ -186,14 +184,6 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void onLoadListNewsFail() {
         showLoading(false);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (mVideoAlertDialog != null) {
-            mVideoAlertDialog.dismiss();
-        }
     }
 
     @Override

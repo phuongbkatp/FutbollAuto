@@ -201,6 +201,7 @@
     <string name="disclaimer_title">Bạn đang thoát %s</string>
     <string name="disclaimer_text_1">Website bên thứ ba bạn chuẩn bị xem không thuộc sở hữu của %s</string>
     <string name="disclaimer_text_2">%s không chịu trách nhiệm về bất cứ nội dung, như các nội dung nghe-nhìn, mà bạn thấy trên website bên thứ ba</string>
+    <string name="disclaimer_text_full">Website bên thứ ba bạn chuẩn bị xem không thuộc sở hữu của %s. %s không chịu trách nhiệm về bất cứ nội dung, như các nội dung nghe-nhìn, mà bạn thấy trên website bên thứ ba</string>
     <string name="share_content">Everything about Manchester United FC in your hands now. Link: http://play.google.com/store/apps/details?id=</string>
 
 </resources>

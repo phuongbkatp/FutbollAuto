@@ -254,11 +254,20 @@
             android:visibility="gone" />
 
         <include
+            android:id="@+id/match_video_row"
+            layout="@layout/item_match_video"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@id/fl_ads"
+            android:layout_marginTop="@dimen/activity_margin_standard" />
+
+        <include
             android:id="@+id/best_player_row"
             layout="@layout/item_best_player"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@id/fl_ads"
+            android:layout_below="@id/match_video_row"
             android:layout_marginTop="@dimen/activity_margin_standard" />
 
         <android.support.v7.widget.RecyclerView

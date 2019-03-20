@@ -22,8 +22,6 @@ import com.appian.manchesterunitednews.app.BaseStateFragmentPagerAdapter;
 import com.appian.manchesterunitednews.app.ToolbarViewListener;
 import com.appian.manchesterunitednews.app.match.lineups.LineupsFragment;
 import com.appian.manchesterunitednews.app.match.statistics.StatisticsFragment;
-import com.appian.manchesterunitednews.app.news.NewsFragment;
-import com.appian.manchesterunitednews.app.news.presenter.ListNewsPresenter;
 import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.network.NetworkHelper;
 import com.appian.manchesterunitednews.util.Utils;
@@ -115,9 +113,6 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
                     case 2:
                         mTvTitle.setText(res.getString(R.string.livescore_tab));
                         break;
-                    case 3:
-                        mTvTitle.setText(res.getString(R.string.video_tab));
-                        break;
 
                 }
             }
@@ -164,13 +159,6 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
             tab2.select();
         }
 
-        View view3 = View.inflate(context, R.layout.custom_tab_layout, null);
-        view3.findViewById(R.id.icon_tab).setBackgroundResource(R.drawable.ic_video_tab);
-        TabLayout.Tab tab3 = tabLayout.getTabAt(3);
-        if (tab3 != null) {
-            tab3.setCustomView(view3);
-        }
-
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         btnBackArrow.setOnClickListener(new View.OnClickListener() {
@@ -209,8 +197,6 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
                     return LineupsFragment.newInstance(mMatchId, this);
                 case 2:
                     return MatchDetailFragment.newInstance(mMatchId, this);
-                case 3:
-                    return NewsFragment.newInstance(0, ListNewsPresenter.TYPE_VIDEO_MATCH, mMatchId);
 
             }
             return null;
@@ -218,7 +204,7 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
 
         @Override
         public int getCount() {
-            return 4;
+            return 3;
         }
     }
 
