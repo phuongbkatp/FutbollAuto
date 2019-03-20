@@ -148,6 +148,7 @@ public class HomeFragment extends BaseFragment implements TeamLastNextMatchView 
         }
         mLastNextAdapterViewPager.notifyDataSetChanged();
         int initPosition = 0;
+        long currentTime = System.currentTimeMillis();
         for (int i = 0; i < data.size(); i++) {
             Event event = data.get(i);
             String type = "";
@@ -156,6 +157,10 @@ public class HomeFragment extends BaseFragment implements TeamLastNextMatchView 
             }
             if (Constant.SOFA_MATCH_STATUS_IN_PROGRESS.equalsIgnoreCase(type)) {
                 initPosition = i;
+                break;
+            }
+            if(Constant.SOFA_MATCH_STATUS_FINISHED.equalsIgnoreCase(type) && currentTime - event.getStartTimestamp() < 86400000) {
+                initPosition = i; // Latest finished match.
                 break;
             }
             if (Constant.SOFA_MATCH_STATUS_NOT_STARTED.equalsIgnoreCase(type)) {

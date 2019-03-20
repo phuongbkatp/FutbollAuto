@@ -369,7 +369,7 @@ public class MatchDetailFragment extends BaseLiveFragment implements
         }
         long currentTime = System.currentTimeMillis();
         long startTime = event.getStartTimestamp();
-        if(currentTime - startTime > 86400000*10) {
+        if(currentTime - startTime > 86400000*3) {
             return;
         }
         mMatchVideoPresenter.loadMatchVideo(event.getHomeTeam().getName(), event.getAwayTeam().getName());
