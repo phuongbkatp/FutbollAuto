@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 import com.appian.manchesterunitednews.R;
+import com.applovin.sdk.AppLovinSdk;
 import com.appnet.android.ads.admob.AbstractAdMob;
 import com.google.android.gms.ads.MobileAds;
 
@@ -223,6 +224,7 @@ public final class Utils {
 
     public static void initAdmob(Context context) {
         MobileAds.initialize(context, context.getString(R.string.admob_app_id));
+        AppLovinSdk.initializeSdk(context);
     }
 
     public static void addAdmobTestDevice(AbstractAdMob adMob) {

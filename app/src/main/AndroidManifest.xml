@@ -25,7 +25,8 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_app_id"/>
-
+        <meta-data android:name="applovin.sdk.key"
+            android:value="@string/applovin_sdk_key" />
         <activity
             android:name=".app.SplashActivity"
             android:configChanges="orientation"
@@ -40,6 +41,11 @@
             android:name=".app.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
+        <activity android:name="com.applovin.adview.AppLovinInterstitialActivity"
+            android:configChanges="orientation|screenSize"/>
+
+        <activity android:name="com.applovin.adview.AppLovinConfirmationActivity"
+            android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".app.match.MatchActivity"
             android:configChanges="orientation"

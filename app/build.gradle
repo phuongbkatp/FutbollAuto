@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 28
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -107,6 +107,8 @@ dependencies {
     implementation 'com.github.marcinmoskala:VideoPlayView:0.0.2'
     implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation "com.facebook.android:audience-network-sdk:5.2.0"
+    implementation 'com.applovin:applovin-sdk:9.2.1'
+    implementation 'com.google.ads.mediation:applovin:9.2.1.1'
 
 }
 apply plugin: 'com.google.gms.google-services'

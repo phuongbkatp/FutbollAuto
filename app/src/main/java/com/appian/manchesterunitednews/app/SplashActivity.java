@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.service.notification.NotificationFactory;
+import com.appian.manchesterunitednews.util.Utils;
 
 public class SplashActivity extends BaseActivity {
     private static final int SPLASH_TIME_OUT = 3000;
@@ -18,6 +19,7 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.splash_activity);
+        Utils.initAdmob(getApplicationContext());
         if (getIntent() != null && getIntent().getExtras() != null) {
             boolean notification = NotificationFactory.handleNotification(getApplicationContext(), getIntent().getExtras());
             if(notification) {

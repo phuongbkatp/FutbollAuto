@@ -7,4 +7,5 @@
     <string name="admob_interstitial" translatable="false">ca-app-pub-1081577958380143/7096490343</string>
     <string name="admob_match_detail_banner" translatable="false">ca-app-pub-1081577958380143/4747451188</string>
     <string name="admob_news_detail_banner" translatable="false">ca-app-pub-1081577958380143/1026207337</string>
+    <string name="applovin_sdk_key" translatable="false">-80sobcBK4FowcNUrxu9tbFNtfbu16IGZrwHmImlTkrxwpKxKXE1OnMAncX9rklKvICKI_W_2WSt952wLQfSt-</string>
 </resources>
