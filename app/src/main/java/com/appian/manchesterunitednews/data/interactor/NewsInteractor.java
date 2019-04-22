@@ -22,7 +22,10 @@ public class NewsInteractor {
         call.enqueue(new Callback<DetailNewsDataAuto>() {
             @Override
             public void onResponse(Call<DetailNewsDataAuto> call, Response<DetailNewsDataAuto> response) {
-                if(response.body() == null && response.body().getStatus() != 0) {
+                if (response == null) {
+                    return;
+                }
+                if(response.body() == null) {
                     return;
                 }
                 listener.onSuccess(response.body().getData());
@@ -43,11 +46,38 @@ public class NewsInteractor {
         enqueue(call, listener);
     }
 
+    public void loadMatchVideo(String home, String away, final OnDetailNewsResponseListener<DetailNewsAuto> listener) {
+        if(listener == null) {
+            return;
+        }
+        Call<DetailNewsDataAuto> call = RestfulServiceAuto.getInstance().loadMatchVideo(home, away);
+        call.enqueue(new Callback<DetailNewsDataAuto>() {
+            @Override
+            public void onResponse(Call<DetailNewsDataAuto> call, Response<DetailNewsDataAuto> response) {
+                if (response == null) {
+                    return;
+                }
+                if(response.body() == null) {
+                    return;
+                }
+                listener.onSuccess(response.body().getData());
+            }
+
+            @Override
+            public void onFailure(Call<DetailNewsDataAuto> call, Throwable t) {
+                listener.onFailure(t.getMessage());
+            }
+        });
+    }
+
     private void enqueue(Call<NewsDataAuto> call, final OnResponseListener<List<NewsAuto>> listener) {
         call.enqueue(new Callback<NewsDataAuto>() {
             @Override
             public void onResponse(Call<NewsDataAuto> call, Response<NewsDataAuto> response) {
-                if (response.body() == null && response.body().getStatus() != 0) {
+                if (response == null) {
+                    return;
+                }
+                if (response.body() == null) {
                     listener.onSuccess(null);
                     return;
                 }

@@ -57,7 +57,6 @@ public class TableFragment extends BaseStateFragment implements SwipeRefreshLayo
         }
         mLeagueStandingPresenter = new LeagueStandingPresenter();
         mLeagueStandingPresenter.attachView(this);
-        loadData();
     }
 
     @Override
@@ -76,6 +75,7 @@ public class TableFragment extends BaseStateFragment implements SwipeRefreshLayo
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mTableAdapter);
         mEmptyDataView = view.findViewById(R.id.linEmpty);
+        loadData();
     }
 
     private void loadData() {

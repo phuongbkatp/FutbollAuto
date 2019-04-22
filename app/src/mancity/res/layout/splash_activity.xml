@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_red_background" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:id="@+id/choose_language"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="50dp"
+            android:text="WELCOME"
+            android:textColor="@color/globalWhite"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/english_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@color/globalWhite"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/setting_content_margin_left"
+                android:layout_marginLeft="@dimen/setting_content_margin_left"
+                android:layout_toLeftOf="@id/english_view"
+                android:text="@string/english"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/toolbar_title_size" />
+
+            <View
+                android:id="@+id/english_view"
+                android:layout_width="10.0dip"
+                android:layout_height="10.0dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15.0dip"
+                android:background="@drawable/theme_disable_circle" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/vietnam_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="30dp"
+            android:background="@color/globalWhite"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/setting_content_margin_left"
+                android:layout_marginLeft="@dimen/setting_content_margin_left"
+                android:text="@string/vietnamese"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/toolbar_title_size" />
+
+            <View
+                android:id="@+id/vietnam_view"
+                android:layout_width="10.0dip"
+                android:layout_height="10.0dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15.0dip"
+                android:background="@drawable/theme_disable_circle" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</FrameLayout>

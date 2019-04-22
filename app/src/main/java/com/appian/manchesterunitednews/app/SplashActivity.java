@@ -1,19 +1,12 @@
 package com.appian.manchesterunitednews.app;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 
 import com.appian.manchesterunitednews.R;
-import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
-import com.appian.manchesterunitednews.network.NetworkHelper;
 import com.appian.manchesterunitednews.service.notification.NotificationFactory;
 
 public class SplashActivity extends BaseActivity {
@@ -23,11 +16,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (!AppConfigManager.isFirstTime(this)) {
-            Intent intent = new Intent(this, ChooseLanguageActivity.class);
-            startActivity(intent);
-            AppConfigManager.setIsFirstTime(this, true);
-        }
+
         setContentView(R.layout.splash_activity);
         if (getIntent() != null && getIntent().getExtras() != null) {
             boolean notification = NotificationFactory.handleNotification(getApplicationContext(), getIntent().getExtras());
@@ -39,6 +28,7 @@ public class SplashActivity extends BaseActivity {
         } else {
             launchMainScreen();
         }
+
     }
 
     private void launchMainScreen() {
@@ -67,22 +57,5 @@ public class SplashActivity extends BaseActivity {
         if(mHandler != null) {
             mHandler.removeCallbacksAndMessages(null);
         }
-    }
-
-    private void showNetworkDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        Resources res = getResources();
-        builder.setTitle(res.getString(R.string.title_network_error));
-        builder.setMessage(res.getString(R.string.body_network_error));
-        builder.setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                finish();
-            }
-        });
-        builder.setCancelable(false);
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 }

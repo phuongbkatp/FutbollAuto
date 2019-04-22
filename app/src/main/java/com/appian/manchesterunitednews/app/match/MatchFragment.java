@@ -16,26 +16,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.appian.manchesterunitednews.Constant;
-import com.appian.manchesterunitednews.MainApplication;
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseStateFragment;
 import com.appian.manchesterunitednews.app.BaseStateFragmentPagerAdapter;
 import com.appian.manchesterunitednews.app.ToolbarViewListener;
-import com.appian.manchesterunitednews.app.comment.CommentFragment;
 import com.appian.manchesterunitednews.app.match.lineups.LineupsFragment;
 import com.appian.manchesterunitednews.app.match.statistics.StatisticsFragment;
-import com.appian.manchesterunitednews.app.news.NewsFragment;
-import com.appian.manchesterunitednews.app.news.presenter.ListNewsPresenter;
 import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
-import com.appian.manchesterunitednews.network.ConnectivityEvent;
 import com.appian.manchesterunitednews.network.NetworkHelper;
+import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.ads.OnAdLoadListener;
 import com.appnet.android.ads.admob.BannerAdMob;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 public class MatchFragment extends BaseStateFragment implements ToolbarViewListener {
 
@@ -62,9 +53,14 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
         if (args != null) {
             mMatchId = args.getInt(Constant.KEY_SOFA_MATCH_ID, 0);
         }
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(getContext());
+    }
 
-        mBannerAdMob = new BannerAdMob(MainApplication.getApplication(), appConfig.getAdmobBanner1());
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        AppConfig appConfig = AppConfig.getInstance();
+        mBannerAdMob = new BannerAdMob(context, appConfig.getAdbMobMatchDetail(context));
+        Utils.addAdmobTestDevice(mBannerAdMob);
     }
 
     @Override
@@ -117,9 +113,6 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
                     case 2:
                         mTvTitle.setText(res.getString(R.string.livescore_tab));
                         break;
-                    case 3:
-                        mTvTitle.setText(res.getString(R.string.video_tab));
-                        break;
 
                 }
             }
@@ -166,13 +159,6 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
             tab2.select();
         }
 
-        View view3 = View.inflate(context, R.layout.custom_tab_layout, null);
-        view3.findViewById(R.id.icon_tab).setBackgroundResource(R.drawable.ic_video_tab);
-        TabLayout.Tab tab3 = tabLayout.getTabAt(3);
-        if (tab3 != null) {
-            tab3.setCustomView(view3);
-        }
-
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         btnBackArrow.setOnClickListener(new View.OnClickListener() {
@@ -188,13 +174,7 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
     @Override
     public void onStart() {
         super.onStart();
-        registerEventBus(true);
         checkInternetConnection(NetworkHelper.isNetworkAvailable(getContext()));
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(ConnectivityEvent event) {
-        checkInternetConnection(event.isConnected());
     }
 
     @Override
@@ -217,8 +197,6 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
                     return LineupsFragment.newInstance(mMatchId, this);
                 case 2:
                     return MatchDetailFragment.newInstance(mMatchId, this);
-                case 3:
-                    return NewsFragment.newInstance(0, ListNewsPresenter.TYPE_VIDEO_MATCH, mMatchId);
 
             }
             return null;
@@ -226,7 +204,7 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
 
         @Override
         public int getCount() {
-            return 4;
+            return 3;
         }
     }
 
@@ -238,20 +216,4 @@ public class MatchFragment extends BaseStateFragment implements ToolbarViewListe
         mViewNoConnectivity.setVisibility(visible);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        registerEventBus(false);
-    }
-
-    private void registerEventBus(boolean isRegister) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            return;
-        }
-        if (isRegister) {
-            EventBus.getDefault().register(this);
-        } else {
-            EventBus.getDefault().unregister(this);
-        }
-    }
 }

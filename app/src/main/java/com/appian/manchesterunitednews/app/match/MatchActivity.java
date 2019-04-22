@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import com.appian.manchesterunitednews.Constant;
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseActivity;
+import com.appian.manchesterunitednews.util.EventHelper;
 import com.appian.manchesterunitednews.util.ViewHelper;
 
 public class MatchActivity extends BaseActivity {
@@ -23,6 +24,7 @@ public class MatchActivity extends BaseActivity {
             sofaMatchId = intent.getIntExtra(Constant.KEY_SOFA_MATCH_ID, 0);
         }
         fragmentManager.beginTransaction().replace(R.id.fragment_container, MatchFragment.newInstance(sofaMatchId)).commit();
+        EventHelper.log(getApplicationContext(), EventHelper.EVENT_SCREEN_MATCH_DETAIL, null);
     }
 
     @Override

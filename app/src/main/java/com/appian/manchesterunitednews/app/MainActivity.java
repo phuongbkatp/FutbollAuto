@@ -1,11 +1,11 @@
 package com.appian.manchesterunitednews.app;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -16,34 +16,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appian.manchesterunitednews.R;
-import com.appian.manchesterunitednews.app.home.presenter.SeasonLeagueTeamPresenter;
-import com.appian.manchesterunitednews.app.home.view.SeasonLeagueTeamView;
 import com.appian.manchesterunitednews.app.league.LeagueFragment;
 import com.appian.manchesterunitednews.app.more.MoreFragment;
-import com.appian.manchesterunitednews.app.newstopic.NewsTopicFragment;
 import com.appian.manchesterunitednews.app.setting.SettingActivity;
 import com.appian.manchesterunitednews.app.team.TeamFragment;
 import com.appian.manchesterunitednews.app.user.LogInActivity;
 import com.appian.manchesterunitednews.app.user.UserFragment;
 import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appian.manchesterunitednews.data.app.Language;
-import com.appian.manchesterunitednews.network.ConnectivityEvent;
-import com.appian.manchesterunitednews.receiver.ReceiverHelper;
+import com.appian.manchesterunitednews.data.app.RemoteConfigData;
+import com.appian.manchesterunitednews.data.interactor.AppConfigInteractor;
+import com.appian.manchesterunitednews.data.interactor.OnResponseListener;
+import com.appian.manchesterunitednews.service.app.AppHelper;
 import com.appian.manchesterunitednews.util.BottomNavigationViewHelper;
+import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.ads.admob.InterstitialAdMob;
-import com.appnet.android.football.fbvn.data.LeagueSeason;
 import com.github.fernandodev.easyratingdialog.library.EasyRatingDialog;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ToolbarViewListener, SeasonLeagueTeamView {
+        implements NavigationView.OnNavigationItemSelectedListener, ToolbarViewListener {
     private static final String TAG_FRAGMENT_LEAGUE = "fragment_league";
     private static final String TAG_FRAGMENT_HOME = "fragment_home";
     private static final String TAG_FRAGMENT_TOPIC = "fragment_topic";
@@ -58,15 +52,9 @@ public class MainActivity extends BaseActivity
 
     private TextView txtTitle;
 
-    private List<LeagueSeason> mLeagueSesons;
-
     private InterstitialAdMob mInterstitialAdMob;
 
     private EasyRatingDialog easyRatingDialog;
-
-    private BroadcastReceiver mUserProfileChangedReceiver;
-
-    private SeasonLeagueTeamPresenter mSeasonLeagueTeamPresenter;
 
     BottomNavigationView bottomNavigation;
     private boolean mIShowAds;
@@ -75,12 +63,11 @@ public class MainActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mLeagueSesons = new ArrayList<>();
         txtTitle = findViewById(R.id.txtTitle);
 
         easyRatingDialog = new EasyRatingDialog(this);
 
-        bottomNavigation = (BottomNavigationView) findViewById(R.id.bottom_navigationView);
+        bottomNavigation = findViewById(R.id.bottom_navigationView);
         BottomNavigationViewHelper.removeShiftMode(bottomNavigation);
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -92,11 +79,9 @@ public class MainActivity extends BaseActivity
 
         switchFragment(TAG_FRAGMENT_HOME, null);
 
-        mSeasonLeagueTeamPresenter = new SeasonLeagueTeamPresenter();
-        mSeasonLeagueTeamPresenter.attachView(this);
-        loadLeftMenu();
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(this);
-        mInterstitialAdMob = new InterstitialAdMob(this, appConfig.getAdmobInterstitial());
+        AppConfig appConfig = AppConfig.getInstance();
+        mInterstitialAdMob = new InterstitialAdMob(this, appConfig.getAdmobInterstitial(getApplicationContext()));
+        Utils.addAdmobTestDevice(mInterstitialAdMob);
     }
 
     @Override
@@ -146,20 +131,6 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    private void loadLeftMenu() {
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(this);
-        mSeasonLeagueTeamPresenter.loadSeasonLeaguesByTeam(appConfig.getCurrentSeasonId(), appConfig.getTeamId());
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(ConnectivityEvent event) {
-        if (event.isConnected()) {
-            if (mLeagueSesons != null && mLeagueSesons.isEmpty()) {
-                loadLeftMenu();
-            }
-        }
-    }
-
     private void onBottomNavigationSelect (MenuItem item) {
         switch (item.getItemId()) {
             case R.id.llNewsFeedMenu:
@@ -169,18 +140,21 @@ public class MainActivity extends BaseActivity
                 switchFragment(TAG_FRAGMENT_SQUAD);
                 break;
             case R.id.llLeagueMenu:
-                // Fake Premier league
-                /*
-                LeagueSeason leagueSeason = mLeagueSesons.get(0);
+                AppConfig appConfig = AppConfig.getInstance();
+                List<RemoteConfigData.League> leagues = appConfig.getLeagues();
+                int leagueId = 0;
+                int seasonId = 0;
+                String name = "";
+                if(!leagues.isEmpty()) {
+                    RemoteConfigData.League league = leagues.get(0);
+                    leagueId = league.getId();
+                    seasonId = league.getSeason();
+                    name = league.getName();
+                }
                 Bundle args = new Bundle();
-                args.putInt("league_id", leagueSeason.getSofaLeagueId());
-                args.putInt("season_id", leagueSeason.getSofaId());
-                args.putString("league_name", leagueSeason.getLeagueName());
-                */
-                Bundle args = new Bundle();
-                args.putInt("league_id", 17);
-                args.putInt("season_id", 17359);
-                args.putString("league_name", "Premier League");
+                args.putInt("league_id", leagueId);
+                args.putInt("season_id", seasonId);
+                args.putString("league_name", name);
                 switchFragment(TAG_FRAGMENT_LEAGUE, args);
                 break;
             case R.id.rlSetting:
@@ -204,10 +178,6 @@ public class MainActivity extends BaseActivity
             if (fragment == null) {
                 fragment = new HomeFragment();
             }
-        } else if (TAG_FRAGMENT_TOPIC.equals(tag)) {
-            if (fragment == null) {
-                //fragment = new NewsTopicFragment();
-            }
         } else if (TAG_FRAGMENT_LEAGUE.equals(tag)) {
             if (fragment == null) {
                 fragment = LeagueFragment.newInstance(args);
@@ -217,10 +187,6 @@ public class MainActivity extends BaseActivity
         } else if (TAG_FRAGMENT_SQUAD.equals(tag)) {
             if (fragment == null) {
                 fragment = new TeamFragment();
-            }
-        } else if (TAG_FRAGMENT_PROFILE.equals(tag)) {
-            if (fragment == null) {
-                fragment = new UserFragment();
             }
         } else if (TAG_FRAGMENT_SETTING.equals(tag)) {
             if (fragment == null) {
@@ -254,14 +220,6 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ReceiverHelper.unregisterReceiver(this, mUserProfileChangedReceiver);
-        mSeasonLeagueTeamPresenter.detachView();
-    }
-
-    @Override
-    public void showSeasonLeagueTeam(List<LeagueSeason> data) {
-        mLeagueSesons.clear();
-        mLeagueSesons.addAll(data);
     }
 
     @Override
@@ -272,17 +230,6 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onStop() {
         super.onStop();
-        registerEventBus(false);
     }
 
-    private void registerEventBus(boolean isRegister) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            return;
-        }
-        if (isRegister) {
-            EventBus.getDefault().register(this);
-        } else {
-            EventBus.getDefault().unregister(this);
-        }
-    }
 }

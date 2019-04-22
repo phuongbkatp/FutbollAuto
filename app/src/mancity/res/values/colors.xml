@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="light_theme_color_primary">@color/colorPrimary</color>
+    <color name="light_theme_color_primary_dark">@color/colorPrimaryDark</color>
+
+    <color name="colorPrimary">#449ee2</color>
+    <color name="colorPrimaryDark">#449ee2</color>
+
+    <color name="colorAccent">#2979FF</color>
+    <color name="player_value">#A50044</color>
+    <color name="tab_team_fragment_color">@color/colorPrimary</color>
+    <color name="tab_team_fragment_color_text">#EEBB00</color>
+
+    <color name="colorBgSettingGray">#f0eff4</color>
+
+</resources>

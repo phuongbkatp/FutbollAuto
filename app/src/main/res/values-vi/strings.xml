@@ -49,7 +49,9 @@
     <string name="video_tab">VIDEO</string>
     <string name="comment_tab">BÌNH LUẬN</string>
     <string name="lineup_tab">ĐỘI HÌNH</string>
-    <string name="all_news">TẤT CẢ</string>
+    <string name="all_news">Man United</string>
+    <string name="trend_news">Quốc Tế</string>
+    <string name="video_news">Trong Nước</string>
     <string name="about_match">TRẬN ĐẤU</string>
     <string name="expert_news">BÌNH LUẬN</string>
     <string name="red_devil_menu">Thông tin đội bóng</string>
@@ -111,6 +113,7 @@
     <string name="welcome">WELCOME</string>
     <string name="english">English</string>
     <string name="vietnamese">Vietnamese</string>
+    <string name="french">French</string>
     <string name="coach_detail_pref_formation_text">Sơ đồ yêu thích</string>
     <string name="coach_detail_matches_text">Số trận</string>
     <string name="coach_detail_points_match_text">Điểm/Trận</string>
@@ -170,8 +173,10 @@
     <string name="no_line_up">Đội hình thi đấu sẽ được cập nhật trước trận đấu 1 tiếng</string>
     <string name="no_stats">Cập nhật khi trận đấu diễn ra</string>
     <string name="update_info_btn">"Cập nhật thông tin"</string>
-    <string name="language_english">Tiếng Anh</string>
+    <string name="language_english">English</string>
     <string name="language_vietnam">Tiếng Việt</string>
+    <string name="language_french">French</string>
+    <string name="language_thai">Thai</string>
     <string name="select_language">Lựa chọn ngôn ngữ</string>
     <string name="privacy_policy">Chính sách riêng tư</string>
     <string name="cancel_match">Bị huỷ</string>
@@ -196,4 +201,7 @@
     <string name="disclaimer_title">Bạn đang thoát %s</string>
     <string name="disclaimer_text_1">Website bên thứ ba bạn chuẩn bị xem không thuộc sở hữu của %s</string>
     <string name="disclaimer_text_2">%s không chịu trách nhiệm về bất cứ nội dung, như các nội dung nghe-nhìn, mà bạn thấy trên website bên thứ ba</string>
+    <string name="disclaimer_text_full">Website bên thứ ba bạn chuẩn bị xem không thuộc sở hữu của %s. %s không chịu trách nhiệm về bất cứ nội dung, như các nội dung nghe-nhìn, mà bạn thấy trên website bên thứ ba</string>
+    <string name="share_content">Everything about Manchester United FC in your hands now. Link: http://play.google.com/store/apps/details?id=</string>
+
 </resources>

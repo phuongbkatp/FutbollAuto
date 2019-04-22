@@ -1,4 +1,6 @@
 /build
 /manutd
 /barca
+/barcavn
 *.apk
+google-services.json

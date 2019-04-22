@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="setting_language_texts">
+        <item>@string/language_english</item>
+        <item>@string/language_vietnam</item>
+    </string-array>
+    <string-array name="setting_language_values" translatable="false">
+        <item>en</item>
+        <item>vi</item>
+    </string-array>
+</resources>

@@ -9,14 +9,14 @@ import android.widget.TextView;
 
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseListAdapter;
+import com.appian.manchesterunitednews.data.app.RemoteConfigData;
 import com.appian.manchesterunitednews.util.ImageLoader;
-import com.appnet.android.football.fbvn.data.LeagueSeason;
 
 import java.util.List;
 
-public class NavigationListAdapter extends BaseListAdapter<LeagueSeason> {
+public class NavigationListAdapter extends BaseListAdapter<RemoteConfigData.League> {
 
-    public NavigationListAdapter(Context context, List<LeagueSeason> data) {
+    public NavigationListAdapter(Context context, List<RemoteConfigData.League> data) {
         super(context, data);
     }
 
@@ -32,10 +32,10 @@ public class NavigationListAdapter extends BaseListAdapter<LeagueSeason> {
         } else {
             holder = (Holder) view.getTag();
         }
-        LeagueSeason item = mData.get(i);
-        ImageLoader.displayImage(item.getLeagueLogo(), holder.icon);
+        RemoteConfigData.League item = mData.get(i);
+        ImageLoader.displayImage("https://www.sofascore.com/u-tournament/"+item.getId()+"/logo", holder.icon);
         holder.icon.setColorFilter(ContextCompat.getColor(mContext, R.color.navigation_icon_color), android.graphics.PorterDuff.Mode.SRC_IN);
-        holder.title.setText(item.getLeagueName());
+        holder.title.setText(item.getName());
 
         return view;
     }

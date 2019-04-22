@@ -1,7 +1,6 @@
 package com.appian.manchesterunitednews.app;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,16 +18,10 @@ import com.appian.manchesterunitednews.app.match.BannerFragment;
 import com.appian.manchesterunitednews.app.news.NewsFragment;
 import com.appian.manchesterunitednews.app.news.presenter.ListNewsPresenter;
 import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
-import com.appian.manchesterunitednews.network.ConnectivityEvent;
 import com.appian.manchesterunitednews.network.NetworkHelper;
 import com.appnet.android.football.sofa.data.Event;
 import com.appnet.android.football.sofa.data.Tournament;
 import com.viewpagerindicator.CirclePageIndicator;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,12 +42,12 @@ public class HomeFragment extends BaseFragment implements TeamLastNextMatchView 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(getContext());
-        mTeamId = appConfig.getTeamSofaId();
+        AppConfig appConfig = AppConfig.getInstance();
+        mTeamId = appConfig.getTeamId(getContext());
         List<Fragment> fList = new ArrayList<>();
-        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_APP, 0));
-        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_TRENDING, 0));
-        fList.add(NewsFragment.newInstance(appConfig.getAppId(), ListNewsPresenter.TYPE_VIDEO, 0));
+        fList.add(NewsFragment.newInstance(ListNewsPresenter.TYPE_APP));
+        fList.add(NewsFragment.newInstance(ListNewsPresenter.TYPE_TRENDING));
+        fList.add(NewsFragment.newInstance(ListNewsPresenter.TYPE_VIDEO));
         mNewsAdapterViewPager = new AdapterViewPager(getChildFragmentManager(), fList);
         mLastNextFragments = new ArrayList<>();
         mLastNextAdapterViewPager = new AdapterViewPager(getChildFragmentManager(), mLastNextFragments);
@@ -85,7 +78,6 @@ public class HomeFragment extends BaseFragment implements TeamLastNextMatchView 
         ViewPager newsViewPager = view.findViewById(R.id.viewpager);
 
         Context context = getContext();
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(context);
         newsViewPager.setAdapter(mNewsAdapterViewPager);
         newsViewPager.setOffscreenPageLimit(3);
 
@@ -135,16 +127,7 @@ public class HomeFragment extends BaseFragment implements TeamLastNextMatchView 
     @Override
     public void onStart() {
         super.onStart();
-        registerEventBus(true);
         checkInternetConnection(NetworkHelper.isNetworkAvailable(getContext()));
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(ConnectivityEvent event) {
-        if (event.isConnected()) {
-            loadTeamLastNext();
-        }
-        checkInternetConnection(event.isConnected());
     }
 
     @Override
@@ -165,6 +148,7 @@ public class HomeFragment extends BaseFragment implements TeamLastNextMatchView 
         }
         mLastNextAdapterViewPager.notifyDataSetChanged();
         int initPosition = 0;
+        long currentTime = System.currentTimeMillis();
         for (int i = 0; i < data.size(); i++) {
             Event event = data.get(i);
             String type = "";
@@ -173,6 +157,10 @@ public class HomeFragment extends BaseFragment implements TeamLastNextMatchView 
             }
             if (Constant.SOFA_MATCH_STATUS_IN_PROGRESS.equalsIgnoreCase(type)) {
                 initPosition = i;
+                break;
+            }
+            if(Constant.SOFA_MATCH_STATUS_FINISHED.equalsIgnoreCase(type) && currentTime - event.getStartTimestamp() < 86400000) {
+                initPosition = i; // Latest finished match.
                 break;
             }
             if (Constant.SOFA_MATCH_STATUS_NOT_STARTED.equalsIgnoreCase(type)) {
@@ -191,20 +179,4 @@ public class HomeFragment extends BaseFragment implements TeamLastNextMatchView 
         mViewNoConnectivity.setVisibility(visible);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        registerEventBus(false);
-    }
-
-    private void registerEventBus(boolean isRegister) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            return;
-        }
-        if (isRegister) {
-            EventBus.getDefault().register(this);
-        } else {
-            EventBus.getDefault().unregister(this);
-        }
-    }
 }

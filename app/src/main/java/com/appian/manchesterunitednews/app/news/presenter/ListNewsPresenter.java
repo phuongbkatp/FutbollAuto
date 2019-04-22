@@ -45,7 +45,7 @@ public class ListNewsPresenter extends BasePresenter<ListNewsView> implements On
                 mInteractor.loadNews(this, team, "top", language);
                 break;
             case TYPE_VIDEO:
-                mInteractor.loadNews(this, team, "video", language);
+                mInteractor.loadNews(this, team, "related", language);
                 break;
         }
     }

@@ -1,10 +1,10 @@
 package com.appian.manchesterunitednews.app.news;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,50 +12,50 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.appian.manchesterunitednews.Constant;
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseFragment;
 import com.appian.manchesterunitednews.app.detailnews.DetailArticleActivity;
 import com.appian.manchesterunitednews.app.news.presenter.ListNewsPresenter;
 import com.appian.manchesterunitednews.app.news.view.ListNewsView;
 import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
 import com.appian.manchesterunitednews.data.app.Language;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
-import com.appian.manchesterunitednews.util.CustomDialogFragment;
 import com.appian.manchesterunitednews.util.EndlessRecyclerViewScrollListener;
+import com.appian.manchesterunitednews.util.EventHelper;
 import com.appian.manchesterunitednews.util.ItemClickSupport;
 import com.appian.manchesterunitednews.util.SimpleDividerItemDecoration;
-import com.appnet.android.football.fbvn.data.News;
 import com.appnet.android.football.fbvn.data.NewsAuto;
 
 import java.util.List;
 
 public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, ListNewsView {
-    private static final int LIMIT_NEWS = 6;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private LinearLayout mLlNoData;
     private ContentLoadingProgressBar mLoadingView;
     private NewsRecycleAdapter mNewsAdapter;
 
     private int mNewsType = 0;
-    private int mTypeId = 0;
     private int mCurrentPage = 1;
     private int mStartingPage = 1;
     private String mLanguage;
     private String mTeam;
 
-    private int mAppId = 0;
-
     private ListNewsPresenter mListNewsPresenter;
     private EndlessRecyclerViewScrollListener mOnLoadMoreListener;
-    CustomDialogFragment mVideoAlertDialog;
 
     public static NewsFragment newInstance(int appId, int type, int id) {
         Bundle args = new Bundle();
         args.putInt("type", type);
         args.putInt("id", id);
         args.putInt("appId", appId);
+        NewsFragment fragment = new NewsFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static NewsFragment newInstance(int type) {
+        Bundle args = new Bundle();
+        args.putInt("type", type);
         NewsFragment fragment = new NewsFragment();
         fragment.setArguments(args);
         return fragment;
@@ -68,20 +68,23 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppConfig config = AppConfigManager.getInstance().getAppConfig(getContext());
+
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        AppConfig config = AppConfig.getInstance();
         mTeam = config.getAppKey();
-        mLanguage = AppConfigManager.getInstance().getLanguage(getContext());
+        mLanguage = Language.getLanguage(context);
         mCurrentPage = mStartingPage;
-        mNewsAdapter = new NewsRecycleAdapter(getContext(), config.getFbAdsNative1());
+        mNewsAdapter = new NewsRecycleAdapter(getContext(), context.getResources().getString(R.string.facebook_ads_list_news_feed), 5);
         Bundle agrs = getArguments();
         if (agrs != null) {
             mNewsType = agrs.getInt("type");
-            mTypeId = agrs.getInt("id");
-            mAppId = agrs.getInt("appId");
         }
         mListNewsPresenter = new ListNewsPresenter(new NewsInteractor());
         mListNewsPresenter.attachView(this);
-        loadNews(mTeam, mLanguage);
     }
 
     @Override
@@ -119,6 +122,8 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         };
         lvNews.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
         lvNews.addOnScrollListener(mOnLoadMoreListener);
+        loadNews(mTeam, mLanguage);
+        mNewsAdapter.setStepAds(6);
         mNewsAdapter.loadAd();
     }
 
@@ -127,7 +132,20 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         Intent intent = new Intent(this.getActivity(), DetailArticleActivity.class);
         intent.putExtra(DetailArticleActivity.LINK, link);
         startActivity(intent);
+        logClickItemEvent();
+    }
 
+    private void logClickItemEvent() {
+        String category = "latest";
+        if(mNewsType == ListNewsPresenter.TYPE_TRENDING) {
+            category = "top";
+        } else if(mNewsType == ListNewsPresenter.TYPE_VIDEO) {
+            category = "related";
+        }
+        Bundle bundle = new Bundle();
+        bundle.putString("category", category);
+        bundle.putString("lang", Language.getLanguage(getContext()));
+        EventHelper.log(getContext(), EventHelper.EVENT_TAP_NEWS_DETAIL, bundle);
     }
 
     @Override
@@ -166,14 +184,6 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void onLoadListNewsFail() {
         showLoading(false);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (mVideoAlertDialog != null) {
-            mVideoAlertDialog.dismiss();
-        }
     }
 
     @Override

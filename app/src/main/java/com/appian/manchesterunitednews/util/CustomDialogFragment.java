@@ -3,6 +3,7 @@ package com.appian.manchesterunitednews.util;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
@@ -15,20 +16,19 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.appian.manchesterunitednews.R;
-import com.appian.manchesterunitednews.app.match.videohighlight.VideoActivity;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class CustomDialogFragment extends DialogFragment {
-    private int mId;
+    private String mLink;
     private static final int AUTO_DISMISS_MILLIS = 6000;
     private CountDownTimer mTimer;
 
-    public static CustomDialogFragment newInstance(int id) {
+    public static CustomDialogFragment newInstance(String link) {
         CustomDialogFragment frg = new CustomDialogFragment();
         Bundle args = new Bundle();
-        args.putInt("id", id);
+        args.putString("link", link);
         frg.setArguments(args);
         return frg;
     }
@@ -52,14 +52,14 @@ public class CustomDialogFragment extends DialogFragment {
         final TextView mCountDownText = rootView.findViewById(R.id.countdownTxt);
         Bundle args = getArguments();
         if(args != null) {
-            mId = args.getInt("id", 0);
+            mLink = args.getString("link");
         }
         rootView.findViewById(R.id.btn_watch_video).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mTimer.cancel();
-                Intent intent = new Intent(getContext(), VideoActivity.class);
-                intent.putExtra("id", mId);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(mLink));
                 startActivity(intent);
             }
         });
@@ -73,8 +73,8 @@ public class CustomDialogFragment extends DialogFragment {
             }
             @Override
             public void onFinish() {
-                Intent intent = new Intent(getContext(), VideoActivity.class);
-                intent.putExtra("id", mId);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(mLink));
                 startActivity(intent);
             }
         }.start();

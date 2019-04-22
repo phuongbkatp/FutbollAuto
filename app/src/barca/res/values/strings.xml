@@ -1,3 +1,4 @@
 <resources>
 	<string name="app_name">Barcelona News</string>
+	<string name="all_news">Barcelona</string>
 </resources>

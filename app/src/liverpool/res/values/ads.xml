@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="facebook_app_id" translatable="false">794705967548887</string>
+    <string name="facebook_ads_list_news_feed" translatable="false">794705967548887_794706304215520</string>
+    <string name="facebook_ads_match_detail" translatable="false">794705967548887_794711300881687</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-1081577958380143~5212607501</string>
+    <string name="admob_interstitial" translatable="false">ca-app-pub-1081577958380143/6142545797</string>
+    <string name="admob_match_detail_banner" translatable="false">ca-app-pub-1081577958380143/5286304285</string>
+    <string name="admob_news_detail_banner" translatable="false">ca-app-pub-1081577958380143/2735328413</string>
+</resources>

@@ -9,62 +9,34 @@ import com.appian.manchesterunitednews.Constant;
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.detailnews.DetailArticleActivity;
 import com.appian.manchesterunitednews.app.match.MatchActivity;
-import com.appian.manchesterunitednews.app.match.videohighlight.VideoActivity;
 
 import java.util.Map;
 
 public class NotificationFactory {
 
     private static boolean handleNewsNotification(Context context, Bundle data) {
-        int id;
-        try {
-            id = Integer.parseInt(data.getString("id"));
-        } catch (NumberFormatException e) {
-            id = 0;
-        }
-        // Video type
-        if("video".equals(data.getString("news_type"))) {
-            Intent intent = new Intent(context, VideoActivity.class);
-            intent.putExtra("id", id);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-        } else {
-            int[] ids = {id};
-            Intent intent = new Intent(context, DetailArticleActivity.class);
-            //intent.putExtra(DetailArticleActivity.EXTRA_NEWS_LIST_ID, ids);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-        }
+        String link = data.getString("link");
+        Intent intent = new Intent(context, DetailArticleActivity.class);
+        intent.putExtra("link", link);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
         return true;
     }
 
     private static NotificationProvider createNewsNotification(Context context, Map<String, String> data) {
-        int id;
-        try {
-            id = Integer.parseInt(data.get("id"));
-        } catch (NumberFormatException e) {
-            id = 0;
-        }
+        String link = data.get("link");
         String title = data.get("title");
-        String newsType = data.get("news_type");
-        return createNewsNotification(context, id, title, newsType);
+        return createNewsNotification(context, link, title);
     }
 
-    private static NotificationProvider createNewsNotification(Context context, int id, String title, String newsType) {
-        int[] ids = {id};
+    private static NotificationProvider createNewsNotification(Context context, String link, String title) {
         Resources res = context.getResources();
         NotificationProvider notification = new NotificationProvider(context);
-        if("video".equals(newsType)) {
-            notification.setTitle(res.getString(R.string.notification_video));
-            notification.putExtra("id", id);
-            notification.setClass(VideoActivity.class);
-        } else {
-            //notification.putExtra(DetailArticleActivity.EXTRA_NEWS_LIST_ID, ids);
-            notification.setTitle(res.getString(R.string.notification_news));
-            notification.setClass(DetailArticleActivity.class);
-        }
+        notification.setTitle(res.getString(R.string.notification_news));
+        notification.putExtra("link", link);
+        notification.setClass(DetailArticleActivity.class);
         notification.setText(title);
-        notification.setId(id);
+        notification.setId(0);
         return notification;
     }
 
@@ -77,7 +49,7 @@ public class NotificationFactory {
         }
         Intent intent = new Intent(context, MatchActivity.class);
         intent.putExtra(Constant.KEY_SOFA_MATCH_ID, id);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
         return true;
     }

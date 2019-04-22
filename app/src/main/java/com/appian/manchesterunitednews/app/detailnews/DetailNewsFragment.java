@@ -1,42 +1,40 @@
 package com.appian.manchesterunitednews.app.detailnews;
 
-import android.media.MediaPlayer;
-import android.net.Uri;
-import android.support.v4.widget.ContentLoadingProgressBar;
-import android.widget.ImageButton;
-import android.widget.MediaController;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.ContentLoadingProgressBar;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseStateFragment;
 import com.appian.manchesterunitednews.app.comment.CommentsAdapter;
 import com.appian.manchesterunitednews.app.detailnews.presenter.DetailNewsPresenter;
 import com.appian.manchesterunitednews.app.detailnews.view.DetailNewsView;
+import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
-import com.appian.manchesterunitednews.util.CustomImageLayout;
-import com.appian.manchesterunitednews.util.CustomTableLayout;
-import com.appian.manchesterunitednews.util.CustomTextView;
 import com.appian.manchesterunitednews.util.ImageLoader;
 import com.appian.manchesterunitednews.util.Utils;
+import com.appnet.android.ads.OnAdLoadListener;
+import com.appnet.android.ads.admob.BannerAdMob;
 import com.appnet.android.football.fbvn.data.Cell;
 import com.appnet.android.football.fbvn.data.ColumnHeader;
-import com.appian.manchesterunitednews.util.MyTableViewAdapter;
-import com.appnet.android.football.fbvn.data.RowHeader;
 import com.appnet.android.football.fbvn.data.ContentDetailNewsAuto;
 import com.appnet.android.football.fbvn.data.DetailNewsAuto;
-import com.evrencoskun.tableview.TableView;
+import com.appnet.android.football.fbvn.data.RowHeader;
+import com.bumptech.glide.Glide;
+import com.marcinmoskala.videoplayview.VideoPlayView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DetailNewsFragment extends BaseStateFragment implements DetailNewsView {
@@ -44,12 +42,13 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
     private TextView mTvDescription;
     private TextView mTvSource;
     private ImageView mImgThumbnail;
-    private VideoView mContentVideo;
+    private VideoPlayView mContentVideo;
     private RelativeLayout mRlVideo;
     private ProgressBar progressBar;
     private TextView mTvTimeNews;
-    private LinearLayout ll_content;
+    private RecyclerView ll_content;
     private ContentLoadingProgressBar mLoadingView;
+    private ViewGroup mAdViewContainer;
 
     private List<RowHeader> mRowHeaderList;
     private List<ColumnHeader> mColumnHeaderList;
@@ -58,12 +57,12 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
     private String link;
     private DetailNewsAuto mNews;
 
+    private DetailNewsRecycleAdapter mDetailNewsAdapter;
     private DetailNewsPresenter mPresenter;
 
     private CommentsAdapter mAdapter;
-    private MediaController mediacontroller;
-    private boolean isPlaying = true;
-    private ImageButton playPause;
+
+    private BannerAdMob mBannerAdMob;
 
     @Override
     public void showNews(DetailNewsAuto news) {
@@ -105,31 +104,46 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         fillData();
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mBannerAdMob = new BannerAdMob(context, AppConfig.getInstance().getAdbMobNewsDetail(context));
+        Utils.addAdmobTestDevice(mBannerAdMob);
+    }
+
     private void initView(View view) {
         mTvTitle = view.findViewById(R.id.tv_news_detail_title);
         mTvDescription = view.findViewById(R.id.tv_news_detail_description);
         mTvSource = view.findViewById(R.id.tv_news_detail_source);
         mImgThumbnail = view.findViewById(R.id.img_news_detail_thumbnail);
         mContentVideo = view.findViewById(R.id.content_video);
-        playPause = view.findViewById(R.id.play_or_pause);
         mLoadingView = view.findViewById(R.id.loading_view);
 
-        playPause.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                if (isPlaying) {
-                    playPause.setSelected(true);
-                    mContentVideo.pause();
-                } else {
-                    playPause.setSelected(false);
-                    mContentVideo.start();
-                }
-                isPlaying = !isPlaying;
-            }
-        });
         mRlVideo = view.findViewById(R.id.rl_video);
-        progressBar = view.findViewById(R.id.progrss);
         mTvTimeNews = view.findViewById(R.id.tv_time_news);
         ll_content = view.findViewById(R.id.ll_content);
+        mAdViewContainer = view.findViewById(R.id.admob_banner_container);
+
+        mDetailNewsAdapter = new DetailNewsRecycleAdapter(getContext(), "");
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        ll_content.setLayoutManager(layoutManager);
+        ll_content.setNestedScrollingEnabled(false);
+        ll_content.setAdapter(mDetailNewsAdapter);
+      //  mDetailNewsAdapter.loadAd();
+        mBannerAdMob.addView(mAdViewContainer);
+        mBannerAdMob.setOnLoadListener(new OnAdLoadListener() {
+            @Override
+            public void onAdLoaded() {
+                mAdViewContainer.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAdFailed() {
+                mAdViewContainer.setVisibility(View.GONE);
+            }
+        });
+        mBannerAdMob.loadAd();
     }
 
     private void fillData() {
@@ -151,7 +165,8 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         String url = mNews.getMetaDetailNewsAuto().getVideo();
         if (!url.equals("")) {
             mRlVideo.setVisibility(View.VISIBLE);
-            playVideo(url);
+            mContentVideo.setVideoUrl(url);
+            Glide.with(this).load(mNews.getMetaDetailNewsAuto().getImage()).into(mContentVideo.getImageView());
         } else {
             mRlVideo.setVisibility(View.GONE);
         }
@@ -160,27 +175,27 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         if (listContent.size() == 0) {
             return;
         }
-        for (ContentDetailNewsAuto item : listContent) {
-            if (item.getType() != null && item.getType().equals("text")) {
-                LinearLayout textView = new CustomTextView(getContext(), item.getText(), item.isHead());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                ll_content.addView(textView, params);
-            } else if (item.getType() != null && item.getType().equals("image")) {
-                if (item.getLinkImg() == null) {
-                    continue;
-                }
-                CustomImageLayout imgLayout = new CustomImageLayout(getContext(), item.getLinkImg(), item.getText());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                ll_content.addView(imgLayout, params);
-                //ll_content.addView(new RecyclerView(getContext()));
-            } else if (item.getType() != null && item.getType().equals("table")) {
-                mColumnHeaderList = item.getRowHeaderList();
-                mCellList = item.getCellList();
-                CustomTableLayout tableLayout = new CustomTableLayout(getContext(), item.getText(), mColumnHeaderList, mCellList);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                ll_content.addView(tableLayout, params);
+        // Multi video
+        List<ContentDetailNewsAuto> newListContent = new ArrayList<>();
+        for(ContentDetailNewsAuto item : listContent) {
+            if(!item.getType().equalsIgnoreCase("video")) {
+                newListContent.add(item);
+                continue;
+            }
+            String link = item.getLinkImg();
+            if(TextUtils.isEmpty(link)) {
+                continue;
+            }
+            String[] links = link.split(",");
+            for(String src : links) {
+                ContentDetailNewsAuto newItem = new ContentDetailNewsAuto();
+                newItem.setLinkImg(src);
+                newItem.setType(item.getType());
+                newItem.setText(item.getText());
+                newListContent.add(newItem);
             }
         }
+        mDetailNewsAdapter.updateData(newListContent);
     }
 
     @Override
@@ -189,20 +204,4 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         mPresenter.detachView();
     }
 
-    private void playVideo(String uriPath) {
-        mediacontroller = new MediaController(getContext());
-        mediacontroller.setAnchorView(mContentVideo);
-        Uri uri = Uri.parse(uriPath);
-
-        mContentVideo.setVideoURI(uri);
-        progressBar.setVisibility(View.VISIBLE);
-        mContentVideo.start();
-
-        mContentVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            // Close the progress bar and play the video
-            public void onPrepared(MediaPlayer mp) {
-                progressBar.setVisibility(View.GONE);
-            }
-        });
-    }
 }

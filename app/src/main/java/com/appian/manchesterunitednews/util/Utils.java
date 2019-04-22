@@ -7,8 +7,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 import com.appian.manchesterunitednews.R;
-import com.appian.manchesterunitednews.data.app.AppConfig;
-import com.appian.manchesterunitednews.data.app.AppConfigManager;
+import com.appnet.android.ads.admob.AbstractAdMob;
 import com.google.android.gms.ads.MobileAds;
 
 import java.text.ParseException;
@@ -18,6 +17,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public final class Utils {
+    private static final String[] ADMOB_TEST_ID = {"779DF624C32BC4E7F95BD786CC47F69D", "04ACC18D19FD79C8D2C145D8F4AA969E", "6687c922-a9f1-407d-9333-be26b64fbd2b"};
+
     private static final String DATE_TIME_FORMAT_TZ = "yyyy-MM-dd'T'HH:mm:ssX";
     private static final String D_D_M_FORMAT = "EEE, dd-MM";
     private static final String HH_MM_FORMAT = "HH:mm";
@@ -221,7 +222,12 @@ public final class Utils {
     }
 
     public static void initAdmob(Context context) {
-        AppConfig appConfig = AppConfigManager.getInstance().getAppConfig(context);
-        MobileAds.initialize(context, appConfig.getAdmobAppId());
+        MobileAds.initialize(context, context.getString(R.string.admob_app_id));
+    }
+
+    public static void addAdmobTestDevice(AbstractAdMob adMob) {
+        for(String id : ADMOB_TEST_ID) {
+            adMob.addTestDevice(id);
+        }
     }
 }
