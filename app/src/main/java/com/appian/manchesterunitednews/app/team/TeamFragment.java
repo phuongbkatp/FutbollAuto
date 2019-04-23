@@ -10,28 +10,42 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseStateFragment;
 import com.appian.manchesterunitednews.app.BaseStateFragmentPagerAdapter;
 import com.appian.manchesterunitednews.app.ToolbarViewListener;
+import com.appian.manchesterunitednews.util.Utils;
+import com.appnet.android.ads.OnAdLoadListener;
+import com.appnet.android.ads.admob.BannerAdMob;
 
 public class TeamFragment extends BaseStateFragment {
     private MatchPagerAdapter mAdapter;
     private ToolbarViewListener mToolBar;
 
+    private int mTeamId = 0;
 
-    public static TeamFragment newInstance(Bundle args) {
+    private ViewGroup mAdViewContainer;
+    private BannerAdMob mBannerAdMob;
+
+    public static TeamFragment newInstance(int teamId) {
         TeamFragment fragment = new TeamFragment();
+        Bundle args = new Bundle();
+        args.putInt("team_id", teamId);
         fragment.setArguments(args);
         return fragment;
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FragmentManager fm = getChildFragmentManager();
         mAdapter = new MatchPagerAdapter(fm);
+        if(getArguments() != null) {
+            mTeamId = getArguments().getInt("team_id");
+        }
     }
 
     @Override
@@ -52,7 +66,30 @@ public class TeamFragment extends BaseStateFragment {
         }
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         updateTitle();
+        initAds(view);
     }
+
+    private void initAds(View view) {
+        Context context = getContext();
+        if(context == null) {
+            return;
+        }
+        mAdViewContainer = view.findViewById(R.id.admob_banner_container);
+        mBannerAdMob.addView(mAdViewContainer);
+        mBannerAdMob.setOnLoadListener(new OnAdLoadListener() {
+            @Override
+            public void onAdLoaded() {
+                mAdViewContainer.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAdFailed() {
+                mAdViewContainer.setVisibility(View.GONE);
+            }
+        });
+        mBannerAdMob.loadAd();
+    }
+
 
     @Override
     public void onResume() {
@@ -74,7 +111,7 @@ public class TeamFragment extends BaseStateFragment {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new ClubFragment();
+                    return ClubFragment.newInstance(mTeamId);
                 case 1:
                     return new SquadFragment();
             }
@@ -97,6 +134,8 @@ public class TeamFragment extends BaseStateFragment {
         if(context instanceof ToolbarViewListener) {
             mToolBar = (ToolbarViewListener) context;
         }
+        mBannerAdMob = new BannerAdMob(context, context.getString(R.string.admob_match_detail_banner));
+        Utils.addAdmobTestDevice(mBannerAdMob);
     }
 
     private void updateTitle() {

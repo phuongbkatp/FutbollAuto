@@ -1,5 +1,6 @@
 package com.appian.manchesterunitednews.app.coach;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,11 +16,14 @@ import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseStateFragment;
 import com.appian.manchesterunitednews.app.coach.presenter.CoachDetailPresenter;
 import com.appian.manchesterunitednews.app.coach.view.CoachDetailView;
+import com.appian.manchesterunitednews.app.team.TeamDetailsActivity;
 import com.appian.manchesterunitednews.util.ImageLoader;
+import com.appian.manchesterunitednews.util.ItemClickSupport;
 import com.appian.manchesterunitednews.util.Utils;
 import com.appian.manchesterunitednews.util.ViewHelper;
 import com.appnet.android.football.sofa.data.GeneralInfo;
 import com.appnet.android.football.sofa.data.Manager;
+import com.appnet.android.football.sofa.data.ManagerCareer;
 import com.appnet.android.football.sofa.data.ManagerPerformance;
 import com.appnet.android.football.sofa.data.Team;
 import com.appnet.android.football.sofa.helper.FlagHelper;
@@ -141,11 +145,31 @@ public class CoachDetailFragment extends BaseStateFragment implements CoachDetai
         if(coach.getCareerHistory() != null) {
             mAdapter.updateData(coach.getCareerHistory());
         }
+        ItemClickSupport.addTo(mRecyclerViewCareer).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                ManagerCareer item = mAdapter.getItem(position);
+                if(item == null) {
+                    return;
+                }
+                displayTeam(item.getTeam());
+            }
+        });
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         mCoachDetailPresenter.detachView();
+    }
+
+    private void displayTeam(Team team) {
+        if(team == null) {
+            return;
+        }
+        Intent intent = new Intent(getActivity(), TeamDetailsActivity.class);
+        intent.putExtra(Constant.EXTRA_KEY_TEAM_NAME, team.getName());
+        intent.putExtra(Constant.EXTRA_KEY_TEAM_ID, team.getId());
+        startActivity(intent);
     }
 }

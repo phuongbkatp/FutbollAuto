@@ -50,8 +50,10 @@
                     android:textStyle="bold"/>
 
                 <LinearLayout
+                    android:id="@+id/group_view_home_coach"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
                     android:layout_alignParentRight="true">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -135,9 +137,11 @@
                     android:textStyle="bold"/>
 
                 <LinearLayout
+                    android:id="@+id/group_view_away_coach"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:background="?android:attr/selectableItemBackground"
                     android:gravity="center">
 
                     <TextView

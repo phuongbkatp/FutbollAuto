@@ -52,6 +52,12 @@
             android:windowSoftInputMode="adjustPan"
             tools:targetApi="jelly_bean" />
         <activity
+            android:name=".app.team.TeamDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Light.NoActionBar" />
+
+        <activity
             android:name=".app.player.PlayerDetailsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"

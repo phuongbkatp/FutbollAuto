@@ -12,14 +12,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appian.manchesterunitednews.Constant;
@@ -34,6 +32,8 @@ import com.appian.manchesterunitednews.app.match.view.MatchDetailView;
 import com.appian.manchesterunitednews.app.match.view.MatchIncidentView;
 import com.appian.manchesterunitednews.app.match.view.MatchTeamPerformanceView;
 import com.appian.manchesterunitednews.app.match.view.MatchVideoView;
+import com.appian.manchesterunitednews.app.player.PlayerDetailsActivity;
+import com.appian.manchesterunitednews.app.team.TeamDetailsActivity;
 import com.appian.manchesterunitednews.data.app.AppConfig;
 import com.appian.manchesterunitednews.data.interactor.MatchInteractor;
 import com.appian.manchesterunitednews.data.interactor.NewsInteractor;
@@ -50,6 +50,7 @@ import com.appnet.android.football.sofa.data.BestPlayer;
 import com.appnet.android.football.sofa.data.Event;
 import com.appnet.android.football.sofa.data.Incident;
 import com.appnet.android.football.sofa.data.Performance;
+import com.appnet.android.football.sofa.data.Person;
 import com.appnet.android.football.sofa.data.Round;
 import com.appnet.android.football.sofa.data.Team;
 import com.appnet.android.football.sofa.data.Tournament;
@@ -76,7 +77,7 @@ public class MatchDetailFragment extends BaseLiveFragment implements
     private ImageView mImgHomeTeamLogo;
     private ImageView mImgAwayTeamLogo;
 
-    private RelativeLayout rlBestPlayer;
+    private ViewGroup rlBestPlayer;
     private RecyclerView mLvMatchEvents;
     private ImageView mImgHomeBestPlayer;
     private ImageView mImgAwayBestPlayer;
@@ -107,6 +108,11 @@ public class MatchDetailFragment extends BaseLiveFragment implements
     private MatchIncidentPresenter mMatchIncidentPresenter;
     private MatchTeamPerformancePresenter mMatchTeamPerformancePresenter;
     private MatchVideoPresenter mMatchVideoPresenter;
+
+    private Team mHomeTeam;
+    private Team mAwayTeam;
+    private Person mBestHomePlayer;
+    private Person mBestAwayPlayer;
 
     public static MatchDetailFragment newInstance(int matchId, StateFragment stateFragment) {
         Bundle args = new Bundle();
@@ -191,6 +197,55 @@ public class MatchDetailFragment extends BaseLiveFragment implements
         mThumbVideo = view.findViewById(R.id.img_thumb_news);
         mTvSourceVideo = view.findViewById(R.id.tv_source);
         mTvDateCreatedVideo = view.findViewById(R.id.tv_date);
+
+        View.OnClickListener btnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.group_view_home_team:
+                        displayTeam(mHomeTeam);
+                        break;
+                    case R.id.group_view_away_team:
+                        displayTeam(mAwayTeam);
+                        break;
+                    case R.id.group_view_home_best_player:
+                        displayPlayer(mBestHomePlayer);
+                        break;
+                    case R.id.group_view_away_best_player:
+                        displayPlayer(mBestAwayPlayer);
+                        break;
+                }
+            }
+        };
+        View viewHomeTeam = view.findViewById(R.id.group_view_home_team);
+        viewHomeTeam.setOnClickListener(btnClickListener);
+        View viewAwayTeam = view.findViewById(R.id.group_view_away_team);
+        viewAwayTeam.setOnClickListener(btnClickListener);
+        View viewHomeBestPlayer = view.findViewById(R.id.group_view_home_best_player);
+        viewHomeBestPlayer.setOnClickListener(btnClickListener);
+        View viewAwayBestPlayer = view.findViewById(R.id.group_view_away_best_player);
+        viewAwayBestPlayer.setOnClickListener(btnClickListener);
+
+    }
+
+    private void displayTeam(Team team) {
+        if(team == null) {
+            return;
+        }
+        Intent intent = new Intent(getActivity(), TeamDetailsActivity.class);
+        intent.putExtra(Constant.EXTRA_KEY_TEAM_NAME, team.getName());
+        intent.putExtra(Constant.EXTRA_KEY_TEAM_ID, team.getId());
+        startActivity(intent);
+    }
+
+    private void displayPlayer(Person player) {
+        if(player == null) {
+            return;
+        }
+        Intent intent = new Intent(getActivity(), PlayerDetailsActivity.class);
+        intent.putExtra(Constant.EXTRA_KEY_SOFA_PLAYER_ID, player.getId());
+        intent.putExtra(Constant.EXTRA_KEY_PLAYER_NAME, player.getName());
+        startActivity(intent);
     }
 
     private void initMvp() {
@@ -225,6 +280,8 @@ public class MatchDetailFragment extends BaseLiveFragment implements
         BestPlayer awayBestPlayer = event.getBestAwayTeamPlayer();
 
         if (homeBestPlayer != null && awayBestPlayer != null) {
+            mBestHomePlayer = homeBestPlayer.getPlayer();
+            mBestAwayPlayer = awayBestPlayer.getPlayer();
             ImageLoader.displayImage(SofaImageHelper.getSofaImgPlayer(homeBestPlayer.getPlayer().getId()),
                     mImgHomeBestPlayer);
             mTvHomeBestPlayer.setText(homeBestPlayer.getPlayer().getName());
@@ -346,6 +403,8 @@ public class MatchDetailFragment extends BaseLiveFragment implements
             mTvDate.setText(Utils.formatWeekTime(getContext(), event.getStartTimestamp()));
             mTvTime.setText(Utils.formatDateMonthYear(new Date(event.getStartTimestamp())));
             if (event.getHomeTeam() != null && event.getAwayTeam() != null) {
+                mHomeTeam = event.getHomeTeam();
+                mAwayTeam = event.getAwayTeam();
                 mTvHomeTeamName.setText(event.getHomeTeam().getShortName());
                 ImageLoader.displayImage(SofaImageHelper.getSofaImgTeam(event.getHomeTeam().getId()), mImgHomeTeamLogo);
                 mTvAwayTeamName.setText(event.getAwayTeam().getShortName());

@@ -39,4 +39,8 @@ public final class Constant {
 
     public static final String APP_BARCA_VN = "barcavn";
     public static final String APP_BARCA = "barca";
+
+    public static final String EXTRA_KEY_TEAM_NAME = "key_team_name";
+    public static final String EXTRA_KEY_TEAM_ID = "key_team_id";
+
 }

@@ -1,5 +1,6 @@
 package com.appian.manchesterunitednews.app.table;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,13 +10,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.appian.manchesterunitednews.Constant;
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseStateFragment;
 import com.appian.manchesterunitednews.app.StateFragment;
 import com.appian.manchesterunitednews.app.league.OnLeagueUpdatedListener;
 import com.appian.manchesterunitednews.app.table.presenter.LeagueStandingPresenter;
 import com.appian.manchesterunitednews.app.table.view.LeagueStandingView;
+import com.appian.manchesterunitednews.app.team.TeamDetailsActivity;
+import com.appian.manchesterunitednews.app.widget.SectionWrapper;
+import com.appian.manchesterunitednews.util.ItemClickSupport;
+import com.appnet.android.football.sofa.data.TableRow;
 import com.appnet.android.football.sofa.data.TableRowsData;
+import com.appnet.android.football.sofa.data.Team;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +82,16 @@ public class TableFragment extends BaseStateFragment implements SwipeRefreshLayo
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mTableAdapter);
         mEmptyDataView = view.findViewById(R.id.linEmpty);
+        ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                SectionWrapper<TableRowsSection, TableRow> wrapper = mTableAdapter.getItem(position);
+                if(wrapper.getChild() != null) {
+                    displayTeam(wrapper.getChild().getTeam());
+                }
+            }
+        });
+
         loadData();
     }
 
@@ -127,4 +144,12 @@ public class TableFragment extends BaseStateFragment implements SwipeRefreshLayo
             mRefreshLayout.setRefreshing(isLoading);
         }
     }
+
+    private void displayTeam(Team team) {
+        Intent intent = new Intent(getActivity(), TeamDetailsActivity.class);
+        intent.putExtra(Constant.EXTRA_KEY_TEAM_NAME, team.getName());
+        intent.putExtra(Constant.EXTRA_KEY_TEAM_ID, team.getId());
+        startActivity(intent);
+    }
+
 }
