@@ -123,7 +123,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         lvNews.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
         lvNews.addOnScrollListener(mOnLoadMoreListener);
         loadNews(mTeam, mLanguage);
-        mNewsAdapter.setStepAds(6);
+        mNewsAdapter.setStepAds(5);
         mNewsAdapter.loadAd();
     }
 

@@ -3,6 +3,7 @@
     <string name="facebook_app_id" translatable="false">357228641488054</string>
     <string name="facebook_ads_list_news_feed" translatable="false">357228641488054_357230154821236</string>
     <string name="facebook_ads_match_detail" translatable="false">357228641488054_357231411487777</string>
+    <string name="facebook_ads_news_detail" translatable="false">357228641488054_431740174036900</string>
     <string name="admob_app_id" translatable="false">ca-app-pub-1081577958380143~1428783589</string>
     <string name="admob_interstitial" translatable="false">ca-app-pub-1081577958380143/2219121074</string>
     <string name="admob_match_detail_banner" translatable="false">ca-app-pub-1081577958380143/9398772940</string>

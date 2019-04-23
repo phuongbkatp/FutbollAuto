@@ -7,6 +7,7 @@ import android.support.multidex.MultiDexApplication;
 import com.appian.manchesterunitednews.data.app.Language;
 import com.appian.manchesterunitednews.service.app.AppHelper;
 import com.appian.manchesterunitednews.util.FontsOverride;
+import com.appnet.android.ads.fb.FbAdHelper;
 
 public class MainApplication extends MultiDexApplication {
     private static MainApplication sInstance;
@@ -17,6 +18,7 @@ public class MainApplication extends MultiDexApplication {
         if(sInstance == null) {
             sInstance = this;
         }
+        FbAdHelper.initialize(this);
         new BackgroundTask().execute(getApplication());
     }
 

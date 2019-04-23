@@ -7,9 +7,8 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 import com.appian.manchesterunitednews.R;
-import com.applovin.sdk.AppLovinSdk;
 import com.appnet.android.ads.admob.AbstractAdMob;
-import com.google.android.gms.ads.MobileAds;
+import com.appnet.android.ads.admob.AdmobHelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -223,8 +222,7 @@ public final class Utils {
     }
 
     public static void initAdmob(Context context) {
-        MobileAds.initialize(context, context.getString(R.string.admob_app_id));
-        AppLovinSdk.initializeSdk(context);
+        AdmobHelper.initialize(context, context.getString(R.string.admob_app_id));
     }
 
     public static void addAdmobTestDevice(AbstractAdMob adMob) {
