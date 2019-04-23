@@ -14,7 +14,6 @@ import com.appian.manchesterunitednews.util.ImageLoader;
 import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.ads.widget.FbAdRecyclerAdapter;
 import com.appnet.android.football.fbvn.data.NewsAuto;
-import com.facebook.ads.AdError;
 
 class NewsRecycleAdapter extends FbAdRecyclerAdapter<NewsAuto> {
     private static final int SMALL_NEWS_VIEW_TYPE = 1;

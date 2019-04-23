@@ -186,7 +186,7 @@ public class MainActivity extends BaseActivity
             }
         } else if (TAG_FRAGMENT_SQUAD.equals(tag)) {
             if (fragment == null) {
-                fragment = new TeamFragment();
+                fragment = TeamFragment.newInstance(getResources().getInteger(R.integer.team_id));
             }
         } else if (TAG_FRAGMENT_SETTING.equals(tag)) {
             if (fragment == null) {

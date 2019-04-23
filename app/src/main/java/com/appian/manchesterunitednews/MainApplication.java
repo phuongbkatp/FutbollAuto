@@ -7,7 +7,7 @@ import android.support.multidex.MultiDexApplication;
 import com.appian.manchesterunitednews.data.app.Language;
 import com.appian.manchesterunitednews.service.app.AppHelper;
 import com.appian.manchesterunitednews.util.FontsOverride;
-import com.appian.manchesterunitednews.util.Utils;
+import com.appnet.android.ads.fb.FbAdHelper;
 
 public class MainApplication extends MultiDexApplication {
     private static MainApplication sInstance;
@@ -18,6 +18,7 @@ public class MainApplication extends MultiDexApplication {
         if(sInstance == null) {
             sInstance = this;
         }
+        FbAdHelper.initialize(this);
         new BackgroundTask().execute(getApplication());
     }
 
@@ -36,7 +37,6 @@ public class MainApplication extends MultiDexApplication {
         protected Void doInBackground(Context... contexts) {
             Context context = contexts[0];
             FontsOverride.setDefaultFont(context, "DEFAULT", "sfregular.otf");
-            Utils.initAdmob(context);
             AppHelper.initSubscribe(context);
             AppHelper.initRemoteConfig();
             return null;

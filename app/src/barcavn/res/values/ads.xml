@@ -2,7 +2,8 @@
 <resources>
     <string name="facebook_app_id" translatable="false">1068838976588894</string>
     <string name="facebook_ads_list_news_feed" translatable="false">1068838976588894_1068842176588574</string>
-    <string name="facebook_ads_match_detail" translatable="false">1068838976588894_1069215593217899</string>
+    <string name="facebook_ads_match_detail" translatable="false">1068838976588894_1367621590043963</string>
+    <string name="facebook_ads_news_detail" translatable="false">412898349243358_412917345908125</string>
     <string name="admob_app_id" translatable="false">ca-app-pub-1081577958380143~9784570074</string>
     <string name="admob_interstitial" translatable="false">ca-app-pub-1081577958380143/7415936345</string>
     <string name="admob_match_detail_banner" translatable="false">ca-app-pub-1081577958380143/8242411789</string>

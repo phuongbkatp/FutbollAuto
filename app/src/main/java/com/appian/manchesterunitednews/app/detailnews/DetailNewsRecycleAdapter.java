@@ -2,9 +2,7 @@ package com.appian.manchesterunitednews.app.detailnews;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.media.MediaMetadataRetriever;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,17 +13,10 @@ import android.widget.TextView;
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.util.ImageLoader;
 import com.appian.manchesterunitednews.util.PreviewVideoLoadingTask;
-import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.ads.widget.FbAdRecyclerAdapter;
 import com.appnet.android.football.fbvn.data.ContentDetailNewsAuto;
-import com.appnet.android.football.fbvn.data.DetailNewsAuto;
-import com.appnet.android.football.fbvn.data.NewsAuto;
 import com.bumptech.glide.Glide;
 import com.marcinmoskala.videoplayview.VideoPlayView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 class DetailNewsRecycleAdapter extends FbAdRecyclerAdapter<ContentDetailNewsAuto> {
     private static final int TEXT_VIEW_TYPE = 1;

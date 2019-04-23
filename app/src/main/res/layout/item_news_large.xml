@@ -9,7 +9,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_large_height">
+        android:layout_height="@dimen/item_large_height"
+        android:background="?android:attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/img_thumb_news"

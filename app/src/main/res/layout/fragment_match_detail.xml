@@ -45,10 +45,12 @@
 
 
                         <LinearLayout
+                            android:id="@+id/group_view_home_team"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:background="?android:attr/selectableItemBackground"
                             android:orientation="vertical">
 
                             <ImageView
@@ -194,10 +196,12 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/group_view_away_team"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:background="?android:attr/selectableItemBackground"
                             android:orientation="vertical">
 
                             <ImageView

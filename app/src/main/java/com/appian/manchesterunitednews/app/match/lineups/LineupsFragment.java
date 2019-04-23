@@ -1,5 +1,6 @@
 package com.appian.manchesterunitednews.app.match.lineups;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.appian.manchesterunitednews.Constant;
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseRecyclerViewAdapter;
 import com.appian.manchesterunitednews.app.StateFragment;
+import com.appian.manchesterunitednews.app.coach.CoachDetailsActivity;
 import com.appian.manchesterunitednews.app.match.BaseLiveFragment;
 import com.appian.manchesterunitednews.app.match.OnMatchUpdatedListener;
 import com.appian.manchesterunitednews.app.match.presenter.MatchLineupsPresenter;
@@ -24,6 +26,7 @@ import com.appian.manchesterunitednews.util.ImageLoader;
 import com.appian.manchesterunitednews.util.ViewHelper;
 import com.appnet.android.football.sofa.data.Event;
 import com.appnet.android.football.sofa.data.LineupsData;
+import com.appnet.android.football.sofa.data.Person;
 import com.appnet.android.football.sofa.helper.SofaImageHelper;
 
 import java.util.ArrayList;
@@ -63,6 +66,9 @@ public class LineupsFragment extends BaseLiveFragment implements OnMatchUpdatedL
     private LineupsData mLineupsData;
     private Event mMatchEvent;
     private int mMatchId;
+
+    private Person mHomeCoach;
+    private Person mAwayCoach;
 
     private MatchLineupsPresenter mMatchLineupsPresenter;
 
@@ -113,6 +119,25 @@ public class LineupsFragment extends BaseLiveFragment implements OnMatchUpdatedL
         mViewLineUp34 = view.findViewById(R.id.lineup34);
         mViewLineUp43 = view.findViewById(R.id.lineup43);
         mViewLineUp44 = view.findViewById(R.id.lineup44);
+
+        View viewHomeCoach = view.findViewById(R.id.group_view_home_coach);
+        View viewAwayCoach = view.findViewById(R.id.group_view_away_coach);
+        View.OnClickListener btnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.group_view_home_coach:
+                        displayManager(mHomeCoach);
+                        break;
+                    case R.id.group_view_away_coach:
+                        displayManager(mAwayCoach);
+                        break;
+                }
+            }
+        };
+        viewHomeCoach.setOnClickListener(btnClickListener);
+        viewAwayCoach.setOnClickListener(btnClickListener);
+
     }
 
     @Override
@@ -174,10 +199,12 @@ public class LineupsFragment extends BaseLiveFragment implements OnMatchUpdatedL
 
         mSubstitutionAdapter.notifyDataSetChanged();
         if (mLineupsData.getHomeManager() != null) {
+            mHomeCoach = mLineupsData.getHomeManager();
             mTvHomeTeamCoach.setText(res.getString(R.string.match_detail_lineups_coach_name_s, mLineupsData.getHomeManager().getName()));
             ImageLoader.displayImage(SofaImageHelper.getSofaImgManager(mLineupsData.getHomeManager().getId()), mImgHomeTeamCoach);
         }
         if (mLineupsData.getAwayManager() != null) {
+            mAwayCoach = mLineupsData.getAwayManager();
             mTvAwayTeamCoach.setText(res.getString(R.string.match_detail_lineups_coach_name_s, mLineupsData.getAwayManager().getName()));
             ImageLoader.displayImage(SofaImageHelper.getSofaImgManager(mLineupsData.getAwayManager().getId()), mImgAwayTeamCoach);
         }
@@ -339,4 +366,15 @@ public class LineupsFragment extends BaseLiveFragment implements OnMatchUpdatedL
             }
         });
     }
+
+    private void displayManager(Person manager) {
+        if(manager == null) {
+            return;
+        }
+        Intent intent = new Intent(getActivity(), CoachDetailsActivity.class);
+        intent.putExtra(Constant.EXTRA_KEY_SOFA_MANAGER_ID, manager.getId());
+        intent.putExtra(Constant.EXTRA_KEY_MANAGER_NAME, manager.getName());
+        startActivity(intent);
+    }
+
 }

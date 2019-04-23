@@ -16,6 +16,7 @@ import com.appian.manchesterunitednews.Constant;
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseFragment;
 import com.appian.manchesterunitednews.app.coach.CoachDetailsActivity;
+import com.appian.manchesterunitednews.app.player.PlayerDetailsActivity;
 import com.appian.manchesterunitednews.app.team.presenter.TeamDetailPresenter;
 import com.appian.manchesterunitednews.app.team.presenter.TeamPerformancePresenter;
 import com.appian.manchesterunitednews.app.team.view.TeamDetailView;
@@ -56,10 +57,23 @@ public class ClubFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private TeamPerformancePresenter mTeamPerformancePresenter;
     private TeamDetailPresenter mTeamDetailPresenter;
 
+    private View.OnClickListener mOnPlayerClickListener;
+
+    public static ClubFragment newInstance(int teamId) {
+        ClubFragment fragment = new ClubFragment();
+        Bundle args = new Bundle();
+        args.putInt("team_id", teamId);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int teamId = AppConfig.getInstance().getTeamId(getContext());
+        int teamId = 0;
+        if(getArguments() != null) {
+            teamId = getArguments().getInt("team_id");
+        }
         TeamInteractor teamInteractor = new TeamInteractor();
         mTeamPerformancePresenter = new TeamPerformancePresenter(teamInteractor);
         mTeamPerformancePresenter.attachView(this);
@@ -67,6 +81,16 @@ public class ClubFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         mTeamDetailPresenter = new TeamDetailPresenter(teamInteractor);
         mTeamDetailPresenter.attachView(this);
         mTeamDetailPresenter.loadTeamDetail(teamId);
+        mOnPlayerClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Player player = (Player) view.getTag();
+                if(player == null) {
+                    return;
+                }
+                displayPlayer(player);
+            }
+        };
     }
 
     @Override
@@ -187,6 +211,8 @@ public class ClubFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                         ImageView imgPlayerImage = view.findViewById(R.id.img_player_image);
                         ImageLoader.displayImage(SofaImageHelper.getSofaImgPlayer(player.getId()), imgPlayerImage);
                         mLvArrival.addView(view);
+                        view.setTag(player);
+                        view.setOnClickListener(mOnPlayerClickListener);
                     }
                 }
             }
@@ -201,9 +227,19 @@ public class ClubFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                         ImageView imgPlayerImage = view.findViewById(R.id.img_player_image);
                         ImageLoader.displayImage(SofaImageHelper.getSofaImgPlayer(player.getId()), imgPlayerImage);
                         mLvDeparture.addView(view);
+                        view.setTag(player);
+                        view.setOnClickListener(mOnPlayerClickListener);
                     }
                 }
             }
         }
     }
+
+    private void displayPlayer(Player player) {
+        Intent intent = new Intent(getActivity(), PlayerDetailsActivity.class);
+        intent.putExtra(Constant.EXTRA_KEY_SOFA_PLAYER_ID, player.getId());
+        intent.putExtra(Constant.EXTRA_KEY_PLAYER_NAME, player.getName());
+        startActivity(intent);
+    }
+
 }

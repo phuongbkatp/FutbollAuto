@@ -32,6 +32,16 @@ class ManagerCareerAdapter extends BaseRecyclerViewAdapter<ManagerCareer, Recycl
         return new CareerHolder(view);
     }
 
+    public ManagerCareer getItem(int position) {
+        if(position < 0 || mData == null || mData.isEmpty()) {
+            return null;
+        }
+        if(position >= mData.size()) {
+            return null;
+        }
+        return mData.get(position);
+    }
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         Resources res = mContext.getResources();

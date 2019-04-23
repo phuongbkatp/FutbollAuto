@@ -97,6 +97,7 @@
             android:id="@+id/btn_team_detail_manager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_margin="@dimen/activity_margin_standard">
 
             <TextView

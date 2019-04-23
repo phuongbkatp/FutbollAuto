@@ -32,6 +32,17 @@
             android:id="@+id/view_pager_team"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@id/tab_layout_team"/>
+            android:layout_below="@id/tab_layout_team"
+            android:layout_above="@+id/admob_banner_container"/>
+
+        <LinearLayout
+            android:id="@+id/admob_banner_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            android:visibility="gone" />
+
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

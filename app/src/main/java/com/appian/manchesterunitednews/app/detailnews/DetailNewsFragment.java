@@ -11,13 +11,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseStateFragment;
-import com.appian.manchesterunitednews.app.comment.CommentsAdapter;
 import com.appian.manchesterunitednews.app.detailnews.presenter.DetailNewsPresenter;
 import com.appian.manchesterunitednews.app.detailnews.view.DetailNewsView;
 import com.appian.manchesterunitednews.data.app.AppConfig;
@@ -26,11 +24,9 @@ import com.appian.manchesterunitednews.util.ImageLoader;
 import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.ads.OnAdLoadListener;
 import com.appnet.android.ads.admob.BannerAdMob;
-import com.appnet.android.football.fbvn.data.Cell;
-import com.appnet.android.football.fbvn.data.ColumnHeader;
+import com.appnet.android.ads.fb.FacebookNativeAd;
 import com.appnet.android.football.fbvn.data.ContentDetailNewsAuto;
 import com.appnet.android.football.fbvn.data.DetailNewsAuto;
-import com.appnet.android.football.fbvn.data.RowHeader;
 import com.bumptech.glide.Glide;
 import com.marcinmoskala.videoplayview.VideoPlayView;
 
@@ -44,23 +40,15 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
     private ImageView mImgThumbnail;
     private VideoPlayView mContentVideo;
     private RelativeLayout mRlVideo;
-    private ProgressBar progressBar;
     private TextView mTvTimeNews;
-    private RecyclerView ll_content;
     private ContentLoadingProgressBar mLoadingView;
     private ViewGroup mAdViewContainer;
-
-    private List<RowHeader> mRowHeaderList;
-    private List<ColumnHeader> mColumnHeaderList;
-    private List<List<Cell>> mCellList;
 
     private String link;
     private DetailNewsAuto mNews;
 
     private DetailNewsRecycleAdapter mDetailNewsAdapter;
     private DetailNewsPresenter mPresenter;
-
-    private CommentsAdapter mAdapter;
 
     private BannerAdMob mBannerAdMob;
 
@@ -85,7 +73,6 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         if (args != null) {
             link = args.getString("link");
         }
-        mAdapter = new CommentsAdapter(getContext());
         mPresenter = new DetailNewsPresenter(new NewsInteractor());
         mPresenter.attachView(this);
         mPresenter.loadNewsDetail(link);
@@ -121,7 +108,7 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
 
         mRlVideo = view.findViewById(R.id.rl_video);
         mTvTimeNews = view.findViewById(R.id.tv_time_news);
-        ll_content = view.findViewById(R.id.ll_content);
+        RecyclerView ll_content = view.findViewById(R.id.ll_content);
         mAdViewContainer = view.findViewById(R.id.admob_banner_container);
 
         mDetailNewsAdapter = new DetailNewsRecycleAdapter(getContext(), "");
@@ -130,7 +117,31 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         ll_content.setLayoutManager(layoutManager);
         ll_content.setNestedScrollingEnabled(false);
         ll_content.setAdapter(mDetailNewsAdapter);
-      //  mDetailNewsAdapter.loadAd();
+        initAd(view);
+    }
+
+    private void initAd(View root) {
+        Context context = getContext();
+        if(context == null) {
+            return;
+        }
+        final ViewGroup fbAdContainer = root.findViewById(R.id.fb_ads);
+        FacebookNativeAd.Builder builder = new FacebookNativeAd.Builder(context, context.getString(R.string.facebook_ads_match_detail));
+        builder.addDisplayView(fbAdContainer);
+        builder.setOnAdLoadListener(new OnAdLoadListener() {
+            @Override
+            public void onAdLoaded() {
+                fbAdContainer.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAdFailed() {
+                fbAdContainer.setVisibility(View.GONE);
+            }
+        });
+        FacebookNativeAd fbAd = builder.build();
+        fbAd.loadAd();
+        //
         mBannerAdMob.addView(mAdViewContainer);
         mBannerAdMob.setOnLoadListener(new OnAdLoadListener() {
             @Override

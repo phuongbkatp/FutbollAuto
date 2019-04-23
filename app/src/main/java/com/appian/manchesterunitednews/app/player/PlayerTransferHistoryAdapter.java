@@ -34,6 +34,17 @@ class PlayerTransferHistoryAdapter extends BaseRecyclerViewAdapter<Transfer, Pla
         return new TransferHolder(view);
     }
 
+    public Transfer getItem(int position) {
+        if(position < 0 || mData == null || mData.isEmpty()) {
+            return null;
+        }
+        if(position >= mData.size()) {
+            return null;
+        }
+        return mData.get(position);
+    }
+
+
     @Override
     public void onBindViewHolder(@NonNull TransferHolder holder, int position) {
         Transfer item = mData.get(position);

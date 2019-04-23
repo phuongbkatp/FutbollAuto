@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 28
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -16,17 +16,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
     flavorDimensions "app"
     productFlavors {
         manutd {
             applicationId "com.appian.manchesterunitednews"
-            versionCode 118
-            versionName "1.1.8"
+            versionCode 119
+            versionName "1.1.9"
         }
         mancity {
             applicationId "com.appian.manchestercitynews"
-            versionCode 103
-            versionName "1.0.3"
+            versionCode 104
+            versionName "1.0.4"
         }
         liverpool {
             applicationId "com.appian.liverpoolnews"
@@ -35,23 +41,28 @@ android {
         }
         barca {
             applicationId "com.appian.barcelonanews"
-            versionCode 106
-            versionName "1.0.6"
+            versionCode 107
+            versionName "1.0.7"
         }
         barcavn {
             applicationId "com.appian.barcavietnam"
-            versionCode 108
-            versionName "1.0.8"
+            versionCode 109
+            versionName "1.0.9"
         }
         real {
             applicationId "com.appian.realmadridnews"
-            versionCode 103
-            versionName "1.0.3"
+            versionCode 104
+            versionName "1.0.4"
         }
         juventus {
             applicationId "com.appian.juventusnews"
             versionCode 104
             versionName "1.0.4"
+        }
+        arsenal {
+            applicationId "com.appian.arsenalnews"
+            versionCode 1
+            versionName "1.0.0"
         }
     }
 }
@@ -83,16 +94,16 @@ dependencies {
     implementation 'com.akexorcist:RoundCornerProgressBar:2.0.3'
     implementation 'jp.wasabeef:glide-transformations:3.0.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
-    implementation 'com.google.firebase:firebase-messaging:17.4.0'
+    implementation 'com.google.firebase:firebase-messaging:17.6.0'
     implementation 'com.google.android.gms:play-services-ads:17.2.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
-    implementation 'com.google.firebase:firebase-config:16.4.0'
+    implementation 'com.google.firebase:firebase-config:16.5.0'
     testImplementation 'junit:junit:4.12'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'com.github.fernandodev.easyratingdialog:easyratingdialog:1.1.2'
     implementation 'com.facebook.android:facebook-android-sdk:4.38.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
-    implementation 'com.github.haipv-ptit:social-ads:905ea917d6'
+    implementation 'com.github.haipv-ptit:social-ads:d242b82565'
     implementation 'com.github.haipv-ptit:Social_Auth:d52d1c03ae'
     implementation 'org.bitbucket.haipv_dev:football:525934a762'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
@@ -101,6 +112,9 @@ dependencies {
     implementation 'com.github.haipv-ptit:FbVnApi:5576d842c2'
     implementation 'com.github.marcinmoskala:VideoPlayView:0.0.2'
     implementation 'com.google.firebase:firebase-core:16.0.8'
+    implementation "com.facebook.android:audience-network-sdk:5.2.0"
+    implementation 'com.applovin:applovin-sdk:9.5.4'
+    implementation 'com.google.ads.mediation:applovin:9.2.1.1'
 
 }
 apply plugin: 'com.google.gms.google-services'

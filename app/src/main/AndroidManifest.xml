@@ -25,7 +25,6 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_app_id"/>
-
         <activity
             android:name=".app.SplashActivity"
             android:configChanges="orientation"
@@ -40,6 +39,11 @@
             android:name=".app.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
+        <activity android:name="com.applovin.adview.AppLovinInterstitialActivity"
+            android:configChanges="orientation|screenSize"/>
+
+        <activity android:name="com.applovin.adview.AppLovinConfirmationActivity"
+            android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".app.match.MatchActivity"
             android:configChanges="orientation"
@@ -47,6 +51,12 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
             tools:targetApi="jelly_bean" />
+        <activity
+            android:name=".app.team.TeamDetailsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Light.NoActionBar" />
+
         <activity
             android:name=".app.player.PlayerDetailsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

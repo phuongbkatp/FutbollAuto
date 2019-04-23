@@ -1,5 +1,6 @@
 package com.appian.manchesterunitednews.app.player;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,8 +18,10 @@ import com.appian.manchesterunitednews.app.player.presenter.PlayerDetailPresente
 import com.appian.manchesterunitednews.app.player.presenter.PlayerTransfersPresenter;
 import com.appian.manchesterunitednews.app.player.view.PlayerDetailView;
 import com.appian.manchesterunitednews.app.player.view.PlayerTransferView;
+import com.appian.manchesterunitednews.app.team.TeamDetailsActivity;
 import com.appian.manchesterunitednews.data.interactor.PlayerInteractor;
 import com.appian.manchesterunitednews.util.ImageLoader;
+import com.appian.manchesterunitednews.util.ItemClickSupport;
 import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.football.sofa.data.Player;
 import com.appnet.android.football.sofa.data.Team;
@@ -121,6 +124,17 @@ public class PlayerDetailFragment extends BaseStateFragment implements PlayerDet
 
         tvPlayerName.setText(this.mPlayerName);
         notifyDataChange();
+        ItemClickSupport.addTo(recyclerViewTransfer).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Transfer item = mTransferAdapter.getItem(position);
+                if(item == null) {
+                    return;
+                }
+                displayTeam(item.getTo());
+            }
+        });
+
     }
 
     @Override
@@ -182,4 +196,15 @@ public class PlayerDetailFragment extends BaseStateFragment implements PlayerDet
         mTransferHistory.addAll(data);
         mTransferAdapter.notifyDataSetChanged();
     }
+
+    private void displayTeam(Team team) {
+        if(team == null) {
+            return;
+        }
+        Intent intent = new Intent(getActivity(), TeamDetailsActivity.class);
+        intent.putExtra(Constant.EXTRA_KEY_TEAM_NAME, team.getName());
+        intent.putExtra(Constant.EXTRA_KEY_TEAM_ID, team.getId());
+        startActivity(intent);
+    }
+
 }
