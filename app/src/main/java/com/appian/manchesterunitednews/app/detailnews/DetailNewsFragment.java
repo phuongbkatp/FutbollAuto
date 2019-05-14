@@ -24,7 +24,6 @@ import com.appian.manchesterunitednews.util.ImageLoader;
 import com.appian.manchesterunitednews.util.Utils;
 import com.appnet.android.ads.OnAdLoadListener;
 import com.appnet.android.ads.admob.BannerAdMob;
-import com.appnet.android.ads.fb.FacebookNativeAd;
 import com.appnet.android.football.fbvn.data.ContentDetailNewsAuto;
 import com.appnet.android.football.fbvn.data.DetailNewsAuto;
 import com.bumptech.glide.Glide;
@@ -125,22 +124,6 @@ public class DetailNewsFragment extends BaseStateFragment implements DetailNewsV
         if(context == null) {
             return;
         }
-        final ViewGroup fbAdContainer = root.findViewById(R.id.fb_ads);
-        FacebookNativeAd.Builder builder = new FacebookNativeAd.Builder(context, context.getString(R.string.facebook_ads_match_detail));
-        builder.addDisplayView(fbAdContainer);
-        builder.setOnAdLoadListener(new OnAdLoadListener() {
-            @Override
-            public void onAdLoaded() {
-                fbAdContainer.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAdFailed() {
-                fbAdContainer.setVisibility(View.GONE);
-            }
-        });
-        FacebookNativeAd fbAd = builder.build();
-        fbAd.loadAd();
         //
         mBannerAdMob.addView(mAdViewContainer);
         mBannerAdMob.setOnLoadListener(new OnAdLoadListener() {

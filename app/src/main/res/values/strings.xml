@@ -202,6 +202,7 @@
     <string name="language_vietnam">Vietnamese</string>
     <string name="language_french">French</string>
     <string name="language_thai">Thai</string>
+    <string name="language_spanish">Español</string>
     <string name="select_language">Select language</string>
 
     <string name="privacy_policy">Privacy policy</string>
@@ -229,6 +230,7 @@
     <string name="english">English</string>
     <string name="vietnamese">Vietnamese</string>
     <string name="french">French</string>
+    <string name="spanish">Español</string>
 
     <string name="disclaimer_title">You are now leaving %s</string>
     <string name="disclaimer_text_1">The third party website that you are about to visit is not hosted by %s</string>
