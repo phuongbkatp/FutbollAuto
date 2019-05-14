@@ -73,11 +73,6 @@
                     android:textColor="@color/text_color_common"
                     android:textSize="@dimen/detail_content_text_size"
                     android:textStyle="bold" />
-                <FrameLayout
-                    android:id="@+id/fb_ads"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"

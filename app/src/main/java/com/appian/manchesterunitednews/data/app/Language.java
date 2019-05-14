@@ -18,6 +18,7 @@ public final class Language {
     public static final String VIETNAMESE = "vi";
     public static final String FRENCH = "fr";
     public static final String THAILAND = "th";
+    public static final String SPANISH = "es";
 
     public static String getDefaultLanguage() {
         Locale locale = Locale.getDefault();
@@ -28,6 +29,8 @@ public final class Language {
             return FRENCH;
         } else if("tha".equalsIgnoreCase(iso3)) {
             return THAILAND;
+        } else if("spa".equalsIgnoreCase(iso3)) {
+            return SPANISH;
         }
         return ENGLISH;
     }
@@ -48,6 +51,8 @@ public final class Language {
             locale = new Locale("vi");
         } else if(Language.FRENCH.equals(language)) {
             locale = Locale.FRENCH;
+        } else if(Language.SPANISH.equals(language)) {
+            locale = new Locale("es");
         } else {
             locale = Locale.ENGLISH;
         }

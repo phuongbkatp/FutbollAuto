@@ -26,8 +26,8 @@ android {
     productFlavors {
         manutd {
             applicationId "com.appian.manchesterunitednews"
-            versionCode 119
-            versionName "1.1.9"
+            versionCode 121
+            versionName "1.2.1"
         }
         mancity {
             applicationId "com.appian.manchestercitynews"
@@ -41,13 +41,13 @@ android {
         }
         barca {
             applicationId "com.appian.barcelonanews"
-            versionCode 107
-            versionName "1.0.7"
+            versionCode 109
+            versionName "1.0.9"
         }
         barcavn {
             applicationId "com.appian.barcavietnam"
-            versionCode 109
-            versionName "1.0.9"
+            versionCode 110
+            versionName "1.1.0"
         }
         real {
             applicationId "com.appian.realmadridnews"
