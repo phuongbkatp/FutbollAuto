@@ -9,6 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/gradient_red_background" />
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:background="@drawable/splash_image"/>
 
     <LinearLayout
         android:id="@+id/choose_language"
