@@ -1,4 +1,5 @@
 <resources>
-	<string name="app_name">Barcelona News</string>
+	<string name="app_name">Barcelona Daily News</string>
 	<string name="all_news">Barcelona</string>
+	<string name="splash_claim" translatable="false">This app is not endorsed by or affiliated with the Barcelona FC. Any trademarks used in the app are done so under fair use with sole purpose of identifying the respective entities and remain the property of their respective owners.</string>
 </resources>
