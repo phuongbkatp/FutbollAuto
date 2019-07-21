@@ -36,8 +36,12 @@ public class SquadFragment extends BaseFragment implements SwipeRefreshLayout.On
     private TeamSquadPresenter mTeamSquadPresenter;
     private int mTeamId;
 
-    public SquadFragment() {
-        /* Required empty constructor */
+    public static SquadFragment newInstance(int teamId) {
+        SquadFragment fragment = new SquadFragment();
+        Bundle args = new Bundle();
+        args.putInt("team_id", teamId);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -45,7 +49,9 @@ public class SquadFragment extends BaseFragment implements SwipeRefreshLayout.On
         super.onCreate(savedInstanceState);
         mPlayerList = new ArrayList<>();
         mSquadAdapter = new SquadAdapter(getActivity(), mPlayerList);
-        mTeamId = AppConfig.getInstance().getTeamId(getContext());
+        if(getArguments() != null) {
+            mTeamId = getArguments().getInt("team_id");
+        }
         mTeamSquadPresenter = new TeamSquadPresenter();
         mTeamSquadPresenter.attachView(this);
         loadPlayer();

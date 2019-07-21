@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="position_defender">Defensor</string>
+    <string name="position_goalkeeper">Portero</string>
+    <string name="position_midfielder">Mediocampista</string>
+    <string name="position_forward">Adelante</string>
+
+    <string name="player_preferred_left_foot">Izquierda</string>
+    <string name="player_preferred_right_foot">Derecha</string>
+    <string name="player_preferred_both_foot">Ambos</string>
+</resources>

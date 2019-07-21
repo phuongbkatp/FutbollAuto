@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.widget.TextView;
 
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.service.notification.NotificationFactory;
@@ -19,6 +20,9 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.splash_activity);
+        TextView tvSplashClaim = findViewById(R.id.tv_splash_claim);
+        tvSplashClaim.setText(getResources().getString(R.string.splash_claim, getResources().getString(R.string.team_fc)));
+
         Utils.initAdmob(getApplicationContext());
         if (getIntent() != null && getIntent().getExtras() != null) {
             boolean notification = NotificationFactory.handleNotification(getApplicationContext(), getIntent().getExtras());

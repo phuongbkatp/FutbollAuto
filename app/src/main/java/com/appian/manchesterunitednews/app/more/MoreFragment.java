@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.appian.manchesterunitednews.R;
 import com.appian.manchesterunitednews.app.BaseFragment;
@@ -91,8 +92,6 @@ public class MoreFragment extends BaseFragment
             public void onClick(View v) {
                 Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
                 Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-                // To count with Play market backstack, After pressing back button,
-                // to taken back to our application, we need to add following flags to intent.
                 int flags = Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     flags |= Intent.FLAG_ACTIVITY_NEW_DOCUMENT;
@@ -107,6 +106,8 @@ public class MoreFragment extends BaseFragment
             }
         });
         setTitle();
+        TextView tvSplashClaim = view.findViewById(R.id.tv_splash_claim);
+        tvSplashClaim.setText(getResources().getString(R.string.splash_claim, getResources().getString(R.string.team_fc)));
     }
 
     private void shareVia() {

@@ -203,5 +203,7 @@
     <string name="disclaimer_text_2">%s không chịu trách nhiệm về bất cứ nội dung, như các nội dung nghe-nhìn, mà bạn thấy trên website bên thứ ba</string>
     <string name="disclaimer_text_full">Website bên thứ ba bạn chuẩn bị xem không thuộc sở hữu của %s. %s không chịu trách nhiệm về bất cứ nội dung, như các nội dung nghe-nhìn, mà bạn thấy trên website bên thứ ba</string>
     <string name="share_content">Everything about Manchester United FC in your hands now. Link: http://play.google.com/store/apps/details?id=</string>
+    <string name="spanish">Tây Ban Nha</string>
+    <string name="splash_claim">This app is not endorsed by or affiliated with the %s. Any trademarks used in the app are done so under fair use with sole purpose of identifying the respective entities and remain the property of their respective owners.</string>
 
 </resources>
