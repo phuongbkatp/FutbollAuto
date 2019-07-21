@@ -207,7 +207,7 @@
 	<string name="clear_cache_description">Click to clear cached data</string>
 	<string name="body_confirm_clear_cache_dialog">Do you want to clear cached data?</string>
 	<string name="clear_cached_data_success">Clear cached data successfully</string>
-	<string name="share_via">Share to friend</string>
+	<string name="share_via">Compartir con amigos</string>
 	<string name="confirm_exit">Click Back again to exit</string>
 	<string name="no_internet_connection">No Internet connection</string>
 	<string name="report">Report</string>
@@ -228,6 +228,5 @@
 	<string name="disclaimer_text_2">%s no es responsable de ningún contenido, como el contenido audiovisual, que pueda encontrar en este sitio web alojado por un tercero.</string>
 	<string name="disclaimer_text_full">El sitio web de terceros que está a punto de visitar no está alojado en %s. %s no es responsable de ningún contenido, como el contenido audiovisual, que pueda encontrar en este sitio web hospedado de terceros.</string>
 	<string name="splash_claim">Esta aplicación no está respaldada ni afiliada con el %s. Cualquier marca registrada utilizada en la aplicación se hace bajo un uso justo con el único propósito de identificar a las entidades respectivas y sigue siendo propiedad de sus respectivos dueños.</string>
-	<string name="team_fc">Manchester United FC</string>
 
 </resources>

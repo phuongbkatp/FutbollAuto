@@ -1,4 +1,5 @@
 <resources>
 	<string name="app_name">Barcelona Noticias</string>
 	<string name="all_news">Barcelona</string>
+	<string name="team_fc">Barcelona FC</string>
 </resources>

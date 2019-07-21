@@ -113,7 +113,7 @@ public class TeamFragment extends BaseStateFragment {
                 case 0:
                     return ClubFragment.newInstance(mTeamId);
                 case 1:
-                    return new SquadFragment();
+                    return SquadFragment.newInstance(mTeamId);
             }
             return null;
         }

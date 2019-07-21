@@ -169,6 +169,7 @@
                 android:textSize="@dimen/navigation_title_size" />
         </LinearLayout>
         <TextView
+            android:id="@+id/tv_splash_claim"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -179,6 +180,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_review"
-            android:textSize="20sp" />
+            android:textSize="12sp" />
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
