@@ -91,6 +91,14 @@ public class NotificationProvider {
         mIntent.setClass(mContext, cls);
     }
 
+    public void setAction(String action) {
+        mIntent.setAction(action);
+    }
+
+    public void setData(Uri uri) {
+        mIntent.setData(uri);
+    }
+
     public void setId(int id) {
         mId = id;
     }

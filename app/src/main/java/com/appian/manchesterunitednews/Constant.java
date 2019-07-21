@@ -1,7 +1,6 @@
 package com.appian.manchesterunitednews;
 
 public final class Constant {
-    private static final String DEV_URL = "http://football.webvi.vn/api/frontend/";
     private static final String PRODUCT_URL = "https://footballlivenews.com/api/frontend/";
     public static final String BASE_URL = PRODUCT_URL;
 
@@ -33,12 +32,10 @@ public final class Constant {
 
     public static final String NOTIFICATION_TYPE_NEWS = "news";
     public static final String NOTIFICATION_TYPE_MATCH = "match";
+    public static final String NOTIFICATION_TYPE_OPEN_LINK = "open_link";
 
     public static final String OBJECT_TYPE_SOFA_MATCH = "sofa_match";
     public static final String OBJECT_TYPE_NEWS = "news";
-
-    public static final String APP_BARCA_VN = "barcavn";
-    public static final String APP_BARCA = "barca";
 
     public static final String EXTRA_KEY_TEAM_NAME = "key_team_name";
     public static final String EXTRA_KEY_TEAM_ID = "key_team_id";
