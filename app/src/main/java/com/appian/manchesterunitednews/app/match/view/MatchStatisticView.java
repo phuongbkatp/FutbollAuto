@@ -1,7 +1,7 @@
 package com.appian.manchesterunitednews.app.match.view;
 
-import com.appnet.android.football.sofa.data.StatisticsData;
+import com.appnet.android.football.sofa.data.Statistic;
 
 public interface MatchStatisticView {
-    void showMatchStatistic(StatisticsData data);
+    void showMatchStatistic(Statistic data);
 }

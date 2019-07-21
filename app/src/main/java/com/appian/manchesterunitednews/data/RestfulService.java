@@ -28,7 +28,7 @@ import com.appnet.android.football.sofa.data.LineupsData;
 import com.appnet.android.football.sofa.data.Manager;
 import com.appnet.android.football.sofa.data.Performance;
 import com.appnet.android.football.sofa.data.Player;
-import com.appnet.android.football.sofa.data.StatisticsData;
+import com.appnet.android.football.sofa.data.Statistic;
 import com.appnet.android.football.sofa.data.TableRowsData;
 import com.appnet.android.football.sofa.data.Team;
 import com.appnet.android.football.sofa.data.TeamLastNextData;
@@ -221,8 +221,8 @@ public class RestfulService {
         return mRestfulApiSofa.loadLineups(matchId);
     }
 
-    public Call<StatisticsData> loadStatistics(int matchId) {
-        return mRestfulApiSofa.loadStatistics(matchId);
+    public Call<Statistic> loadStatistics(int matchId) {
+        return mRestfulApiSofa.loadMatchStatistics(matchId);
     }
 
     public Call<Team> loadTeamDetails(int teamId) {

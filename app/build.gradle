@@ -105,7 +105,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     implementation 'com.github.haipv-ptit:social-ads:d242b82565'
     implementation 'com.github.haipv-ptit:Social_Auth:d52d1c03ae'
-    implementation 'org.bitbucket.haipv_dev:football:525934a762'
+    implementation 'org.bitbucket.haipv_dev:football:22b20ab14b'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'com.evrencoskun.library:tableview:0.8.8'
