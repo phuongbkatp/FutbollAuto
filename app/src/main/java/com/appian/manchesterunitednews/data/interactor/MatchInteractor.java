@@ -6,7 +6,7 @@ import com.appnet.android.football.sofa.data.EventDetail;
 import com.appnet.android.football.sofa.data.GameTournament;
 import com.appnet.android.football.sofa.data.Incident;
 import com.appnet.android.football.sofa.data.LineupsData;
-import com.appnet.android.football.sofa.data.StatisticsData;
+import com.appnet.android.football.sofa.data.Statistic;
 
 import java.util.List;
 
@@ -66,14 +66,14 @@ public class MatchInteractor {
         });
     }
 
-    public void loadStatistics(int matchId, final OnResponseListener<StatisticsData> listener) {
+    public void loadStatistics(int matchId, final OnResponseListener<Statistic> listener) {
         if (listener == null) {
             return;
         }
-        Call<StatisticsData> call = RestfulService.getInstance().loadStatistics(matchId);
-        call.enqueue(new Callback<StatisticsData>() {
+        Call<Statistic> call = RestfulService.getInstance().loadStatistics(matchId);
+        call.enqueue(new Callback<Statistic>() {
             @Override
-            public void onResponse(Call<StatisticsData> call, Response<StatisticsData> response) {
+            public void onResponse(Call<Statistic> call, Response<Statistic> response) {
                 if (response.body() == null) {
                     return;
                 }
@@ -81,7 +81,7 @@ public class MatchInteractor {
             }
 
             @Override
-            public void onFailure(Call<StatisticsData> call, Throwable t) {
+            public void onFailure(Call<Statistic> call, Throwable t) {
                 listener.onFailure(t.getMessage());
             }
         });
