@@ -1,6 +1,5 @@
 <resources>
-	<string name="app_name">Barcelona News</string>
+	<string name="app_name">Barcelona Daily News</string>
 	<string name="all_news">Barcelona</string>
-	<string name="language_spanish">Español</string>
-	<string name="spanish">Español</string>
+	<string name="team_fc">Barcelona FC</string>
 </resources>

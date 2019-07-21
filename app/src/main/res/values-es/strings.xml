@@ -1,6 +1,4 @@
 <resources>
-	<string name="app_name">Barcelona Noticias</string>
-	<string name="all_news">Barcelona</string>
 	<string name="match_detail_gold_space">-</string>
 	<string name="match_detail_event_minute">%d\'</string>
 	<string name="match_detail_event_add_minute">%1$d + %2$d\'</string>
@@ -9,7 +7,7 @@
 	<string name="match_detail_lineups_coach_name_s">%s</string>
 	<string name="match_detail_lineups_team_scheme_s">%s</string>
 	<string name="match_detail_substitution_title">Sustituciones</string>
-	<string name="share_content">Todo sobre el Barcelona FC en tus manos ahora. Link: http://play.google.com/store/apps/details?id=</string>
+	<string name="share_content">Todo sobre el %s en tus manos ahora. Link: http://play.google.com/store/apps/details?id=</string>
 	<string name="home_menu">Noticias</string>
 	<string name="news_topic_menu">Los temas</string>
 	<string name="red_devil_menu">Team Info</string>

@@ -36,13 +36,13 @@ android {
         }
         liverpool {
             applicationId "com.appian.liverpoolnews"
-            versionCode 103
-            versionName "1.0.3"
+            versionCode 110
+            versionName "1.1.0"
         }
         barca {
             applicationId "com.appian.barcelonanews"
-            versionCode 110
-            versionName "1.1.0"
+            versionCode 120
+            versionName "1.2.0"
         }
         barcavn {
             applicationId "com.appian.barcavietnam"
@@ -51,13 +51,13 @@ android {
         }
         real {
             applicationId "com.appian.realmadridnews"
-            versionCode 104
-            versionName "1.0.4"
+            versionCode 110
+            versionName "1.1.0"
         }
         juventus {
             applicationId "com.appian.juventusnews"
-            versionCode 104
-            versionName "1.0.4"
+            versionCode 110
+            versionName "1.1.0"
         }
         arsenal {
             applicationId "com.appian.arsenalnews"

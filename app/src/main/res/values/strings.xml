@@ -1,6 +1,4 @@
 <resources>
-
-    <string name="app_name">Man United Daily News</string>
     <string name="match_detail_gold_space">-</string>
     <string name="match_detail_event_minute">%d\'</string>
     <string name="match_detail_event_add_minute">%1$d + %2$d\'</string>
@@ -9,7 +7,7 @@
     <string name="match_detail_lineups_coach_name_s">%s</string>
     <string name="match_detail_lineups_team_scheme_s">%s</string>
     <string name="match_detail_substitution_title">Substitution</string>
-    <string name="share_content">Everything about Manchester United FC in your hands now. Link: http://play.google.com/store/apps/details?id=</string>
+    <string name="share_content">Everything about %s in your hands now. Link: http://play.google.com/store/apps/details?id=</string>
     <string name="home_menu">Newsfeed</string>
     <string name="news_topic_menu">Topics</string>
     <string name="red_devil_menu">Team Info</string>
@@ -72,7 +70,6 @@
     <string name="comment_tab">COMMENT</string>
     <string name="lineup_tab">LINE-UP</string>
 
-    <string name="all_news">Man United</string>
     <string name="trend_news">International</string>
     <string name="video_news">National</string>
 

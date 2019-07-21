@@ -1,8 +1,7 @@
 <resources>
 	<string name="app_name">Liverpool Daily News</string>
 	<string name="all_news">Liverpool</string>
-	<string name="share_content">Everything about Liverpool FC in your hands now. Link: http://play.google.com/store/apps/details?id=</string>
 	<string name="out_from_app_alert">You are now leaving LIVERPOOL NEWS</string>
 	<string name="dont_have_responsible">LIVERPOOL NEWS are not responsible for and can not be held accountable</string>
-	
+	<string name="team_fc">Liverpool FC</string>
 </resources>
