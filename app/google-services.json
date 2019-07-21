@@ -32,10 +32,10 @@
               "client_type": 3
             },
             {
-              "client_id": "29653769627-1cjfeg4imn2mi7a9aqnpficllj2bvjp7.apps.googleusercontent.com",
+              "client_id": "29653769627-7mq2ptvoctor0bs3fpmoonntlmpidg16.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.footballnews.manudailynews"
+                "bundle_id": "com.football.daily"
               }
             }
           ]
@@ -68,10 +68,46 @@
               "client_type": 3
             },
             {
-              "client_id": "29653769627-1cjfeg4imn2mi7a9aqnpficllj2bvjp7.apps.googleusercontent.com",
+              "client_id": "29653769627-7mq2ptvoctor0bs3fpmoonntlmpidg16.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.footballnews.manudailynews"
+                "bundle_id": "com.football.daily"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29653769627:android:3913b4dc1e366f82",
+        "android_client_info": {
+          "package_name": "com.appian.football.dailynews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29653769627-acsacg5l19ddthfa5uk26qu7ob59qhv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6vHTm7QtHeESbYW6H_StztYiPKFWZ1Fs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29653769627-acsacg5l19ddthfa5uk26qu7ob59qhv5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "29653769627-7mq2ptvoctor0bs3fpmoonntlmpidg16.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.football.daily"
               }
             }
           ]
@@ -104,10 +140,10 @@
               "client_type": 3
             },
             {
-              "client_id": "29653769627-1cjfeg4imn2mi7a9aqnpficllj2bvjp7.apps.googleusercontent.com",
+              "client_id": "29653769627-7mq2ptvoctor0bs3fpmoonntlmpidg16.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.footballnews.manudailynews"
+                "bundle_id": "com.football.daily"
               }
             }
           ]
@@ -140,10 +176,10 @@
               "client_type": 3
             },
             {
-              "client_id": "29653769627-1cjfeg4imn2mi7a9aqnpficllj2bvjp7.apps.googleusercontent.com",
+              "client_id": "29653769627-7mq2ptvoctor0bs3fpmoonntlmpidg16.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.footballnews.manudailynews"
+                "bundle_id": "com.football.daily"
               }
             }
           ]
@@ -176,10 +212,46 @@
               "client_type": 3
             },
             {
-              "client_id": "29653769627-1cjfeg4imn2mi7a9aqnpficllj2bvjp7.apps.googleusercontent.com",
+              "client_id": "29653769627-7mq2ptvoctor0bs3fpmoonntlmpidg16.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.footballnews.manudailynews"
+                "bundle_id": "com.football.daily"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29653769627:android:37fc5dd765f9f45d",
+        "android_client_info": {
+          "package_name": "com.appian.manchesternews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29653769627-acsacg5l19ddthfa5uk26qu7ob59qhv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6vHTm7QtHeESbYW6H_StztYiPKFWZ1Fs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29653769627-acsacg5l19ddthfa5uk26qu7ob59qhv5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "29653769627-7mq2ptvoctor0bs3fpmoonntlmpidg16.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.football.daily"
               }
             }
           ]
@@ -212,10 +284,10 @@
               "client_type": 3
             },
             {
-              "client_id": "29653769627-1cjfeg4imn2mi7a9aqnpficllj2bvjp7.apps.googleusercontent.com",
+              "client_id": "29653769627-7mq2ptvoctor0bs3fpmoonntlmpidg16.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.footballnews.manudailynews"
+                "bundle_id": "com.football.daily"
               }
             }
           ]
@@ -248,10 +320,10 @@
               "client_type": 3
             },
             {
-              "client_id": "29653769627-1cjfeg4imn2mi7a9aqnpficllj2bvjp7.apps.googleusercontent.com",
+              "client_id": "29653769627-7mq2ptvoctor0bs3fpmoonntlmpidg16.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.footballnews.manudailynews"
+                "bundle_id": "com.football.daily"
               }
             }
           ]

@@ -29,6 +29,11 @@ android {
             versionCode 121
             versionName "1.2.1"
         }
+        manutdv2 {
+            applicationId "com.appian.manchesternews"
+            versionCode 100
+            versionName "1.0.0"
+        }
         mancity {
             applicationId "com.appian.manchestercitynews"
             versionCode 104
